@@ -5,11 +5,20 @@ const userApi = axios.create({
 })
 
 
-export async function userSignUp(data){
+export async function userSignUp(signupData){
     try{
-        const userSignUpData = await userApi.post('/signup',data)
-        console.log(userSignUpData,'api working good')
-        return userSignUpData
+        const data = await userApi.post('/signup',signupData)
+        return data
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
+export async function emailVerify(id,token){
+    try{
+        const data = await userApi.get(`/${id}/verify/${token}`)
+        return data
     }catch(err){
         console.log(err)
     }

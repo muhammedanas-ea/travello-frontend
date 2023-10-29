@@ -1,66 +1,69 @@
-
+import loginImg from '../../../../public/staticImages/1957947.jpg';
 
 export default function SignIn() {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="w-1/2 logo-main max-w-sm p-4  bg-white rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-      <form className="space-y-5" action="#">
-        <h5 className="text-xl font-semibold text-gray-900 dark:text-white">Get Started</h5>
-        <p className="text-sm font-medium text-gray-500 dark:text-gray-300">Already have an account ? <span className="text-black">Sign in</span></p>
-        <div>
-          <label htmlFor="email" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Enter name</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            placeholder="name@company.com"
-            required
-          />
+    <section className="bg-gray-50 min-h-screen flex items-center justify-center">
+      <div className="bg-[#fff] rounded-md shadow-xl lg:flex max-w-4xl p-5">
+        <div className="lg:w-1/2 lg:pr-8">
+          <h2 className="font-bold text-2xl text-[#171718]">Login</h2>
+          <p className="text-xs mt-4 text-[#1f2020]">If you are already a member, easily log in</p>
+
+          <form action="" className="mt-3 flex flex-col gap-4">
+            <div className="mt-4 flex flex-col gap-3">
+              <label htmlFor="email" className="text-sm">Enter email</label>
+              <input
+                className="p-2 rounded-md border border-[#14141433]"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+              />
+            </div>
+            <div className="mt-3 flex flex-col gap-3">
+              <label htmlFor="password" className="text-sm">Enter password</label>
+              <input
+                className="p-2 rounded-md border"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+              />
+            </div>
+            <div className="text-xs py-4 text-[#002D74]">
+              <a href="#">Forgot your password?</a>
+            </div>
+            <button className="bg-[#002D74] rounded-md text-white py-2 hover:scale-105 duration-300">
+              Login
+            </button>
+          </form>
+
+          <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
+            <hr className="border-gray-400" />
+            <p className="text-center text-sm">OR</p>
+            <hr className="border-gray-400" />
+          </div>
+
+          <button className="bg-white border py-2 w-full rounded-md mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]">
+            <svg
+              className="mr-3"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 48 48"
+              width="25px"
+            >
+              {/* Google icon SVG */}
+            </svg>
+            Login with Google
+          </button>
+
+          <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
+            <p>Dont have an account? <span>Sign up</span></p>
+          </div>
         </div>
-        <div>
-          <label htmlFor="email" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Enter email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            placeholder="name@company.com"
-            required
-          />
+
+        <div className="lg:w-1/2 lg:block hidden">
+          <img className="rounded-2xl w-full" src={loginImg} alt="Login" />
         </div>
-        <div>
-          <label htmlFor="password" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Enter password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="••••••••"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full  text-white bg-black bg-opacity-85 hover:bg-[#000000ea] focus:ring-4 focus:outline-none font-medium rounded-lg text-base px-5 py-2.5 text-center"
-        >
-          Sign up
-        </button>
-        <div className="flex justify-around items-center">
-          <hr className="w-[40%] h-0.5 bg-gray-900" />
-          <span>or</span>
-          <hr className="w-[40%] h-0.5 bg-gray-900" />
-        </div>
-        <button
-          type="submit"
-          className="w-full border border-black  text-black bg-[#f8f7f7] hover:bg-[#f3f2f2ea] focus:ring-4 focus:outline-none font-medium rounded-lg text-base px-5 py-2.5 text-center"
-        >
-          Sign up with google
-        </button>
-      </form>
-    </div>
-    </div>
+      </div>
+    </section>
   );
 }
-
-
