@@ -12,11 +12,11 @@ export default function UserRoute() {
       <Route path="/" element={<UserLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/home/:id/:token" element={<HomePage />} />
         <Route path="/login" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/users/:id/verify/:token" element={<EmailVerifyPage />} />
       </Route>
-     
+      <Route path="/emailVerify" element={<EmailVerifyPage />} />
     </Routes>
   );
 }

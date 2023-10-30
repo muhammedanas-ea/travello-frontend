@@ -1,69 +1,97 @@
-import loginImg from '../../../../public/staticImages/1957947.jpg';
+import loginImg from "../../../../public/staticImages/1991562_Freepik.jpg";
+import "./SignIn.css";
 
 export default function SignIn() {
+  
+
   return (
-    <section className="bg-gray-50 min-h-screen flex items-center justify-center">
-      <div className="bg-[#fff] rounded-md shadow-xl lg:flex max-w-4xl p-5">
-        <div className="lg:w-1/2 lg:pr-8">
-          <h2 className="font-bold text-2xl text-[#171718]">Login</h2>
-          <p className="text-xs mt-4 text-[#1f2020]">If you are already a member, easily log in</p>
-
-          <form action="" className="mt-3 flex flex-col gap-4">
-            <div className="mt-4 flex flex-col gap-3">
-              <label htmlFor="email" className="text-sm">Enter email</label>
-              <input
-                className="p-2 rounded-md border border-[#14141433]"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Email"
-              />
-            </div>
-            <div className="mt-3 flex flex-col gap-3">
-              <label htmlFor="password" className="text-sm">Enter password</label>
-              <input
-                className="p-2 rounded-md border"
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Password"
-              />
-            </div>
-            <div className="text-xs py-4 text-[#002D74]">
-              <a href="#">Forgot your password?</a>
-            </div>
-            <button className="bg-[#002D74] rounded-md text-white py-2 hover:scale-105 duration-300">
-              Login
-            </button>
-          </form>
-
-          <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
-            <hr className="border-gray-400" />
-            <p className="text-center text-sm">OR</p>
-            <hr className="border-gray-400" />
+    <div className="container mx-auto">
+      <div className="flex justify-center px-6 my-12">
+        <div className="w-full xl:w-3/4 lg:w-11/12 shadow-xl flex">
+          <div
+            className="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
+            style={{ backgroundImage: `url(${loginImg})` }}
+          ></div>
+          <div className="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
+            <h3 className="pt-4 text-2xl px-8 text-start">Welcome Back!</h3>
+            <span className="px-8 pt-2 text-sm font-medium text-gray-500 dark:text-gray-300">
+              Please enter login details below
+            </span>
+            <form className="px-8 pt-6 pb-2 mb-4 bg-white rounded">
+              <div className="mb-4">
+                <label
+                  htmlFor="username"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                >
+                  Enter Name
+                </label>
+                <input
+                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border border-gray-500 rounded  appearance-none focus:outline-none focus:shadow-outline"
+                  id="username"
+                  type="text"
+                />
+              </div>
+              <div className="mb-3">
+                <label
+                  htmlFor="password"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                >
+                  Enter Password
+                </label>
+                <input
+                  className="w-full px-3 py-2 mb-2 text-sm leading-tight text-gray-700 border border-gray-500 rounded  appearance-none focus:outline-none focus:shadow-outline"
+                  id="password"
+                  type="password"
+                />
+                <p className="text-xs italic text-red-500">
+                  Please choose a password.
+                </p>
+              </div>
+              <div className="mb-3 text-end">
+                <a
+                  className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                  href="#"
+                >
+                  Forgot Password?
+                </a>
+              </div>
+              <div className="mb-3 text-center">
+                <button
+                  className="w-full px-4 py-2 font-bold text-white bg-[#000] rounded hover:bg-[#000000de] focus:outline-none focus:shadow-outline"
+                  type="button"
+                >
+                  Sign In
+                </button>
+              </div>
+              <div>
+                <hr className="mb-3 border-t" />
+              </div>
+              <div className="flex mb-6 justify-around items-center">
+                <hr className="w-[40%] h-0.5 bg-gray-900 border-t" />
+                <span>or</span>
+                <hr className="w-[40%] h-0.5 bg-gray-900 border-t" />
+              </div>
+              <button
+                className="w-full mb-4 px-4 py-2 font-bold text-gray-800 bg-[#fff] rounded border border-gray-500 hover:bg-[#f8f7f7de] focus:outline-none focus:shadow-outline"
+                type="button"
+              >
+                Login in with Google
+              </button>
+              <div className="text-center">
+                <a
+                  className="text-sm font-medium text-gray-500 dark:text-gray-300"
+                  href="#"
+                >
+                  Don’t have an account?{" "}
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-700">
+                    Sign UP
+                  </span>
+                </a>
+              </div>
+            </form>
           </div>
-
-          <button className="bg-white border py-2 w-full rounded-md mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]">
-            <svg
-              className="mr-3"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 48 48"
-              width="25px"
-            >
-              {/* Google icon SVG */}
-            </svg>
-            Login with Google
-          </button>
-
-          <div className="mt-3 text-xs flex justify-between items-center text-[#002D74]">
-            <p>Dont have an account? <span>Sign up</span></p>
-          </div>
-        </div>
-
-        <div className="lg:w-1/2 lg:block hidden">
-          <img className="rounded-2xl w-full" src={loginImg} alt="Login" />
         </div>
       </div>
-    </section>
+    </div>
   );
 }

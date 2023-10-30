@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
   Navbar,
   Typography,
@@ -18,9 +16,15 @@ import {
   PowerIcon,
 } from "@heroicons/react/24/solid";
 
-
 // Import Logo Components
 import { Logo } from "../commonComponents/CommonComponets";
+
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { emailVerify } from "../../../api/UserApi";
+import { GenerateSuccess } from "../../../toast/Toast";
+import { useDispatch , useSelector } from "react-redux";
+import { setUserDetails } from "../../../redux/userSlice/UserSlice";
 
 // profile menu component
 const profileMenuItems = [
@@ -40,8 +44,21 @@ const profileMenuItems = [
 
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
+  const navigate = useNavigate();
   const closeMenu = () => setIsMenuOpen(false);
+  const dispatch = useDispatch()
+
+  const userLOgout = () => {
+    localStorage.removeItem("userToken");
+    dispatch(
+      setUserDetails({
+        id: '',
+        name: '',
+        email: '',
+      })
+    );
+    navigate("/login");
+  };
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -83,14 +100,35 @@ function ProfileMenu() {
                 className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
                 strokeWidth: 2,
               })}
-              <Typography
-                as="span"
-                variant="small"
-                className="font-normal"
-                color={isLastItem ? "red" : "inherit"}
-              >
-                {label}
-              </Typography>
+              {label === "Sign Out" ? (
+                <Typography
+                  as="span"
+                  variant="small"
+                  className="font-normal"
+                  color={isLastItem ? "red" : "inherit"}
+                  onClick={userLOgout}
+                >
+                  {label}
+                </Typography>
+              ) : label === "Edit Profile" ? (
+                <Typography
+                  as="span"
+                  variant="small"
+                  className="font-normal"
+                  color={isLastItem ? "red" : "inherit"}
+                >
+                  {label}
+                </Typography>
+              ) : (
+                <Typography
+                  as="span"
+                  variant="small"
+                  className="font-normal"
+                  color={isLastItem ? "red" : "inherit"}
+                >
+                  {label}
+                </Typography>
+              )}
             </MenuItem>
           );
         })}
@@ -100,16 +138,62 @@ function ProfileMenu() {
 }
 
 export default function Header() {
+  const params = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {name} = useSelector(state => state.user)
+
+  useEffect(() => {
+    const verifyEmailUrl = async () => {
+      try {
+        const response = await emailVerify(params.id, params.token);
+        console.log(response);
+        if (response.data.status) {
+          localStorage.setItem("userToken", response.data.usertoken);
+          GenerateSuccess(response.data.message);
+          dispatch(
+            setUserDetails({
+              id: response.data.userData._id,
+              name: response.data.userData.name,
+              email: response.data.userData.email,
+            })
+          );
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    verifyEmailUrl();
+  }, [params]);
+
   return (
     <Navbar className="z-50 shadow-lg bg-white  rounded-none max-w-none mx-auto lg:pl-6 sticky top-0 left-0 right-0">
       <div className="container">
         <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
-          <Logo/>
-          <div className="flex gap-7">
-            <Button className="border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20" size="sm" variant="text">
-              List your property
-            </Button>
-            <ProfileMenu />
+          <Logo />
+          <div className="flex items-center gap-7">
+            {localStorage.getItem("userToken") ? (
+              <>
+                <span>{name}</span>
+                <ProfileMenu />
+              </>
+            ) : (
+              <>
+                <Button
+                  className="border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20"
+                  size="sm"
+                  variant="text"
+                >
+                  List your property
+                </Button>
+                <span
+                  className="text-gray-900 hover:text-[#000]"
+                  onClick={() => navigate("/login")}
+                >
+                  Log In
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>

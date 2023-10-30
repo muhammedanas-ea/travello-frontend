@@ -1,36 +1,27 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { emailVerify } from "../../../api/UserApi";
+import {  Link} from "react-router-dom";
+import veriftyImg from "../../../../public/staticImages/emailVerify-img.jpg";
 
-export default function EmailVerify() {
-  const params = useParams();
-  console.log(params.id,params.token,'params reched in to the console')
-  const [verifyUrl, setVerifyUrl] = useState(false);
-  useEffect(() => {
-    console.log('hiiiiiiiiiiiiiiii')
-    const verifyEmailUrl = async () => {
-      try {
-
-        const response = await emailVerify(params.id, params.token);
-        if (response) {
-          setVerifyUrl(true);
-        } else {
-          setVerifyUrl(false);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    verifyEmailUrl();
-  }, [params]);
-
-  return verifyUrl === true ? (
-    <div>
-      <h1>welocoms</h1>
-    </div>
-  ) : (
-    <div>
-      <h1>welocoms</h1>
+function EmailVerify() {
+  
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div>
+        <div className="flex flex-col items-center  space-y-2">
+          <img className="h-[13rem] w-[18rem]" src={veriftyImg} alt="" />
+          <h1 className="text-4xl font-bold">Thank You !</h1>
+          <p className="pb-3">
+            Please verify this email address by click button below. 
+          </p>
+          <Link
+            className="px-5 py-2 text-white bg-[#000] border border-[#000]  rounded-md hover:bg-[#000000d3] focus:outline-none focus:ring"
+            to="https://mail.google.com/mail/u/0/#inbox/FMfcgzGwHVJhPpzQLJkkjhfttZSSdsWQ"
+          >
+            <span className="text-sm font-medium">verify your email</span>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
+
+export default EmailVerify;
