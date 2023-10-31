@@ -94,7 +94,7 @@ export default function SignIn() {
               </div>
               <div className="mb-3 text-end">
                 <Link
-                  to="/forgot-password"
+                  to="/forgotPassword"
                   className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
                 >
                   Forgot Password?
@@ -126,7 +126,7 @@ export default function SignIn() {
               </button>
               <div className="text-center">
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                  Don’t have an account?{" "}
+                  Don’t have an account?
                   <Link
                     to="/signup"
                     className="text-sm font-medium text-gray-700 dark:text-gray-700"

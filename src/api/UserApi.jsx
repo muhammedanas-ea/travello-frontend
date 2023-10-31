@@ -38,3 +38,13 @@ export async function userLogin(loginData){
         handleApiCallError(err)
     }
 }
+
+
+export async function userForgotPassword(email){
+    try{
+        const data = await userApi.post('/forgotPassword',email)
+        return data
+    }catch(err){
+        handleApiCallError(err)
+    }
+}
