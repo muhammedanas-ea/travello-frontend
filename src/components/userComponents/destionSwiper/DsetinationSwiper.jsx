@@ -1,8 +1,8 @@
 // Import tailwind Component section
 import {
-  Card,
-  CardHeader,
-  CardBody,
+  // Card,
+  // CardHeader,
+  // CardBody,
   Typography,
 } from "@material-tailwind/react";
 
@@ -10,24 +10,24 @@ import {
 import "./DestinationSwiper.css";
 
 export default function DestinationSwiper() {
-  const destination = [
-    {
-      image: "",
-      destionName: "Maharashtra",
-    },
-    {
-      image: "",
-      destionName: "",
-    },
-    {
-      image: "",
-      destionName: "",
-    },
-    {
-      image: "",
-      destionName: "",
-    },
-  ];
+  // const destination = [
+  //   {
+  //     image: "",
+  //     destionName: "Maharashtra",
+  //   },
+  //   {
+  //     image: "",
+  //     destionName: "",
+  //   },
+  //   {
+  //     image: "",
+  //     destionName: "",
+  //   },
+  //   {
+  //     image: "",
+  //     destionName: "",
+  //   },
+  // ];
 
   return (
     <div className="main-sparation">
@@ -37,7 +37,7 @@ export default function DestinationSwiper() {
             popular Destination
           </Typography>
         </div>
-        <div className="flex gap-6">
+        {/* <div className="flex gap-6">
           {destination.map((items, index) => {
 
             const {image,destionName} = items
@@ -68,7 +68,7 @@ export default function DestinationSwiper() {
               </Card>
             );
           })}
-        </div>
+        </div> */}
       </div>
     </div>
   );

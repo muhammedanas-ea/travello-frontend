@@ -23,7 +23,16 @@ export async function userSignUp(signupData){
 
 export async function emailVerify(id,token){
     try{
-        const data = await userApi.get(`/${id}/verify/${token}`)
+        const data = await userApi.get(`verify/${id}/${token}`)
+        return data
+    }catch(err){
+        handleApiCallError(err)
+    }
+}
+
+export async function userLogin(loginData){
+    try{
+        const data = await userApi.post('/login',loginData)
         return data
     }catch(err){
         handleApiCallError(err)

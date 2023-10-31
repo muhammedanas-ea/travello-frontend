@@ -20,10 +20,10 @@ import {
 import { Logo } from "../commonComponents/CommonComponets";
 
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { emailVerify } from "../../../api/UserApi";
 import { GenerateSuccess } from "../../../toast/Toast";
-import { useDispatch , useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
 
 // profile menu component
@@ -46,15 +46,15 @@ function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const navigate = useNavigate();
   const closeMenu = () => setIsMenuOpen(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const userLOgout = () => {
     localStorage.removeItem("userToken");
     dispatch(
       setUserDetails({
-        id: '',
-        name: '',
-        email: '',
+        id: "",
+        name: "",
+        email: "",
       })
     );
     navigate("/login");
@@ -141,16 +141,14 @@ export default function Header() {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {name} = useSelector(state => state.user)
+  const { name } = useSelector((state) => state.user);
 
   useEffect(() => {
     const verifyEmailUrl = async () => {
       try {
         const response = await emailVerify(params.id, params.token);
-        console.log(response);
         if (response.data.status) {
           localStorage.setItem("userToken", response.data.usertoken);
-          GenerateSuccess(response.data.message);
           dispatch(
             setUserDetails({
               id: response.data.userData._id,
@@ -158,6 +156,7 @@ export default function Header() {
               email: response.data.userData.email,
             })
           );
+          GenerateSuccess(response.data.message);
         }
       } catch (err) {
         console.log(err);
@@ -186,12 +185,12 @@ export default function Header() {
                 >
                   List your property
                 </Button>
-                <span
+                <Link
                   className="text-gray-900 hover:text-[#000]"
                   onClick={() => navigate("/login")}
                 >
                   Log In
-                </span>
+                </Link>
               </>
             )}
           </div>

@@ -5,18 +5,19 @@ import SignInPage from "../pages/userPages/SignInPage";
 import HomePage from "../pages/userPages/HomePage";
 import SignUpPage from "../pages/userPages/SignUpPage";
 import EmailVerifyPage from '../pages/userPages/EmailVerifyPage';
+import UserPublic from "../protected/UserPublic";
 
 export default function UserRoute() {
   return (
     <Routes>
+      <Route path="/emailVerify" element={<UserPublic><EmailVerifyPage /></UserPublic>} />
       <Route path="/" element={<UserLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/home/:id/:token" element={<HomePage />} />
-        <Route path="/login" element={<SignInPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<UserPublic><SignInPage /></UserPublic>} />
+        <Route path="/signup" element={<UserPublic><SignUpPage /></UserPublic>} />
       </Route>
-      <Route path="/emailVerify" element={<EmailVerifyPage />} />
     </Routes>
   );
 }
