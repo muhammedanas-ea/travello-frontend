@@ -36,8 +36,8 @@ export default function SignUp() {
             <h3 className="pt-4 text-2xl px-3 text-start">Get Started</h3>
             <span className="px-3 pt-2 text-sm font-medium text-gray-500 dark:text-gray-300">
               Already have an account ?
-              <Link to='/login'
-                
+              <Link
+                to="/login"
                 className="text-sm font-medium text-gray-700 dark:text-gray-700"
               >
                 Sign In

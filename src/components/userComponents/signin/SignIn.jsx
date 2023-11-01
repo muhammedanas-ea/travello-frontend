@@ -3,7 +3,6 @@ import loginImg from "../../../../public/staticImages/1991562_Freepik.jpg";
 import "./SignIn.css";
 import { userLogin } from "../../../api/UserApi";
 import { useNavigate, Link } from "react-router-dom";
-import { GenerateSuccess } from "../../../toast/Toast";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
 
@@ -19,7 +18,6 @@ export default function SignIn() {
     e.preventDefault();
     try {
       const response = await userLogin(value);
-      console.log(response);
       if (response.data.status) {
         localStorage.setItem("userToken", response.data.usertoken);
         dispatch(
@@ -32,9 +30,6 @@ export default function SignIn() {
             is_admin: response.data.userData.is_admin,
           })
         );
-        setTimeout(() => {
-          GenerateSuccess(response.data.message);
-        }, 500);
         navigate("/home");
       }
     } catch (err) {
@@ -126,7 +121,7 @@ export default function SignIn() {
               </button>
               <div className="text-center">
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                  Don’t have an account?
+                  Don’t have an account ?
                   <Link
                     to="/signup"
                     className="text-sm font-medium text-gray-700 dark:text-gray-700"

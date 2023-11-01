@@ -139,31 +139,33 @@ function ProfileMenu() {
 
 export default function Header() {
   const params = useParams();
+  const { id, token } = params;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { name } = useSelector((state) => state.user);
 
   useEffect(() => {
     const verifyEmailUrl = async () => {
       try {
-        const response = await emailVerify(params.id, params.token);
-        if (response.data.status) {
-          localStorage.setItem("userToken", response.data.usertoken);
-          dispatch(
-            setUserDetails({
-              id: response.data.userData._id,
-              name: response.data.userData.name,
-              email: response.data.userData.email,
-            })
-          );
-          GenerateSuccess(response.data.message);
+        if (id && token) {
+          const response = await emailVerify(params.id, params.token);
+          if (response.data.status) {
+            localStorage.setItem("userToken", response.data.usertoken);
+            dispatch(
+              setUserDetails({
+                id: response.data.userData._id,
+                name: response.data.userData.name,
+                email: response.data.userData.email,
+              })
+            );
+            GenerateSuccess(response.data.message);
+          }
         }
       } catch (err) {
         console.log(err);
       }
     };
     verifyEmailUrl();
-  }, [params]);
+  }, [id, token]);
 
   return (
     <Navbar className="z-50 shadow-lg bg-white  rounded-none max-w-none mx-auto lg:pl-6 sticky top-0 left-0 right-0">
@@ -185,10 +187,7 @@ export default function Header() {
                 >
                   List your property
                 </Button>
-                <Link
-                  className="text-gray-900 hover:text-[#000]"
-                  onClick={() => navigate("/login")}
-                >
+                <Link className="text-gray-900 hover:text-[#000]" to="/login">
                   Log In
                 </Link>
               </>

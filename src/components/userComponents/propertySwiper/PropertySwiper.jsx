@@ -42,7 +42,7 @@ export default function PropertySwiper() {
     <div className="main-sparation">
       <div className="contai-section">
         <div className="pb-6">
-          <Typography variant="text" className="text-[#1e1e1e] font-fmaily">
+          <Typography  className="text-[#1e1e1e] font-fmaily">
             Best rated
           </Typography>
         </div>
