@@ -20,7 +20,7 @@ import {
 import { Logo } from "../commonComponents/CommonComponets";
 
 import React, { useEffect } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { emailVerify } from "../../../api/UserApi";
 import { GenerateSuccess } from "../../../toast/Toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,7 +48,7 @@ function ProfileMenu() {
   const closeMenu = () => setIsMenuOpen(false);
   const dispatch = useDispatch();
 
-  const userLOgout = () => {
+  const userLogout = () => {
     localStorage.removeItem("userToken");
     dispatch(
       setUserDetails({
@@ -101,15 +101,12 @@ function ProfileMenu() {
                 strokeWidth: 2,
               })}
               {label === "Sign Out" ? (
-                <Typography
-                  as="span"
-                  variant="small"
-                  className="font-normal"
-                  color={isLastItem ? "red" : "inherit"}
-                  onClick={userLOgout}
-                >
-                  {label}
-                </Typography>
+                <button
+                className={`font-normal ${isLastItem ? 'text-red' : 'text-blue-gray-900'} hover:underline`}
+                onClick={userLogout}
+              >
+                {label}
+              </button>
               ) : label === "Edit Profile" ? (
                 <Typography
                   as="span"
@@ -142,6 +139,7 @@ export default function Header() {
   const { id, token } = params;
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.user);
+  
 
   useEffect(() => {
     const verifyEmailUrl = async () => {
@@ -187,7 +185,7 @@ export default function Header() {
                 >
                   List your property
                 </Button>
-                <Link className="text-gray-900 hover:text-[#000]" to="/login">
+                <Link className="text-gray-900 hover:text-[#000]" to='/login'>
                   Log In
                 </Link>
               </>
