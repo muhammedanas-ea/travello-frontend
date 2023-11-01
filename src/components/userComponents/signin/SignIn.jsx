@@ -5,6 +5,7 @@ import { userLogin } from "../../../api/UserApi";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
+import GoogleSignin from "../googleAuth/googleSigin";
 
 export default function SignIn() {
   const [value, setValue] = useState({
@@ -113,12 +114,7 @@ export default function SignIn() {
               </div>
             </form>
             <div className="px-3">
-              <button
-                className="w-full mb-4 px-3  py-2 font-bold text-gray-800 bg-[#fff] rounded border border-gray-500 hover:bg-[#f8f7f7de] focus:outline-none focus:shadow-outline"
-                type=""
-              >
-                Login with Google
-              </button>
+             <GoogleSignin/>
               <div className="text-center">
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-300">
                   Don’t have an account ?
@@ -126,7 +122,7 @@ export default function SignIn() {
                     to="/signup"
                     className="text-sm font-medium text-gray-700 dark:text-gray-700"
                   >
-                    Sign up
+                    <span> Sign up</span>
                   </Link>
                 </p>
               </div>

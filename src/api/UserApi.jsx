@@ -39,6 +39,24 @@ export async function userLogin(loginData){
     }
 }
 
+export async function userGoogleSignUp(googleData){
+    try{
+        const data = await userApi.post('/googleSignUp',googleData)
+        return data
+    }catch(err){
+        handleApiCallError(err)
+    }
+}
+
+export async function userGoogleSignin(googleSigninData){
+    try{
+        const data = await userApi.post('/googleSignin',googleSigninData)
+        return data
+    }catch(err){
+        handleApiCallError(err)
+    }
+}
+
 
 export async function userForgotPassword(email){
     try{

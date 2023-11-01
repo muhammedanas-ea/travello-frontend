@@ -3,6 +3,8 @@ import { userSignUp } from "../../../api/UserApi";
 import { Link, useNavigate } from "react-router-dom";
 import { GenerateSuccess } from "../../../toast/Toast";
 import loginImg from "../../../../public/staticImages/1991562_Freepik.jpg";
+import GoogleSignUp from "../googleAuth/GoogleSignUp";
+
 
 export default function SignUp() {
   const [value, setValue] = useState({
@@ -28,6 +30,9 @@ export default function SignUp() {
     }
   };
 
+
+
+
   return (
     <div className="container mx-auto">
       <div className="flex justify-center px-6 my-12">
@@ -40,7 +45,7 @@ export default function SignUp() {
                 to="/login"
                 className="text-sm font-medium text-gray-700 dark:text-gray-700"
               >
-                Sign In
+                <span> Sign In</span>
               </Link>
             </span>
             <form
@@ -102,6 +107,7 @@ export default function SignUp() {
                 </p>
               </div>
               <div className="mb-3 text-center">
+
                 <button
                   className="w-full px-4 py-2 font-bold text-white bg-[#000] rounded hover:bg-[#000000de] focus:outline-none focus:shadow-outline"
                   type="submit"
@@ -119,12 +125,8 @@ export default function SignUp() {
               </div>
             </form>
             <div className="px-3">
-              <button
-                className="w-full mb-4 px-3 py-2 font-bold text-gray-800 bg-[#fff] rounded border border-gray-500 hover:bg-[#f8f7f7de] focus:outline-none focus:shadow-outline"
-                type="submit"
-              >
-                Login in with Google
-              </button>
+              {/* <GoogleLogin onSuccess={responseMessage} onError={errorMessage} /> */}
+              <GoogleSignUp />
             </div>
           </div>
           <div className="w-full lg:w-1/2 bg-gray-400 hidden lg:block lg:bg-cover">
