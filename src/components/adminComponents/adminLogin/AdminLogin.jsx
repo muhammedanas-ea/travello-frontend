@@ -1,5 +1,5 @@
 import { useState } from "react";
-import bgImg from "../../../../public/staticImages/slider-img1.jpg";
+import bgImg from "../../../../public/staticImages/property-signin.jpg";
 import { AdminLoginVerify } from "../../../api/AdminApi";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,7 @@ export default function AdminLogin() {
   return (
     <section
       className="bg-gray-50 dark:bg-gray-900 w-full h-screen"
-      style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }}
+      style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" , width:'100%' , height:'100%' }}
     >
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-md shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

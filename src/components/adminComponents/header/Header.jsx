@@ -10,6 +10,7 @@ import {
 } from "@material-tailwind/react";
 import { Logo } from "../../commonComponents/CommonComponets";
 import Sidebars from "../sidebar/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 // profile menu component
 const profileMenuItems = [
@@ -22,6 +23,12 @@ const profileMenuItems = [
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+  const navigate = useNavigate()
+
+  const adminLogout = () =>{
+    localStorage.removeItem('adminToken')
+    navigate('/admin/login')
+  }
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -68,6 +75,7 @@ function ProfileMenu() {
                 className={`font-normal ${
                   isLastItem ? "text-red" : "text-blue-gray-900"
                 } hover:underline`}
+                onClick={adminLogout}
               >
                 {label}
               </button>
