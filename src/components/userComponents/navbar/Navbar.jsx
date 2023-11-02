@@ -17,7 +17,7 @@ import {
 } from "@heroicons/react/24/solid";
 
 // Import Logo Components
-import { Logo } from "../commonComponents/CommonComponets";
+import { Logo } from "../../commonComponents/CommonComponets";
 
 import React, { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";

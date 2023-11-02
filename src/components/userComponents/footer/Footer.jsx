@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 
 // Import Logo Components
-import { Logo } from "../commonComponents/CommonComponets";
+import { Logo } from "../../commonComponents/CommonComponets";
 
  
 const LINKS = [

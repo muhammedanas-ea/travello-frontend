@@ -13,7 +13,6 @@ const handleApiCallError = (error) =>{
 export async function userSignUp(signupData){
     try{
         const data = await userApi.post('/signup',signupData)
-        console.log(data,'sdfghjkl')
         return data
     }catch(err){
         handleApiCallError(err)

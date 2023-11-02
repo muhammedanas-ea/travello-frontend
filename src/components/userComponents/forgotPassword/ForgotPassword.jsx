@@ -10,7 +10,6 @@ export default function ForgotPassword() {
     e.preventDefault();
     try {
       const response = await userForgotPassword({ email });
-      console.log(response);
       if (response.data.status) {
         GenerateSuccess(response.data.message);
       }
