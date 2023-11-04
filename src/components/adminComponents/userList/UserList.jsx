@@ -1,16 +1,36 @@
-import { Chip } from "@material-tailwind/react";
+import {
+  Button,
+  Chip,
+} from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import { userDetails } from "../../../api/AdminApi";
+import { UserDetails } from "../../../api/AdminApi";
+import DialogBox from "../dialogBox/dialogBox";
+import { UserUnblock } from "../../../api/AdminApi";
 
 export default function UserList() {
+  
   const [userData, setUserData] = useState([]);
+  const [child, setChild] = useState();
 
+  const handleUnblock = async (id) =>{
+    try{
+      const response = await UserUnblock({id})
+      console.log(response);
+      if(response.data.status){
+        setChild(true)
+      }
+    }catch(err){
+      console.log(err)
+    }
+  } 
+  
   useEffect(() => {
     const showUserData = async () => {
       try {
-        const response = await userDetails();
+        const response = await UserDetails();
         if (response.data.status) {
           setUserData(response.data.userData);
+          setChild(false)
         } else {
           console.log(response.data.message);
         }
@@ -19,8 +39,13 @@ export default function UserList() {
       }
     };
     showUserData();
-  }, []);
+  }, [child]);
 
+  const onDataUpdate = (data) => {
+    setChild(data);
+  };
+  
+ 
   return (
     <div className="p-4 sm:ml-64">
       <div className="p-4 rounded-lg dark:border-gray-700 mt-14">
@@ -51,7 +76,7 @@ export default function UserList() {
               </thead>
               <tbody>
                 {userData.map((item, index) => {
-                  const { name, email } = item;
+                  const { name, email, is_block, _id } = item;
                   return (
                     <tr
                       key={index}
@@ -69,17 +94,21 @@ export default function UserList() {
                         <Chip
                           variant="ghost"
                           size="sm"
-                          value="Block"
+                          value={is_block ? "block" : "unblock"}
                           color="green"
                         />
                       </td>
                       <td className="flex items-center px-6 py-4 space-x-3">
-                        <a
-                          href="#"
-                          className="font-medium text-red-600 dark:text-red-500 hover:underline"
-                        >
-                          Remove
-                        </a>
+                        {!is_block ? (
+                          <DialogBox  id={item} onDataUpdate={onDataUpdate}/>
+                        ) : (
+                          <Button 
+                          className="rounded-md font-medium" size="sm"
+                          onClick={() => handleUnblock(_id)}
+                          >
+                            Unblock
+                          </Button>
+                        )}
                       </td>
                     </tr>
                   );

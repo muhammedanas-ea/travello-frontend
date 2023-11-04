@@ -1,25 +1,31 @@
 import { ToastContainer } from "react-toastify";
-import bgImg from "../../../../public/staticImages/slider-img2.jpg";
-import { propertySignUp } from "../../../api/PropertyApi";
-import { Link } from "react-router-dom";
+import bgImg from "../../../../public/staticImages/property-signin.jpg";
+import { PropertySignUp } from "../../../api/PropertyApi";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function PropertySignup() {
+    const navigate = useNavigate()
     const [value,setValue] = useState({
         name:'',
         number:'',
         email:'',
         password:'',
     })
+
     const handleSubmit = async (e) =>{
         e.preventDefault()
         try{
-            const response = await propertySignUp(value)
-            console.log(response);
+            const response = await PropertySignUp(value)
+            if(response.data.status){
+              const id = response.data.ownerData._id
+              navigate(`/property/otpverification/${id}`)
+            }
         }catch(err){
             console.log(err);
         }
     }
+    
   return (
     <section
       className="bg-gray-50 dark:bg-gray-900 w-full h-screen"
@@ -34,7 +40,7 @@ export default function PropertySignup() {
             <span className=" pt-2 text-sm font-medium text-gray-500 dark:text-gray-300">
               Already have an account ?
               <Link
-                to="/login"
+                to="/property/login"
                 className="text-sm font-medium text-gray-700 dark:text-gray-700"
               >
                 <span> Sign In</span>
@@ -47,7 +53,7 @@ export default function PropertySignup() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Name
                 </label>

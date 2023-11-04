@@ -1,12 +1,44 @@
-import otpImg from '../../../../public/staticImages/otp.jpg'
+import { useState } from "react";
+import otpImg from "../../../../public/staticImages/otp.jpg";
+import { OtpChecking } from "../../../api/PropertyApi";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPropertyOwnerDetails } from "../../../redux/userSlice/PropertySlice";
+
 function OtpVerification() {
+  const { id } = useParams();
+  const [otp, setOtp] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await OtpChecking({ otp, id });
+      if (response.data.status) {
+        localStorage.setItem("propertyToken", response.data.propertytoken);
+        dispatch(
+          setPropertyOwnerDetails({
+            id: response.data.propertyData._id,
+            name: response.data.propertyData.name,
+            email: response.data.propertyData.email,
+            number: response.data.propertyData.number,
+          })
+        );
+        navigate("/property");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="flex h-screen">
       <div className="w-1/2 h-screen bg-blue-500 text-white flex items-center justify-center">
         <img src={otpImg} alt="Vector Image" className="object-fill h-screen" />
       </div>
       <div className="w-1/2 bg-gray-100 p-10 flex items-center justify-center">
-        <form className="w-2/3" >
+        <form className="w-2/3" onSubmit={handleSubmit}>
           <h2 className="text-2xl font-bold mb-1">Enter your otp</h2>
           <span className="text-xs text-gray-500">
             Send a otp in your email check it .
@@ -23,8 +55,8 @@ function OtpVerification() {
               type="text"
               placeholder="enter otp"
               name="otp"
-            //   value={email}
-            //   onChange={(e) => setEmail(e.target.value)}
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
             />
           </div>
           <button

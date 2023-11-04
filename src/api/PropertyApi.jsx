@@ -11,12 +11,29 @@ const handleApiCallError = (error) =>{
 
 
 
-
-export async function propertySignUp(signupData){
+export async function PropertySignUp(signupData){
     try{
         const data = await propertyApi.post('/propertySignup',signupData)
         return data
     }catch(err){
         handleApiCallError(err);
+    }
+}
+
+export async function OtpChecking(otpData){
+    try{
+        const data = await propertyApi.post('/otpChecking',otpData)
+        return data
+    }catch(err){
+        handleApiCallError(err)
+    }
+}
+
+export async function PropertySignin(loginDta){
+    try{
+        const data = await propertyApi.post('/propertySignin',loginDta)
+        return data
+    }catch(err){
+        handleApiCallError(err)
     }
 }

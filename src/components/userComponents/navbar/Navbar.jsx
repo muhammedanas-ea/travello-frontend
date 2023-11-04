@@ -139,6 +139,7 @@ export default function Header() {
   const { id, token } = params;
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.user);
+  const navigate = useNavigate()
   
 
   useEffect(() => {
@@ -182,6 +183,7 @@ export default function Header() {
                   className="border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20"
                   size="sm"
                   variant="text"
+                  onClick={() =>navigate('/property/login')}
                 >
                   List your property
                 </Button>
