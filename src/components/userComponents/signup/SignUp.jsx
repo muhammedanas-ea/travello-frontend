@@ -1,37 +1,37 @@
-import { useState } from "react";
 import { userSignUp } from "../../../api/UserApi";
 import { Link, useNavigate } from "react-router-dom";
 import { GenerateSuccess } from "../../../toast/Toast";
 import loginImg from "../../../../public/staticImages/1991562_Freepik.jpg";
 import GoogleSignUp from "../googleAuth/GoogleSignUp";
-
+import { useFormik } from "formik";
+import { SignupSchema } from "../../../yup/validation";
 
 export default function SignUp() {
-  const [value, setValue] = useState({
+  const navigate = useNavigate();
+
+  const initialValues = {
     name: "",
     email: "",
     password: "",
-  });
-
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await userSignUp(value);
-      if (response.data.status) {
-        setTimeout(() => {
-          GenerateSuccess(response.data.message);
-        }, 500);
-        navigate("/emailVerify");
-      }
-    } catch (err) {
-      console.log(err);
-    }
   };
-
-
-
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: SignupSchema,
+      onSubmit: async (values) => {
+        try {
+          const response = await userSignUp(values);
+          if (response.data.status) {
+            setTimeout(() => {
+              GenerateSuccess(response.data.message);
+            }, 500);
+            navigate("/emailVerify");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    });
 
   return (
     <div className="container mx-auto">
@@ -64,10 +64,15 @@ export default function SignUp() {
                   id="name"
                   type="text"
                   name="name"
-                  onChange={(e) =>
-                    setValue({ ...value, [e.target.name]: e.target.value })
-                  }
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {touched.name && errors.name && (
+                  <p className="pt-2 text-xs italic text-red-500">
+                    {errors.name}
+                  </p>
+                )}
               </div>
               <div className="mb-4">
                 <label
@@ -81,10 +86,15 @@ export default function SignUp() {
                   id="name"
                   type="text"
                   name="email"
-                  onChange={(e) =>
-                    setValue({ ...value, [e.target.name]: e.target.value })
-                  }
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {touched.email && errors.email && (
+                  <p className="pt-2 text-xs italic text-red-500">
+                    {errors.email}
+                  </p>
+                )}
               </div>
               <div className="mb-3">
                 <label
@@ -98,16 +108,17 @@ export default function SignUp() {
                   id="password"
                   type="password"
                   name="password"
-                  onChange={(e) =>
-                    setValue({ ...value, [e.target.name]: e.target.value })
-                  }
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                <p className="text-xs italic text-red-500">
-                  Please choose a password.
-                </p>
+                {touched.password && errors.password && (
+                  <p className="pt-1 text-xs italic text-red-500">
+                    {errors.password}
+                  </p>
+                )}
               </div>
               <div className="mb-3 text-center">
-
                 <button
                   className="w-full px-4 py-2 font-bold text-white bg-[#000] rounded hover:bg-[#000000de] focus:outline-none focus:shadow-outline"
                   type="submit"

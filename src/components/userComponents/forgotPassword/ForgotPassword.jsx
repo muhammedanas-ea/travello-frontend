@@ -1,22 +1,29 @@
-import { useState } from "react";
 import { userForgotPassword } from "../../../api/UserApi";
 import { GenerateSuccess } from "../../../toast/Toast";
 import { ToastContainer } from "react-toastify";
 import loginImg from "../../../../public/staticImages/5500661.jpg";
+import { useFormik } from "formik";
+import { ForgotSchema } from "../../../yup/validation";
 
 export default function ForgotPassword() {
-  const [email, setEmail] = useState("");
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await userForgotPassword({ email });
-      if (response.data.status) {
-        GenerateSuccess(response.data.message);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+  const initialValues = {
+    email: "",
   };
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: ForgotSchema,
+      onSubmit: async (values) => {
+        try {
+          const response = await userForgotPassword(values);
+          if (response.data.status) {
+            GenerateSuccess(response.data.message);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    });
 
   return (
     <div className="flex h-screen">
@@ -41,9 +48,13 @@ export default function ForgotPassword() {
               type="email"
               placeholder="enter email"
               name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
+            {touched.email && errors.email && (
+              <p className="pt-2 text-xs italic text-red-500">{errors.email}</p>
+            )}
           </div>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

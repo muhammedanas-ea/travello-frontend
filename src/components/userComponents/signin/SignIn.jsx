@@ -1,4 +1,3 @@
-import { useState } from "react";
 import loginImg from "../../../../public/staticImages/1991562_Freepik.jpg";
 import "./SignIn.css";
 import { userLogin } from "../../../api/UserApi";
@@ -6,37 +5,43 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
 import GoogleSignin from "../googleAuth/googleSigin";
+import { useFormik } from "formik";
+import { LoginSchema } from "../../../yup/validation";
 
 export default function SignIn() {
-  const [value, setValue] = useState({
-    email: "",
-    password: "",
-  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await userLogin(value);
-      if (response.data.status) {
-        localStorage.setItem("userToken", response.data.usertoken);
-        dispatch(
-          setUserDetails({
-            id: response.data.userData._id,
-            name: response.data.userData.name,
-            email: response.data.userData.email,
-            is_block: response.data.userData.is_block,
-            is_verified: response.data.userData.is_verified,
-            is_admin: response.data.userData.is_admin,
-          })
-        );
-        navigate("/home");
-      }
-    } catch (err) {
-      console.log(err);
-    }
+  const initialValues = {
+    email: "",
+    password: "",
   };
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: LoginSchema,
+      onSubmit: async (values) => {
+        try {
+          const response = await userLogin(values);
+          if (response.data.status) {
+            localStorage.setItem("userToken", response.data.usertoken);
+            dispatch(
+              setUserDetails({
+                id: response.data.userData._id,
+                name: response.data.userData.name,
+                email: response.data.userData.email,
+                is_block: response.data.userData.is_block,
+                is_verified: response.data.userData.is_verified,
+                is_admin: response.data.userData.is_admin,
+              })
+            );
+            navigate("/home");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    });
 
   return (
     <div className="container mx-auto">
@@ -63,10 +68,15 @@ export default function SignIn() {
                   id="email"
                   type="text"
                   name="email"
-                  onChange={(e) =>
-                    setValue({ ...value, [e.target.name]: e.target.value })
-                  }
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {touched.email && errors.email && (
+                  <p className="pt-2 text-xs italic text-red-500">
+                    {errors.email}
+                  </p>
+                )}
               </div>
               <div className="mb-3">
                 <label
@@ -80,13 +90,15 @@ export default function SignIn() {
                   id="password"
                   type="password"
                   name="password"
-                  onChange={(e) =>
-                    setValue({ ...value, [e.target.name]: e.target.value })
-                  }
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                <p className="text-xs italic text-red-500">
-                  Please choose a password.
-                </p>
+                {touched.password && errors.password && (
+                  <p className="pt-1 text-xs italic text-red-500">
+                    {errors.password}
+                  </p>
+                )}
               </div>
               <div className="mb-3 text-end">
                 <Link
@@ -114,7 +126,7 @@ export default function SignIn() {
               </div>
             </form>
             <div className="px-3">
-             <GoogleSignin/>
+              <GoogleSignin />
               <div className="text-center">
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-300">
                   Don’t have an account ?

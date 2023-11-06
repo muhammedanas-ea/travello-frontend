@@ -8,6 +8,7 @@ import EmailVerifyPage from '../pages/userPages/EmailVerifyPage';
 import UserPublic from "../protected/UserPublic";
 import ForgotPasswordPage from "../pages/userPages/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/userPages/ResetPasswordPage";
+import PropertyListPage from "../pages/userPages/PropertyListPage";
 
 export default function UserRoute() {
   return (
@@ -19,6 +20,7 @@ export default function UserRoute() {
         <Route index element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/home/:id/:token" element={<HomePage />} />
+        <Route path='/propertyList' element={<PropertyListPage/>} />
         <Route path="/login" element={<UserPublic><SignInPage /></UserPublic>} />
         <Route path="/signup" element={<UserPublic><SignUpPage /></UserPublic>} />
       </Route>

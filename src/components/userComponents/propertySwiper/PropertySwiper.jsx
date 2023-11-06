@@ -9,8 +9,10 @@ import slide4 from "../../../../public/staticImages/sliderimg-4.jpg";
 
 // Import Style For Property Swiper Card
 import "./PropertySwiper.css";
+import { useNavigate } from "react-router-dom";
 
 export default function PropertySwiper() {
+  const navigate = useNavigate()
   const bestRated = [
     {
       image: slide1,
@@ -46,14 +48,14 @@ export default function PropertySwiper() {
             Best rated
           </Typography>
         </div>
-        <div className="flex gap-9">
+        <div className="flex gap-6">
           {bestRated.map((item, index) => {
             const { image, propertyName, location, price } = item;
 
             return (
               <div
                 key={index}
-                className="sahdow mt-5 max-w-[300px] shadow-lg transition-transform transform hover:scale-105 duration-300 bg-white border border-[#00000027] rounded-lg  dark:bg-gray-800 dark:border-gray-700"
+                className="sahdow mt-5 max-w-[300px] shadow-lg transition-transform  hover:scale-105 duration-300 bg-white border border-[#00000027] rounded-lg  dark:bg-gray-800 dark:border-gray-700"
               >
                 <a href="#">
                   <img
@@ -85,6 +87,7 @@ export default function PropertySwiper() {
                         className="h-10 border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20"
                         size="sm"
                         variant="text"
+                        onClick={() => navigate('/propertylist')}
                       >
                         View property
                       </Button>

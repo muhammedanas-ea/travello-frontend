@@ -1,33 +1,43 @@
-import { useState } from "react";
 import bgImg from "../../../../public/staticImages/property-signin.jpg";
 import { AdminLoginVerify } from "../../../api/AdminApi";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { AdminLoginSchema } from "../../../yup/validation";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
-  const [value, setValue] = useState({
+  
+  const initialValues = {
     email: "",
     password: "",
-  });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await AdminLoginVerify(value);
-      if (response.data.status) {
-        localStorage.setItem("adminToken", response.data.admintoken);
-        navigate("/admin");
-      }
-    } catch (err) {
-      console.log(err);
-    }
   };
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: AdminLoginSchema,
+      onSubmit: async (values) => {
+        try {
+          const response = await AdminLoginVerify(values);
+          if (response.data.status) {
+            localStorage.setItem("adminToken", response.data.admintoken);
+            navigate("/admin");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    });
 
   return (
     <section
       className="bg-gray-50 dark:bg-gray-900 w-full h-screen"
-      style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" , width:'100%' , height:'100%' }}
+      style={{
+        backgroundImage: `url(${bgImg})`,
+        backgroundSize: "cover",
+        width: "100%",
+        height: "100%",
+      }}
     >
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-md shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -52,10 +62,15 @@ export default function AdminLogin() {
                   name="email"
                   id="email"
                   className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                  onChange={(e) =>
-                    setValue({ ...value, [e.target.name]: e.target.value })
-                  }
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {touched.email && errors.email && (
+                  <p className="pt-2 text-xs italic text-red-500">
+                    {errors.email}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -69,10 +84,15 @@ export default function AdminLogin() {
                   name="password"
                   id="password"
                   className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                  onChange={(e) =>
-                    setValue({ ...value, [e.target.name]: e.target.value })
-                  }
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {touched.password && errors.password && (
+                  <p className="pt-1 text-xs italic text-red-500">
+                    {errors.password}
+                  </p>
+                )}
               </div>
 
               <button

@@ -2,30 +2,34 @@ import { ToastContainer } from "react-toastify";
 import bgImg from "../../../../public/staticImages/property-signin.jpg";
 import { PropertySignUp } from "../../../api/PropertyApi";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useFormik } from "formik";
+import { PropertySignupSchema } from "../../../yup/validation";
 
 export default function PropertySignup() {
-    const navigate = useNavigate()
-    const [value,setValue] = useState({
-        name:'',
-        number:'',
-        email:'',
-        password:'',
-    })
-
-    const handleSubmit = async (e) =>{
-        e.preventDefault()
-        try{
-            const response = await PropertySignUp(value)
-            if(response.data.status){
-              const id = response.data.ownerData._id
-              navigate(`/property/otpverification/${id}`)
-            }
-        }catch(err){
-            console.log(err);
+  const navigate = useNavigate();
+  const initialValues = {
+    name: "",
+    number: "",
+    email: "",
+    password: "",
+  };
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: PropertySignupSchema,
+      onSubmit: async (values) => {
+        try {
+          const response = await PropertySignUp(values);
+          if (response.data.status) {
+            const id = response.data.ownerData._id;
+            navigate(`/property/otpverification/${id}`);
+          }
+        } catch (err) {
+          console.log(err);
         }
-    }
-    
+      },
+    });
+
   return (
     <section
       className="bg-gray-50 dark:bg-gray-900 w-full h-screen"
@@ -46,10 +50,7 @@ export default function PropertySignup() {
                 <span> Sign In</span>
               </Link>
             </span>
-            <form 
-            className="space-y-4 md:space-y-6"
-            onSubmit={handleSubmit}
-            >
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="email"
@@ -61,8 +62,15 @@ export default function PropertySignup() {
                   type="text"
                   name="name"
                   className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                  onChange={(e) => setValue({ ...value, [e.target.name]: e.target.value })}
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {touched.name && errors.name && (
+                  <p className="pt-2 text-xs italic text-red-500">
+                    {errors.name}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -75,8 +83,15 @@ export default function PropertySignup() {
                   type="text"
                   name="number"
                   className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                  onChange={(e) => setValue({ ...value, [e.target.name]: e.target.value })}
+                  value={values.number}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {touched.number && errors.number && (
+                  <p className="pt-2 text-xs italic text-red-500">
+                    {errors.number}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -89,8 +104,15 @@ export default function PropertySignup() {
                   type="email"
                   name="email"
                   className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                  onChange={(e) => setValue({ ...value, [e.target.name]: e.target.value })}
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {touched.email && errors.email && (
+                  <p className="pt-2 text-xs italic text-red-500">
+                    {errors.email}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -104,8 +126,15 @@ export default function PropertySignup() {
                   name="password"
                   id="password"
                   className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
-                  onChange={(e) => setValue({ ...value, [e.target.name]: e.target.value })}
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {touched.password && errors.password && (
+                  <p className="pt-2 text-xs italic text-red-500">
+                    {errors.password}
+                  </p>
+                )}
               </div>
 
               <button

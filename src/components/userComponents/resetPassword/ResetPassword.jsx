@@ -1,53 +1,51 @@
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import loginImg from "../../../../public/staticImages/5500661.jpg";
 import { userRestPassword } from "../../../api/UserApi";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
 import { GenerateSuccess } from "../../../toast/Toast";
+import { useFormik } from "formik";
+import { ResetPasswordSchema } from "../../../yup/validation";
 
 export default function ResetPassword() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [value, setValue] = useState({
+
+  const initialValues = {
     password: "",
     conformPassword: "",
-    id: "",
-  });
-
-  useEffect(() => {
-    setValue((prevValue) => ({
-      ...prevValue,
-      id,
-    }));
-  }, [id]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await userRestPassword(value);
-      if (response.data.status) {
-        localStorage.setItem("userToken", response.data.usertoken);
-        dispatch(
-          setUserDetails({
-            id: response.data.userData._id,
-            name: response.data.userData.name,
-            email: response.data.userData.email,
-            is_block: response.data.userData.is_block,
-            is_verified: response.data.userData.is_verified,
-            is_admin: response.data.userData.is_admin,
-          })
-        );
-        setTimeout(() => {
-          GenerateSuccess(response.data.message);
-        }, 500);
-        navigate("/home");
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    id: id,
   };
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: ResetPasswordSchema,
+      onSubmit: async (values) => {
+        try {
+          const response = await userRestPassword(values);
+          if (response.data.status) {
+            localStorage.setItem("userToken", response.data.usertoken);
+            dispatch(
+              setUserDetails({
+                id: response.data.userData._id,
+                name: response.data.userData.name,
+                email: response.data.userData.email,
+                is_block: response.data.userData.is_block,
+                is_verified: response.data.userData.is_verified,
+                is_admin: response.data.userData.is_admin,
+              })
+            );
+            setTimeout(() => {
+              GenerateSuccess(response.data.message);
+            }, 500);
+            navigate("/home");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    });
 
   return (
     <div className="flex h-screen">
@@ -67,10 +65,15 @@ export default function ResetPassword() {
               type="password"
               placeholder="New Password"
               name="password"
-              onChange={(e) =>
-                setValue({ ...value, [e.target.name]: e.target.value })
-              }
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
+            {touched.password && errors.password && (
+              <p className="pt-1 text-xs italic text-red-500">
+                {errors.password}
+              </p>
+            )}
           </div>
           <div className="mb-4">
             <label htmlFor="">Conform password</label>
@@ -80,10 +83,15 @@ export default function ResetPassword() {
               type="password"
               placeholder="Confirm Password"
               name="conformPassword"
-              onChange={(e) =>
-                setValue({ ...value, [e.target.name]: e.target.value })
-              }
+              value={values.conformPassword}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
+            {touched.conformPassword && errors.conformPassword && (
+              <p className="pt-1 text-xs italic text-red-500">
+                {errors.conformPassword}
+              </p>
+            )}
           </div>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
