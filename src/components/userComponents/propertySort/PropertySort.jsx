@@ -4,7 +4,7 @@ export default function PropertySort() {
   return (
     <div className="flex justify-end mb-10">
       <div className="relative inline-block text-left w-52">
-        <select className="block appearance-none w-full bg-white border border-gray-500 hover:border-gray-400 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+        <select className="block appearance-none w-full bg-white border border-gray-500 hover:border-gray-400 px-4 py-2 pr-8 rounded-md leading-tight focus:outline-none focus:shadow-outline">
           <option value="lowToHigh">Price: Low to High</option>
           <option value="highToLow">Price: High to Low</option>
         </select>

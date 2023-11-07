@@ -1,6 +1,5 @@
 import {
   Navbar,
-  Typography,
   Button,
   Menu,
   MenuHandler,
@@ -108,23 +107,19 @@ function ProfileMenu() {
                 {label}
               </button>
               ) : label === "Edit Profile" ? (
-                <Typography
-                  as="span"
-                  variant="small"
+                <button
                   className="font-normal"
                   color={isLastItem ? "red" : "inherit"}
                 >
                   {label}
-                </Typography>
+                </button>
               ) : (
-                <Typography
-                  as="span"
-                  variant="small"
+                <button
                   className="font-normal"
                   color={isLastItem ? "red" : "inherit"}
                 >
                   {label}
-                </Typography>
+                </button>
               )}
             </MenuItem>
           );

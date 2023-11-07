@@ -6,6 +6,7 @@ import PropertyLoginpage from "../pages/propertyPages/PropertyLoginpage";
 import PropertyLayout from "../layout/propertyLayout/PropertyLayout";
 import PropertyProtected from "../protected/PropertyProtected";
 import PropertyPublic from "../protected/PropertyPublic";
+import OwnerProfilePage from "../pages/propertyPages/OwnerProfilePage";
 
 export default function PropertyRoute() {
   return (
@@ -18,6 +19,7 @@ export default function PropertyRoute() {
       <Route element={<PropertyProtected />}>
         <Route element={<PropertyLayout />}>
           <Route path="/" element={<DashboardPage />} />
+          <Route path="/ownerprofile" element={<OwnerProfilePage />} />
         </Route>
       </Route>
     </Routes>

@@ -21,7 +21,7 @@ const propertySlice = createSlice({
         setPropertyOwnerlogoutDetails:(state) =>{
             state.id= '';
             state.name= '';
-            state.email= '';
+            state.email= '';    
             state.number= '';
         }
     }
