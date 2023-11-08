@@ -51,3 +51,22 @@ export const PropertySignupSchema = Yup.object({
     .required("please enter your email"),
   password: Yup.string().min(6).required("Please enter password"),
 });
+
+export const AddPropertySchema = Yup.object({
+  propertyName: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  price: Yup.number().min(0).required("please enter price"),
+  room: Yup.string().min(0).required("please enter room"),
+  gust: Yup.string().min(0).required("please enter gust"),
+  state: Yup.string().required("please enter state"),
+  location: Yup.string().required("please enetr location"),
+  propertyType: Yup.string().required("please enter property type"),
+  number: Yup.number().min(10).required("please enter your number"),
+  amenities: Yup.array()
+    .of(Yup.string())
+    .required("Select at least one amenity"),
+  describe: Yup.string().required("Required"),
+  images: Yup.array().required("Required"),
+});

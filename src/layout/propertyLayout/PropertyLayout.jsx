@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "../../components/propertyComponents/propertyHeader/PropertyHeader"
 import Sidebar from "../../components/propertyComponents/propertySidebar/PropertySidebar";
+import { ToastContainer } from "react-toastify";
 
 export default function PropertyLayout() {
   return (
@@ -8,6 +9,7 @@ export default function PropertyLayout() {
     <Header/>
     <Sidebar />
     <Outlet/>
+    <ToastContainer/>
     </div>
   );
 }

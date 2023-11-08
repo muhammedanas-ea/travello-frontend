@@ -4,7 +4,9 @@ import slide2 from "../../../../public/staticImages/sliderimg-2.jpg";
 import slide3 from "../../../../public/staticImages/sliderimg-4.jpg";
 import PropertyAddingDialog from "../propertyAddingDialog/PropertyAddingDialog";
 
+
 export default function OwnerPropertyLIst() {
+ 
   const PropertyList = [
     {
       image: slide1,
