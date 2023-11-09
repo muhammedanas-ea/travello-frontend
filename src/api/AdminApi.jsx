@@ -12,7 +12,6 @@ const handleApiCallError = (error) => {
 
 export async function UserDetails(active, search) {
   try {
-    console.log(active, search);
     const data = await adminApi.get(`/userlist/${active}/${search}`);
     return data;
   } catch (err) {
@@ -44,5 +43,43 @@ export async function UserUnblock(id) {
     return data;
   } catch (err) {
     console.log(err);
+  }
+}
+
+export async function VerifyNotification() {
+  try {
+    const data = await adminApi.get("/verify");
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function PropertyDetails(active,search) {
+  try {
+    console.log(active,search);
+    const data = await adminApi.get(`/propertylistadmin/${active}/${search}`);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
+export async function PropertyBlock(id){
+  try{
+    const data = await adminApi.put('/propertyBlock', id)
+    return data
+  }catch(err){
+    console.log(err)
+  }
+}
+
+export async function PropertyUnblock(id){
+  try{
+    const data = await adminApi.put('/propertyUnblock', id)
+    return data
+  }catch(err){
+    console.log(err)
   }
 }

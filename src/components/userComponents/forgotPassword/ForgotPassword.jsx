@@ -1,4 +1,4 @@
-import { userForgotPassword } from "../../../api/UserApi";
+import { UserForgotPassword } from "../../../api/UserApi";
 import { GenerateSuccess } from "../../../toast/Toast";
 import { ToastContainer } from "react-toastify";
 import loginImg from "../../../../public/staticImages/5500661.jpg";
@@ -15,7 +15,7 @@ export default function ForgotPassword() {
       validationSchema: ForgotSchema,
       onSubmit: async (values) => {
         try {
-          const response = await userForgotPassword(values);
+          const response = await UserForgotPassword(values);
           if (response.data.status) {
             GenerateSuccess(response.data.message);
           }

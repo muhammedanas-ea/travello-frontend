@@ -1,39 +1,44 @@
 import { Button } from "@material-tailwind/react";
-import slide1 from "../../../../public/staticImages/sliderimg-3.jpg";
-import slide2 from "../../../../public/staticImages/sliderimg-2.jpg";
-import slide3 from "../../../../public/staticImages/sliderimg-4.jpg";
 import PropertyAddingDialog from "../propertyAddingDialog/PropertyAddingDialog";
-
+import { useEffect, useState } from "react";
+import { ListProperty } from "../../../api/PropertyApi";
+import { useSelector } from "react-redux";
 
 export default function OwnerPropertyLIst() {
- 
-  const PropertyList = [
-    {
-      image: slide1,
-      propertyName: "Enchanting Pastures - Khopoli",
-      location: "Lonavala, Maharashtra",
-    },
-    {
-      image: slide2,
-      propertyName: "Enchanting Pastures - Khopoli",
-      location: "Lonavala, Maharashtra",
-    },
-    {
-      image: slide3,
-      propertyName: "Enchanting Pastures - Khopoli",
-      location: "Lonavala, Maharashtra",
-    },
-  ];
+  const { id } = useSelector((state) => state.owner);
+  const [PropertyList, setPropertyList] = useState([]);
+  const [child, setChild] = useState();
+
+  const onDataUpdate = (data) => {
+    setChild(data);
+  };
+
+  useEffect(() => {
+    const showPropertyData = async () => {
+      try {
+        const response = await ListProperty(id);
+        if (response.data.status) {
+          console.log(response.data);
+          setPropertyList(response.data.propertyData);
+          setChild(false);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    showPropertyData();
+  }, [id, child]);
+
   return (
     <div className="px-4 pb-5 sm:ml-64">
       <div className="px-4 rounded-md dark:border-gray-700">
         <div className="w-full grid grid-cols-1  bg-white border border-gray-200 rounded-lg shadow">
           <div className="p-5 flex justify-end">
-            <PropertyAddingDialog />
+            <PropertyAddingDialog onDataUpdate={onDataUpdate} />
           </div>
-          <div className="p-3 px-5 grid grid-cols-3 gap-5">
+          <div className="p-3 px-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
             {PropertyList.map((items, index) => {
-              const { image, propertyName, location } = items;
+              const { Image, PropertyName, State, City, Price, RoomCount, GuestCount } = items;
               return (
                 <div
                   key={index}
@@ -42,28 +47,44 @@ export default function OwnerPropertyLIst() {
                   <div>
                     <img
                       className="object-fill h-[210px] w-full rounded-t-md"
-                      src={image}
+                      src={
+                        Image
+                          ? `/images/${Image[0]}`
+                          : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
+                      }
                       alt=""
                     />
+                    {console.log(Image[1])}
                   </div>
                   <div className="p-5">
                     <h6 className="font-san mb-1 text-xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
-                      {propertyName}
+                      {PropertyName}
                     </h6>
                     <p className="mb-4 font-normal text-gray-700 dark:text-gray-400">
-                      {location}
+                      {City},{State}
                     </p>
+                    <span className="font-normal text-sm leading-3 tracking-tighter text-[#959595]">
+                      Up to {GuestCount} Guests + {RoomCount} Rooms
+                    </span>
                     <div className="mt-4">
                       <hr className="border-1 border-gray-400" />
                     </div>
-                    <div className="mt-5 flex justify-end items-center">
+                    <div className="mt-5 flex justify-between items-center">
+                      <div>
+                        <h5 className="ont-san text-2xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
+                          ₹ {Price}
+                        </h5>
+                        <span className="font-normal text-xs leading-3 tracking-tighter text-[#959595]">
+                          Per night + Tax
+                        </span>
+                      </div>
                       <div className="pt-3 sm:pt-0">
                         <Button
                           className="h-10 border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20"
                           size="sm"
                           variant="text"
                         >
-                          View Details
+                          View details
                         </Button>
                       </div>
                     </div>

@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import loginImg from "../../../../public/staticImages/5500661.jpg";
-import { userRestPassword } from "../../../api/UserApi";
+import { UserRestPassword } from "../../../api/UserApi";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
 import { GenerateSuccess } from "../../../toast/Toast";
@@ -23,7 +23,7 @@ export default function ResetPassword() {
       validationSchema: ResetPasswordSchema,
       onSubmit: async (values) => {
         try {
-          const response = await userRestPassword(values);
+          const response = await UserRestPassword(values);
           if (response.data.status) {
             localStorage.setItem("userToken", response.data.usertoken);
             dispatch(

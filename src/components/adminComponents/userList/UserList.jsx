@@ -46,7 +46,6 @@ export default function UserList() {
   }, [child, active, search]);
 
   const onDataUpdate = (data) => {
-    console.log("first working");
     setChild(data);
   };
 

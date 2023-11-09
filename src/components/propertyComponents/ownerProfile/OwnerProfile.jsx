@@ -1,7 +1,10 @@
 // import React from 'react';
 
+import { useSelector } from "react-redux";
+
 
 function OwnerProfile() {
+  const { name,email,number } = useSelector((state) => state.owner);
   return (
     <div className="p-4 sm:ml-64">
       <div className="p-4 rounded-lg dark:border-gray-700 mt-16">
@@ -16,13 +19,13 @@ function OwnerProfile() {
             </div>
             <div className="p-3 leading-normal">
               <h5 className="mb-5 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                Muhammed anas
+                {name}
               </h5>
               <p className="mb-1 font-normal text-gray-700 dark:text-gray-400">
-                muhammedanasea2000@gmail.com
+                {email}
               </p>
               <p className="font-normal text-gray-700 dark:text-gray-400">
-                9747519239
+                {number}
               </p>
             </div>
           </div>

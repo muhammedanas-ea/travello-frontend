@@ -47,7 +47,7 @@ export async function userGoogleSignin(googleSigninData) {
   }
 }
 
-export async function userForgotPassword(email) {
+export async function UserForgotPassword(email) {
   try {
     const data = await userApi.post("/forgotPassword", email);
     return data;
@@ -56,11 +56,20 @@ export async function userForgotPassword(email) {
   }
 }
 
-export async function userRestPassword(resetPasswordData) {
+export async function UserRestPassword(resetPasswordData) {
   try {
     const data = await userApi.post("/restPasword", resetPasswordData);
     return data;
   } catch (err) {
     throw new err(err);
+  }
+}
+
+export async function UserPropertyList(){
+  try{
+    const data = await userApi.get('/userpropertylist')
+    return data
+  }catch(err){
+    throw new err(err)
   }
 }

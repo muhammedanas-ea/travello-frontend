@@ -165,7 +165,7 @@ export default function Header() {
     <Navbar className="z-50  shadow-md bg-white  rounded-none max-w-none mx-auto lg:pl-6 sticky top-0 left-0 right-0">
       <div className="container">
         <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
-          <Logo />
+         <Link to='/home'><Logo /></Link> 
           <div className="flex items-center gap-7">
             {localStorage.getItem("userToken") ? (
               <>

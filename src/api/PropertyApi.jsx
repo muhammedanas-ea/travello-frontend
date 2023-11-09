@@ -37,10 +37,19 @@ export async function AddProperty(addData) {
       },
       WithCreadentials: true,
     };
-    console.log(propertyApi,'in api');
     const data = await propertyApi.post("/addProperty", addData, config);
     return data;
   } catch (err) {
     throw new err(err);
+  }
+}
+
+
+export async function ListProperty(id){
+  try{
+    const data = await propertyApi.get(`/listProperty/${id}`)
+    return data
+  }catch(err){
+    console.log(err)
   }
 }

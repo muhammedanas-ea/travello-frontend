@@ -17,7 +17,8 @@ import { AddPropertySchema } from "../../../yup/validation";
 import { AddProperty } from "../../../api/PropertyApi";
 import { GenerateSuccess } from "../../../toast/Toast";
 
-export default function PropertyAddingDialog() {
+// eslint-disable-next-line react/prop-types
+export default function PropertyAddingDialog({onDataUpdate}) {
   const [open, setOpen] = React.useState(false);
   const [state, setState] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -47,7 +48,7 @@ export default function PropertyAddingDialog() {
   } = useFormik({
     initialValues: initialValues,
     validationSchema: AddPropertySchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values,{resetForm}) => {
       try {
         console.log(values);
         const formData = new FormData();
@@ -68,12 +69,11 @@ export default function PropertyAddingDialog() {
           formData.append("images", values.images[i]);
         }
 
-        console.log(formData);
-
         const response = await AddProperty(formData);
-        console.log(response);
         if (response.data.status) {
+          resetForm(initialValues)
           GenerateSuccess(response.data.message);
+          onDataUpdate(true)
           handleOpen();
         }
       } catch (err) {
@@ -89,7 +89,6 @@ export default function PropertyAddingDialog() {
 
   useEffect(() => {
     GetState(101).then((result) => {
-      console.log(result);
       setState(result);
     });
   }, []);
@@ -227,7 +226,7 @@ export default function PropertyAddingDialog() {
                     <option value="">Select a state</option>
                     {state.map((item) => {
                       return (
-                        <option key={item.id} value={item.id}>
+                        <option key={item.id} value={item.name}>
                           {item.name}
                         </option>
                       );

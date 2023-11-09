@@ -8,8 +8,8 @@ export default function PropertySearch() {
   const [checkInDate, setCheckInDate] = useState(null);
   const [checkOutDate, setCheckOutDate] = useState(null);
   return (
-    <div className="grid grid-cols-4 gap-3 items-center w-full h-[80px] rounded-md bg-[#fcfbfb] box-shadow  my-6">
-      <div className="h-[45px] ml-4 rounded-md  bg-gray-100 border border-gray-700  flex items-center">
+    <div className="grid grid-cols-1  md:grid-cols-4 gap-3 items-center w-full h-[80px] rounded-md bg-[#fcfbfb] box-shadow mb-[10rem] md:my-6">
+      <div className="h-[45px] md:ml-4 rounded-md  bg-gray-100 border border-gray-700  flex items-center">
         <DatePicker
           selected={checkInDate}
           onChange={(date) => setCheckInDate(date)}
@@ -33,7 +33,7 @@ export default function PropertySearch() {
           placeholder="Destination"
         />
       </div>
-      <Button className="rounded-md h-[45px] mr-4" size="md">
+      <Button className="rounded-md h-[45px] md:mr-4" size="md">
         Search
       </Button>
     </div>

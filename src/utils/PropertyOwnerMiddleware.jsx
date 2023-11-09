@@ -6,11 +6,9 @@ const axiosInterceptorInstanceOwner = axios.create({
 });
 
 axiosInterceptorInstanceOwner.interceptors.request.use((req) => {
-    console.log(localStorage.getItem("propertyToken"),'iiiiiiiiii');
   if (localStorage.getItem("propertyToken")) {
     req.headers.Authorization = "Bearer " + localStorage.getItem("propertyToken");
   }
-  console.log(req)
   return req;
 });
 
