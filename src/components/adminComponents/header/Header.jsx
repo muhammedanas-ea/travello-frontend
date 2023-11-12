@@ -12,7 +12,6 @@ import { Logo } from "../../commonComponents/CommonComponets";
 import Sidebars from "../sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 
-// profile menu component
 const profileMenuItems = [
   {
     label: "Sign Out",
@@ -23,12 +22,12 @@ const profileMenuItems = [
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const adminLogout = () =>{
-    localStorage.removeItem('adminToken')
-    navigate('/admin/login')
-  }
+  const adminLogout = () => {
+    localStorage.removeItem("adminToken");
+    navigate("/admin/login");
+  };
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -87,8 +86,6 @@ function ProfileMenu() {
   );
 }
 
-
-
 export default function Header() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -102,7 +99,7 @@ export default function Header() {
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
-            <button
+              <button
                 type="button"
                 className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 onClick={toggleSidebar}

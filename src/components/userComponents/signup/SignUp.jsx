@@ -1,4 +1,4 @@
-import { userSignUp } from "../../../api/UserApi";
+import { UserSignUp } from "../../../api/UserApi";
 import { Link, useNavigate } from "react-router-dom";
 import { GenerateSuccess } from "../../../toast/Toast";
 import loginImg from "../../../../public/staticImages/1991562_Freepik.jpg";
@@ -20,7 +20,7 @@ export default function SignUp() {
       validationSchema: SignupSchema,
       onSubmit: async (values) => {
         try {
-          const response = await userSignUp(values);
+          const response = await UserSignUp(values);
           if (response.data.status) {
             setTimeout(() => {
               GenerateSuccess(response.data.message);

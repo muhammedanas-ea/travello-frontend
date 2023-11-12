@@ -1,6 +1,5 @@
 import {
   ChevronDownIcon,
-  Cog6ToothIcon,
   PowerIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/solid";
@@ -15,8 +14,8 @@ import {
 } from "@material-tailwind/react";
 import { Logo } from "../../commonComponents/CommonComponets";
 import Sidebars from "../propertySidebar/PropertySidebar";
-import { useNavigate  } from "react-router-dom";
-import {setPropertyOwnerlogoutDetails} from "../../../redux/userSlice/PropertySlice";
+import { Link, useNavigate } from "react-router-dom";
+import { setPropertyOwnerlogoutDetails } from "../../../redux/userSlice/PropertySlice";
 import { useDispatch, useSelector } from "react-redux";
 
 // profile menu component
@@ -24,10 +23,6 @@ const profileMenuItems = [
   {
     label: "My Profile",
     icon: UserCircleIcon,
-  },
-  {
-    label: "Edit Profile",
-    icon: Cog6ToothIcon,
   },
   {
     label: "Sign Out",
@@ -104,20 +99,14 @@ function ProfileMenu() {
                 >
                   {label}
                 </button>
-              ) : label === "Edit Profile" ? (
-                <button
-                  className="font-normal"
-                  color={isLastItem ? "red" : "inherit"}
-                >
-                  {label}
-                </button>
               ) : (
-                <button
+                <Link
                   className="font-normal"
                   color={isLastItem ? "red" : "inherit"}
+                  to="/property/ownerprofile"
                 >
                   {label}
-                </button>
+                </Link>
               )}
             </MenuItem>
           );

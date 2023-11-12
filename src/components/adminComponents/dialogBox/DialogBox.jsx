@@ -7,30 +7,25 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { UserBlock } from "../../../api/AdminApi";
-// import UserList from "../userList/UserList";
-
-
 
 // eslint-disable-next-line react/prop-types
-export default function DialogDefault({ id, onDataUpdate}) {
+export default function DialogDefault({ id, onDataUpdate }) {
   // eslint-disable-next-line react/prop-types
   const { name, _id } = id;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
 
- 
-  
-  const handleSubmit = async () =>{
-    try{
-        const response = await UserBlock({_id})
-        if(response.data.status){
-            onDataUpdate(true)
-            handleOpen();
-        }
-    }catch(err){
-        console.log(err);
+  const handleSubmit = async () => {
+    try {
+      const response = await UserBlock({ _id });
+      if (response.data.status) {
+        onDataUpdate(true);
+        handleOpen();
+      }
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   return (
     <>
@@ -43,9 +38,7 @@ export default function DialogDefault({ id, onDataUpdate}) {
       </Button>
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>Its a user block confirm dialog.</DialogHeader>
-        <DialogBody>
-          Are you sure you want to blog user {name} ? 
-        </DialogBody>
+        <DialogBody>Are you sure you want to blog user {name} ?</DialogBody>
         <DialogFooter>
           <Button
             variant="text"

@@ -7,30 +7,25 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { PropertyBlock } from "../../../api/AdminApi";
-// import UserList from "../userList/UserList";
-
-
 
 // eslint-disable-next-line react/prop-types
-export default function PropertyBlockDialog({ id, onDataUpdate}) {
+export default function PropertyBlockDialog({ id, onDataUpdate }) {
   // eslint-disable-next-line react/prop-types
   const { PropertyName, _id } = id;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
 
- 
-  
-  const handleSubmit = async () =>{
-    try{
-        const response = await PropertyBlock({_id})
-        if(response.data.status){
-            onDataUpdate(true)
-            handleOpen();
-        }
-    }catch(err){
-        console.log(err);
+  const handleSubmit = async () => {
+    try {
+      const response = await PropertyBlock({ _id });
+      if (response.data.status) {
+        onDataUpdate(true);
+        handleOpen();
+      }
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   return (
     <>
@@ -44,7 +39,7 @@ export default function PropertyBlockDialog({ id, onDataUpdate}) {
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>Its a property block confirm dialog.</DialogHeader>
         <DialogBody>
-          Are you sure you want to blog property {PropertyName} ? 
+          Are you sure you want to blog property {PropertyName} ?
         </DialogBody>
         <DialogFooter>
           <Button

@@ -22,7 +22,7 @@ export default function PropertySignup() {
           const response = await PropertySignUp(values);
           if (response.data.status) {
             const id = response.data.ownerData._id;
-            navigate(`/property/otpverification/${id}`);
+            navigate(`/property/otpverification`, { state: { id } });
           }
         } catch (err) {
           console.log(err);

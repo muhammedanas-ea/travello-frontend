@@ -1,14 +1,14 @@
+// import PropertyList from "../../components/userComponents/propertyList/PropertyList";
 import PropertySearch from "../../components/userComponents/propertySearch/PropertySearch";
-import PropertyList from "../../components/userComponents/propertyList/PropertyList";
-import PropertySort from "../../components/userComponents/propertySort/PropertySort";
+// import PropertySort from "../../components/userComponents/propertySort/PropertySort";
 
 export default function PropertyListPage() {
   return (
-    <div className="py-10">
+    <div className="py-9">
       <div className="contai-section">
         <PropertySearch />
-        <PropertySort/>
-        <PropertyList />
+        {/* <PropertySort /> */}
+        {/* <PropertyList /> */}
       </div>
     </div>
   );

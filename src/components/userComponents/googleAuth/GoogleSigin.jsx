@@ -1,7 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { userGoogleSignin } from "../../../api/UserApi";
+import { UserGoogleSignin } from "../../../api/UserApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
@@ -10,7 +10,6 @@ export default function GoogleSignin() {
   const [user, setUser] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
@@ -30,24 +29,26 @@ export default function GoogleSignin() {
           }
         )
         .then((res) => {
-            userGoogleSignin(res.data).then((res)=>{
-                if (res.data.status) {
-                    localStorage.setItem("userToken", res.data.usertoken);
-                    dispatch(
-                      setUserDetails({
-                        id: res.data.userData._id,
-                        name: res.data.userData.name,
-                        email: res.data.userData.email,
-                        is_block: res.data.userData.is_block,
-                        is_verified: res.data.userData.is_verified,
-                        is_admin: res.data.userData.is_admin,
-                      })
-                    );
-                    navigate("/home");
-                  }
-          }).catch((err) =>{
-            console.log(err);
-          })
+          UserGoogleSignin(res.data)
+            .then((res) => {
+              if (res.data.status) {
+                localStorage.setItem("userToken", res.data.usertoken);
+                dispatch(
+                  setUserDetails({
+                    id: res.data.userData._id,
+                    name: res.data.userData.name,
+                    email: res.data.userData.email,
+                    is_block: res.data.userData.is_block,
+                    is_verified: res.data.userData.is_verified,
+                    is_admin: res.data.userData.is_admin,
+                  })
+                );
+                navigate("/home");
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => console.log(err));
     }

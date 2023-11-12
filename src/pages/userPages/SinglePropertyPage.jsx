@@ -1,10 +1,11 @@
-import SingleProperty from "../../components/userComponents/singleProperty/SingleProperty";
+import SinglePropertyDetails from "../../components/userComponents/singlePropertyDetails/SinglePropertyDetails";
 
 export default function SinglePropertyPage() {
   return (
-   <>
-   <SingleProperty />
-   </>
+    <div className="py-9">
+      <div className="contai-section" style={{margin: '0px 5%'}}>
+        <SinglePropertyDetails />
+      </div>
+    </div>
   );
 }
-

@@ -2,7 +2,7 @@ import axiosInterceptorInstance from "../utils/UserMiddleware";
 
 const userApi = axiosInterceptorInstance;
 
-export async function userSignUp(signupData) {
+export async function UserSignUp(signupData) {
   try {
     const data = await userApi.post("/signup", signupData);
     return data;
@@ -11,7 +11,7 @@ export async function userSignUp(signupData) {
   }
 }
 
-export async function emailVerify(id, token) {
+export async function EmailVerify(id, token) {
   try {
     const data = await userApi.get(`verify/${id}/${token}`);
     return data;
@@ -20,7 +20,7 @@ export async function emailVerify(id, token) {
   }
 }
 
-export async function userLogin(loginData) {
+export async function UserLogin(loginData) {
   try {
     const data = await userApi.post("/login", loginData);
     return data;
@@ -29,7 +29,7 @@ export async function userLogin(loginData) {
   }
 }
 
-export async function userGoogleSignUp(googleData) {
+export async function UserGoogleSignUp(googleData) {
   try {
     const data = await userApi.post("/googleSignUp", googleData);
     return data;
@@ -38,7 +38,7 @@ export async function userGoogleSignUp(googleData) {
   }
 }
 
-export async function userGoogleSignin(googleSigninData) {
+export async function UserGoogleSignin(googleSigninData) {
   try {
     const data = await userApi.post("/googleSignin", googleSigninData);
     return data;
@@ -65,11 +65,42 @@ export async function UserRestPassword(resetPasswordData) {
   }
 }
 
-export async function UserPropertyList(){
-  try{
-    const data = await userApi.get('/userpropertylist')
-    return data
-  }catch(err){
-    throw new err(err)
+export async function UserPropertyList(active,sort) {
+  try {
+    // const {  state } = search;
+
+    const data = await userApi.get(
+      `/userpropertylist/${active}/${sort}`
+    );
+    return data;
+  } catch (err) {
+    throw new err(err);
+  }
+}
+
+export async function UpdateProfile(profileData, id) {
+  try {
+    const data = await userApi.put("/userprofile", { profileData, id });
+    return data;
+  } catch (err) {
+    throw new err(err);
+  }
+}
+
+export async function UserProfileData(id) {
+  try {
+    const data = await userApi.get(`/profileData/${id}`);
+    return data;
+  } catch (err) {
+    throw new err(err);
+  }
+}
+
+export async function UserSingleProperty(id) {
+  try {
+    const data = await userApi.get(`/singleproperty/${id}`);
+    return data;
+  } catch (err) {
+    throw new err(err);
   }
 }

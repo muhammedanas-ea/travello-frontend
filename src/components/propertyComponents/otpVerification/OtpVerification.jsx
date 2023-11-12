@@ -1,12 +1,13 @@
 import { useState } from "react";
 import otpImg from "../../../../public/staticImages/otp.jpg";
 import { OtpChecking } from "../../../api/PropertyApi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPropertyOwnerDetails } from "../../../redux/userSlice/PropertySlice";
 
 function OtpVerification() {
-  const { id } = useParams();
+  const { state } = useLocation();
+  const { id } = state;
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,7 +68,6 @@ function OtpVerification() {
           </button>
         </form>
       </div>
-      {/* <ToastContainer /> */}
     </div>
   );
 }

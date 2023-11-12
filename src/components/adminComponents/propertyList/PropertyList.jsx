@@ -1,5 +1,9 @@
 import { Button, Chip, IconButton, Input } from "@material-tailwind/react";
-import { ArrowLeftIcon, ArrowRightIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/solid";
 import React, { useEffect, useState } from "react";
 import { PropertyDetails } from "../../../api/AdminApi";
 import PropertyBlockDialog from "../propertyBlockDialog/PropertyBlockDialog";
@@ -12,7 +16,6 @@ export default function PropertyList() {
   const [active, setActive] = React.useState(1);
   const [search, setSearch] = useState(0);
 
-  
   const handleUnblock = async (id) => {
     try {
       const response = await PropertyUnblock({ id });
@@ -28,7 +31,6 @@ export default function PropertyList() {
     const showPropertyData = async () => {
       try {
         const response = await PropertyDetails(active, search);
-        console.log(response);
         if (response) {
           setPropertyData(response.data.propertyData);
           setTotalpage(response.data.totalPages);
@@ -75,10 +77,10 @@ export default function PropertyList() {
                 label="Search"
                 icon={<MagnifyingGlassIcon className="h-5 w-5" />}
                 onChange={(e) => {
-                    e.target.value.length !== 0
-                      ? setSearch(e.target.value)
-                      : setSearch(0);
-                  }}
+                  e.target.value.length !== 0
+                    ? setSearch(e.target.value)
+                    : setSearch(0);
+                }}
               />
             </div>
           </div>
@@ -124,7 +126,7 @@ export default function PropertyList() {
                       Price,
                       Image,
                       Is_block,
-                      _id
+                      _id,
                     } = item;
                     return (
                       <tbody key={index}>
@@ -161,17 +163,20 @@ export default function PropertyList() {
                             />
                           </td>
                           <td className=" px-3 py-4  space-x-3">
-                          {!Is_block ? (
-                          <PropertyBlockDialog id={item} onDataUpdate={onDataUpdate} />
-                        ) : (
-                          <Button
-                            className="rounded-md font-medium"
-                            size="sm"
-                            onClick={() => handleUnblock(_id)}
-                          >
-                            Unblock
-                          </Button>
-                        )}
+                            {!Is_block ? (
+                              <PropertyBlockDialog
+                                id={item}
+                                onDataUpdate={onDataUpdate}
+                              />
+                            ) : (
+                              <Button
+                                className="rounded-md font-medium"
+                                size="sm"
+                                onClick={() => handleUnblock(_id)}
+                              >
+                                Unblock
+                              </Button>
+                            )}
                           </td>
                         </tr>
                       </tbody>
@@ -180,7 +185,9 @@ export default function PropertyList() {
                 </>
               ) : (
                 <div className="w-full flex justify-center h-40 items-center">
-                  <h1 className="text-gray-700">Not exist any property details</h1>
+                  <h1 className="text-gray-700">
+                    Not exist any property details
+                  </h1>
                 </div>
               )}
             </table>

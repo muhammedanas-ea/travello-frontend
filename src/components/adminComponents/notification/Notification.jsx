@@ -2,6 +2,7 @@ import { Button } from "@material-tailwind/react";
 import { Alert } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { VerifyNotification } from "../../../api/AdminApi";
+import { useNavigate } from "react-router-dom";
 
 function Icon() {
   return (
@@ -24,6 +25,7 @@ function Icon() {
 
 export default function Notification() {
   const [nofitificationData, setstateNofitificationData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const notificationData = async () => {
@@ -46,7 +48,7 @@ export default function Notification() {
           <div className="w-full grid grid-cols-1 gap-5 items-center bg-[#e5e2e2]   md:flex-row">
             {nofitificationData.length > 0 ? (
               nofitificationData.map((item, index) => {
-                const { propertOwner } = item;
+                const { propertOwner, _id } = item;
                 return (
                   <Alert
                     key={index}
@@ -58,6 +60,9 @@ export default function Notification() {
                         color="white"
                         size="sm"
                         className="!absolute top-3 right-3"
+                        onClick={() =>
+                          navigate(`/admin/viewdetail`, { state: { _id } })
+                        }
                       >
                         view details
                       </Button>

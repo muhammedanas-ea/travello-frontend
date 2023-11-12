@@ -1,7 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { userGoogleSignUp } from "../../../api/UserApi";
+import { UserGoogleSignUp } from "../../../api/UserApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
@@ -29,7 +29,7 @@ export default function GoogleSignUp() {
           }
         )
         .then((res) => {
-          userGoogleSignUp(res.data)
+          UserGoogleSignUp(res.data)
             .then((res) => {
               if (res.data.status) {
                 localStorage.setItem("userToken", res.data.usertoken);

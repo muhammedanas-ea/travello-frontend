@@ -1,4 +1,4 @@
-import { Button } from "@material-tailwind/react";
+import { Button, Chip } from "@material-tailwind/react";
 import PropertyAddingDialog from "../propertyAddingDialog/PropertyAddingDialog";
 import { useEffect, useState } from "react";
 import { ListProperty } from "../../../api/PropertyApi";
@@ -38,7 +38,14 @@ export default function OwnerPropertyLIst() {
           </div>
           <div className="p-3 px-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
             {PropertyList.map((items, index) => {
-              const { Image, PropertyName, State, City, Price, RoomCount, GuestCount } = items;
+              const {
+                Image,
+                PropertyName,
+                State,
+                City,
+                Price,
+                Is_approve,
+              } = items;
               return (
                 <div
                   key={index}
@@ -56,6 +63,13 @@ export default function OwnerPropertyLIst() {
                     />
                     {console.log(Image[1])}
                   </div>
+                  <Chip
+                    variant="ghost"
+                    size="sm"
+                    value={Is_approve ? "approved" : "rejected"}
+                    color={Is_approve ? "green" : "red"}
+                    className="rounded-none"
+                  />
                   <div className="p-5">
                     <h6 className="font-san mb-1 text-xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
                       {PropertyName}
@@ -63,9 +77,7 @@ export default function OwnerPropertyLIst() {
                     <p className="mb-4 font-normal text-gray-700 dark:text-gray-400">
                       {City},{State}
                     </p>
-                    <span className="font-normal text-sm leading-3 tracking-tighter text-[#959595]">
-                      Up to {GuestCount} Guests + {RoomCount} Rooms
-                    </span>
+                   
                     <div className="mt-4">
                       <hr className="border-1 border-gray-400" />
                     </div>

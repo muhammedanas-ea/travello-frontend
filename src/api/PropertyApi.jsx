@@ -44,12 +44,11 @@ export async function AddProperty(addData) {
   }
 }
 
-
-export async function ListProperty(id){
-  try{
-    const data = await propertyApi.get(`/listProperty/${id}`)
-    return data
-  }catch(err){
-    console.log(err)
+export async function ListProperty(id) {
+  try {
+    const data = await propertyApi.get(`/listProperty/${id}`);
+    return data;
+  } catch (err) {
+    console.log(err);
   }
 }

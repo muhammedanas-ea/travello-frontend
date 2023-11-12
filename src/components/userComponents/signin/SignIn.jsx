@@ -1,6 +1,6 @@
 import loginImg from "../../../../public/staticImages/1991562_Freepik.jpg";
 import "./SignIn.css";
-import { userLogin } from "../../../api/UserApi";
+import { UserLogin } from "../../../api/UserApi";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
@@ -22,7 +22,7 @@ export default function SignIn() {
       validationSchema: LoginSchema,
       onSubmit: async (values) => {
         try {
-          const response = await userLogin(values);
+          const response = await UserLogin(values);
           if (response.data.status) {
             localStorage.setItem("userToken", response.data.usertoken);
             dispatch(

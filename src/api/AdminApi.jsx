@@ -55,9 +55,8 @@ export async function VerifyNotification() {
   }
 }
 
-export async function PropertyDetails(active,search) {
+export async function PropertyDetails(active, search) {
   try {
-    console.log(active,search);
     const data = await adminApi.get(`/propertylistadmin/${active}/${search}`);
     return data;
   } catch (err) {
@@ -65,21 +64,38 @@ export async function PropertyDetails(active,search) {
   }
 }
 
-
-export async function PropertyBlock(id){
-  try{
-    const data = await adminApi.put('/propertyBlock', id)
-    return data
-  }catch(err){
-    console.log(err)
+export async function PropertyBlock(id) {
+  try {
+    const data = await adminApi.put("/propertyBlock", id);
+    return data;
+  } catch (err) {
+    console.log(err);
   }
 }
 
-export async function PropertyUnblock(id){
-  try{
-    const data = await adminApi.put('/propertyUnblock', id)
-    return data
-  }catch(err){
-    console.log(err)
+export async function PropertyUnblock(id) {
+  try {
+    const data = await adminApi.put("/propertyUnblock", id);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function ViewPropertyDetails(id) {
+  try {
+    const data = await adminApi.get(`/viewDetails/${id}`);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function AdminApprove(verify, id) {
+  try {
+    const data = await adminApi.put("/adminapprove", { verify, id });
+    return data;
+  } catch (err) {
+    console.log(err);
   }
 }

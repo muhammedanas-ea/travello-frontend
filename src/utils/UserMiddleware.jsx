@@ -12,12 +12,18 @@ axiosInterceptorInstance.interceptors.request.use((req) => {
   return req;
 });
 
-
 axiosInterceptorInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 400) {
       GenerateError(error.response.data.message);
+    } else if (error.response && error.response.status === 403) {
+      console.log(error.response,'iiss');
+      localStorage.removeItem("userToken");
+      setTimeout(() =>{
+        GenerateError(error.response.data.message);
+      },200)
+      window.location = "/home";
     }
     return Promise.reject(error);
   }

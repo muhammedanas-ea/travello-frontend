@@ -70,3 +70,17 @@ export const AddPropertySchema = Yup.object({
   describe: Yup.string().required("Required"),
   images: Yup.array().required("Required"),
 });
+
+export const userProfileSchema =Yup.object({
+  name: Yup.string()
+  .min(2, "Too Short!")
+  .max(50, "Too Long!")
+  .required("Please Enter Your Name"),
+  email:Yup.string()
+  .email("Invalid email")
+  .required("please enter your email"),
+  number: Yup.number().min(10).required("please enter your number"),
+  houseName: Yup.string().required("Please Enter Your house name"),
+  state: Yup.string().required("Please Enter Your state"),
+  city: Yup.string().required("Please Enter Your city")
+})

@@ -11,7 +11,6 @@ import {
 import {
   UserCircleIcon,
   ChevronDownIcon,
-  Cog6ToothIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
 
@@ -20,7 +19,7 @@ import { Logo } from "../../commonComponents/CommonComponets";
 
 import React, { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { emailVerify } from "../../../api/UserApi";
+import { EmailVerify } from "../../../api/UserApi";
 import { GenerateSuccess } from "../../../toast/Toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
@@ -30,10 +29,6 @@ const profileMenuItems = [
   {
     label: "My Profile",
     icon: UserCircleIcon,
-  },
-  {
-    label: "Edit Profile",
-    icon: Cog6ToothIcon,
   },
   {
     label: "Sign Out",
@@ -101,25 +96,21 @@ function ProfileMenu() {
               })}
               {label === "Sign Out" ? (
                 <button
-                className={`font-normal ${isLastItem ? 'text-red' : 'text-blue-gray-900'} hover:underline`}
-                onClick={userLogout}
-              >
-                {label}
-              </button>
-              ) : label === "Edit Profile" ? (
-                <button
-                  className="font-normal"
-                  color={isLastItem ? "red" : "inherit"}
+                  className={`font-normal ${
+                    isLastItem ? "text-red" : "text-blue-gray-900"
+                  } hover:underline`}
+                  onClick={userLogout}
                 >
                   {label}
                 </button>
               ) : (
-                <button
+                <Link
                   className="font-normal"
                   color={isLastItem ? "red" : "inherit"}
+                  to='/userprofile'
                 >
                   {label}
-                </button>
+                </Link>
               )}
             </MenuItem>
           );
@@ -134,14 +125,13 @@ export default function Header() {
   const { id, token } = params;
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.user);
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
 
   useEffect(() => {
     const verifyEmailUrl = async () => {
       try {
         if (id && token) {
-          const response = await emailVerify(params.id, params.token);
+          const response = await EmailVerify(params.id, params.token);
           if (response.data.status) {
             localStorage.setItem("userToken", response.data.usertoken);
             dispatch(
@@ -165,7 +155,9 @@ export default function Header() {
     <Navbar className="z-50  shadow-md bg-white  rounded-none max-w-none mx-auto lg:pl-6 sticky top-0 left-0 right-0">
       <div className="container">
         <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
-         <Link to='/home'><Logo /></Link> 
+          <Link to="/home">
+            <Logo />
+          </Link>
           <div className="flex items-center gap-7">
             {localStorage.getItem("userToken") ? (
               <>
@@ -178,11 +170,11 @@ export default function Header() {
                   className="border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20"
                   size="sm"
                   variant="text"
-                  onClick={() =>navigate('/property/login')}
+                  onClick={() => navigate("/property/login")}
                 >
                   List your property
                 </Button>
-                <Link className="text-gray-900 hover:text-[#000]" to='/login'>
+                <Link className="text-gray-900 hover:text-[#000]" to="/login">
                   Log In
                 </Link>
               </>
