@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { UserPropertyList } from "../../../api/UserApi";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
+import { GenerateError } from "../../../toast/Toast";
 
 // eslint-disable-next-line react/prop-types
 export default function PropertyList({ sort }) {
@@ -145,9 +146,13 @@ export default function PropertyList({ sort }) {
                       className="h-10 border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20"
                       size="sm"
                       variant="text"
-                      onClick={() =>
-                        navigate(`/singleproperty`, { state: { _id } })
-                      }
+                      onClick={() => {
+                        if (localStorage.getItem("userToken")) {
+                          navigate(`/singleproperty`, { state: { _id } });
+                        }else{
+                          GenerateError('you must be need to  login')
+                        }
+                      }}
                     >
                       View property
                     </Button>

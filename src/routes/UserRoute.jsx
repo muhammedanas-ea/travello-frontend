@@ -12,6 +12,7 @@ import PropertyListPage from "../pages/userPages/PropertyListPage";
 import SinglePropertyPage from "../pages/userPages/SinglePropertyPage";
 import UserProfilePage from "../pages/userPages/UserProfilePage";
 
+
 export default function UserRoute() {
   return (
     <Routes>

@@ -1,7 +1,41 @@
-import { Button, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { SinglePropertyDetails } from "../../../api/PropertyApi";
 
 
 export default function PropertyDetails() {
+  const { state } = useLocation();
+  const { _id } = state;
+  const [singleData,setSingleData] = useState([])
+
+  const {
+    PropertyName,
+    Price,
+    RoomCount,
+    GuestCount,
+    MobileNumber,
+    City,
+    State,
+    PropertyType,
+    Image,
+  } = singleData;
+
+
+  useEffect(() => {
+    const showViewPropertyData = async () => {
+      try {
+        const response = await SinglePropertyDetails(_id);
+        if(response){
+          setSingleData(response.data.propertyData)
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    showViewPropertyData();
+  }, [_id]);
+
   return (
     <div className="p-4 sm:ml-64">
     <div className="p-4 rounded-lg dark:border-gray-700 mt-16">
@@ -18,7 +52,7 @@ export default function PropertyDetails() {
                     Property name
                   </Typography>
                   <Typography className="mb-4 font-normal text-gray-700 dark:text-gray-400">
-                    PropertyName
+                    {PropertyName}
                   </Typography>
                 </div>
                 <div>
@@ -29,7 +63,7 @@ export default function PropertyDetails() {
                     Rooms
                   </Typography>
                   <Typography className="mb-4 font-normal text-gray-700 dark:text-gray-400">
-                    RoomCount
+                    {RoomCount}
                   </Typography>
                 </div>
                 <div>
@@ -40,7 +74,7 @@ export default function PropertyDetails() {
                     State
                   </Typography>
                   <Typography className="mb-4 font-normal text-gray-700 dark:text-gray-400">
-                    State
+                    {State}
                   </Typography>
                 </div>
                 <div>
@@ -51,7 +85,7 @@ export default function PropertyDetails() {
                     Mobile number
                   </Typography>
                   <Typography className="mb-2 font-normal text-gray-700 dark:text-gray-400">
-                    MobileNumber
+                    {MobileNumber}
                   </Typography>
                 </div>
               </div>
@@ -67,7 +101,7 @@ export default function PropertyDetails() {
                     variant="paragraph"
                     className="mb-4 font-normal text-gray-700 dark:text-gray-400"
                   >
-                    Rs Price
+                    Rs {Price}
                   </Typography>
                 </div>
                 <div>
@@ -78,7 +112,7 @@ export default function PropertyDetails() {
                     Maximum Guests
                   </Typography>
                   <Typography className="mb-4 font-normal text-gray-700 dark:text-gray-400">
-                    GuestCount
+                    {GuestCount}
                   </Typography>
                 </div>
                 <div>
@@ -89,7 +123,7 @@ export default function PropertyDetails() {
                     Location
                   </Typography>
                   <Typography className="mb-4 font-light text-gray-700 dark:text-gray-400">
-                    City
+                    {City}
                   </Typography>
                 </div>
                 <div>
@@ -100,12 +134,12 @@ export default function PropertyDetails() {
                     Property type
                   </Typography>
                   <Typography className="mb-2 font-normal text-gray-700 dark:text-gray-400">
-                    PropertyType
+                    {PropertyType}
                   </Typography>
                 </div>
               </div>
             </div>
-            <div className="pl-6 pb-5  flex gap-10">
+            {/* <div className="pl-6 pb-5  flex gap-10">
               <Button
                 variant="outlined"
                 size="md"
@@ -122,7 +156,7 @@ export default function PropertyDetails() {
               >
                 Reject
               </Button>
-            </div>
+            </div> */}
           </div>
           <div className="col-span-2 row-span-4 col-start-4">
             <img

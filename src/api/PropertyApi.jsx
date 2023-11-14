@@ -52,3 +52,12 @@ export async function ListProperty(id) {
     console.log(err);
   }
 }
+
+export async function SinglePropertyDetails(id){
+  try{
+    const data = await propertyApi.get(`/propertydetails/${id}`)
+    return data 
+  }catch(err){
+    console.log(err)
+  }
+}

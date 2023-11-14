@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Button,
   Tab,
   TabPanel,
   Tabs,
@@ -13,6 +14,7 @@ import { FaBath, FaSwimmingPool, FaWifi } from "react-icons/fa";
 import SingleProperty from "../singleProperty/SingleProperty";
 import { useLocation } from "react-router-dom";
 import { UserSingleProperty } from "../../../api/UserApi";
+import DatePicker from "react-datepicker";
 
 function SinglePropertyDetails() {
   const { state } = useLocation();
@@ -86,6 +88,39 @@ function SinglePropertyDetails() {
   ];
 
   const [activeTab, setActiveTab] = React.useState(1);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(startDate);
+  const [isOpen, setIsOpen] = useState(false);
+  const [increment, setIncrement] = useState(1);
+  const [roomCount, setRoomCount] = useState(1);
+
+  const handleSatrtDate = (e) => {
+    const selectedDate = new Date(e);
+    setStartDate(selectedDate);
+  };
+
+  const handleEndDate = (e) => {
+    const selectedDate = new Date(e);
+    setEndDate(selectedDate);
+  };
+
+  const handleDecrement = () => {
+    if (increment > 1) {
+      setIncrement(increment - 1);
+      if ((increment - 1) % 3 === 0 && increment >= 3) {
+        setRoomCount(roomCount - 1);
+      }
+    }
+  };
+
+  const handleIncrement = () => {
+    if (increment < RoomCount * 3) {
+      setIncrement(increment + 1);
+      if ((increment + 1) % 3 === 0 && increment > 3) {
+        setRoomCount(roomCount + 1);
+      }
+    }
+  };
 
   return (
     <>
@@ -223,17 +258,86 @@ function SinglePropertyDetails() {
             </Tabs>
           </div>
         </div>
-        <div className="col-span-2 row-span-5 col-start-4 h-[570px] sticky top-20">
-          <div className="h-[150px] bg-[#EDE3E3] m-5 shadow-lg rounded-md">
-            <div className="p-6 flex gap-3 items-center">
-              <h5 className="ont-san text-2xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
+        <div className="col-span-2 row-span-5 col-start-4">
+          <form action="">
+          <div className="h-[300px] bg-[#EDE3E3] px-5 py-5 shadow-lg rounded-md">
+            <div className=" flex gap-3 items-center mt-2 mb-8">
+              <h5 className="ont-san text-3xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
                 ₹ {Price}
               </h5>
-              <span className="font-normal text-xs leading-3 tracking-tighter text-[#959595]">
+              <span className="font-normal text-lg leading-3 tracking-tighter text-[#959595]">
                 Per night + Tax
               </span>
             </div>
+            <div className="grid grid-cols-2 w-full rounded-none gap-6">
+              <div className="w-full h-[80px] bg-white hover:bg-gray-200 rounded-md shadow-sm">
+                <div className="m-3">
+                  <span className="text-gray-700">Check In</span>
+                  <DatePicker
+                    onChange={handleSatrtDate}
+                    selected={startDate}
+                    placeholderText="Check In"
+                    className=" bg-white mt-1 hover:bg-gray-200 outline-none"
+                    minDate={new Date()}
+                  />
+                </div>
+              </div>
+              <div className="w-full h-[80px] bg-white hover:bg-gray-200 rounded-md shadow-sm">
+                <div className="m-3">
+                  <span className="text-gray-700">Check Out</span>
+                  <DatePicker
+                    selected={endDate}
+                    onChange={handleEndDate}
+                    placeholderText="Check Out"
+                    className=" bg-white hover:bg-gray-200 mt-1 outline-none "
+                    minDate={startDate}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 w-full rounded-none  mt-5 gap-6">
+              <div
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full h-[80px] bg-white hover:bg-gray-200 rounded-md shadow-sm"
+              >
+                <div className="m-3">
+                  <span className="text-gray-700">No. of Guests</span>
+                  <p className="mt-1">{increment} guests</p>
+                </div>
+              </div>
+              <div className="w-full h-[80px] bg-white rounded-md hover:bg-gray-200 shadow-sm">
+                <div className="m-3">
+                  <span className="text-gray-700">No. of Rooms</span>
+                  <p className="mt-1">{roomCount} rooms</p>
+                </div>
+              </div>
+            </div>
+            {isOpen ? (
+              <div className="grid grid-cols-2 gap-5">
+                <div className="flex items-center justify-center rounded-md  bg-white">
+                  <button
+                    onClick={handleDecrement}
+                    className="text-white bg-gray-600 px-4 py-2 rounded hover:bg-gray-900"
+                  >
+                    -
+                  </button>
+                  <span className="m-5">{increment}</span>
+                  <button
+                    onClick={handleIncrement}
+                    className="text-white bg-gray-600 px-4 py-2 rounded hover:bg-gray-900"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            ) : null}
           </div>
+          <div className="w-full mt-10">
+            <Button type="submit" className="w-full leading-10" size="lg">
+              Check Availability
+            </Button>
+          </div>
+          </form>
         </div>
       </div>
     </>

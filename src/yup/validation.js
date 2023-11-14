@@ -43,7 +43,7 @@ export const AdminLoginSchema = Yup.object({
 export const PropertySignupSchema = Yup.object({
   name: Yup.string()
     .min(2, "Too Short!")
-    .max(50, "Too Long!")
+    .max(50, "Too Long!").trim()
     .required("Please Enter Your Name"),
   number: Yup.number().min(10).required("please enter your number"),
   email: Yup.string()

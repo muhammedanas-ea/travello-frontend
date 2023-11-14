@@ -3,11 +3,13 @@ import PropertyAddingDialog from "../propertyAddingDialog/PropertyAddingDialog";
 import { useEffect, useState } from "react";
 import { ListProperty } from "../../../api/PropertyApi";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function OwnerPropertyLIst() {
   const { id } = useSelector((state) => state.owner);
   const [PropertyList, setPropertyList] = useState([]);
   const [child, setChild] = useState();
+  const navigate = useNavigate()
 
   const onDataUpdate = (data) => {
     setChild(data);
@@ -45,6 +47,7 @@ export default function OwnerPropertyLIst() {
                 City,
                 Price,
                 Is_approve,
+                _id
               } = items;
               return (
                 <div
@@ -95,6 +98,9 @@ export default function OwnerPropertyLIst() {
                           className="h-10 border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20"
                           size="sm"
                           variant="text"
+                          onClick={() =>
+                            navigate(`/property/propertydetails`, { state: { _id } })
+                          }
                         >
                           View details
                         </Button>
