@@ -18,7 +18,6 @@ axiosInterceptorInstance.interceptors.response.use(
     if (error.response && error.response.status === 400) {
       GenerateError(error.response.data.message);
     } else if (error.response && error.response.status === 403) {
-      console.log(error.response,'iiss');
       localStorage.removeItem("userToken");
       setTimeout(() =>{
         GenerateError(error.response.data.message);

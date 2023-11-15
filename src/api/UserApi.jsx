@@ -67,8 +67,6 @@ export async function UserRestPassword(resetPasswordData) {
 
 export async function UserPropertyList(active,sort) {
   try {
-    // const {  state } = search;
-
     const data = await userApi.get(
       `/userpropertylist/${active}/${sort}`
     );
@@ -102,5 +100,14 @@ export async function UserSingleProperty(id) {
     return data;
   } catch (err) {
     throw new err(err);
+  }
+}
+
+export async function BookingDetails(bookingData){
+  try{
+    const data = await userApi.post('/bookings',bookingData)
+    return data
+  }catch(err){
+    throw new err(err)
   }
 }
