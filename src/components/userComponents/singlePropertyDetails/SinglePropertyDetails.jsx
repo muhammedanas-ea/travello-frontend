@@ -134,6 +134,7 @@ function SinglePropertyDetails() {
         endDate,
         _id,
       });
+     
       console.log(response);
     } catch (err) {
       console.log(err);
