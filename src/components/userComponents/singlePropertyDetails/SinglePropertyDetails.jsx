@@ -12,7 +12,7 @@ import {
 import { MdOutlinePets } from "react-icons/md";
 import { FaBath, FaSwimmingPool, FaWifi } from "react-icons/fa";
 import SingleProperty from "../singleProperty/SingleProperty";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BookingDetails, UserSingleProperty } from "../../../api/UserApi";
 import DatePicker from "react-datepicker";
 
@@ -88,13 +88,14 @@ function SinglePropertyDetails() {
   ];
 
   const [activeTab, setActiveTab] = React.useState(1);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(startDate);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [increment, setIncrement] = useState(1);
   const [roomCount, setRoomCount] = useState(1);
+  const [booingData, setBokkingData] = useState();
+  const navigate = useNavigate()
   const totalAmount = roomCount * Price;
-  console.log(totalAmount, "usssssssssss");
 
   const handleSatrtDate = (e) => {
     const selectedDate = new Date(e);
@@ -134,12 +135,15 @@ function SinglePropertyDetails() {
         endDate,
         _id,
       });
-     
+      if (response.data.status) {
+        setBokkingData(response.data.id);
+      }
       console.log(response);
     } catch (err) {
       console.log(err);
     }
   };
+
 
   return (
     <>
@@ -279,9 +283,9 @@ function SinglePropertyDetails() {
         </div>
         <div className="col-span-2 row-span-5 col-start-4">
           <form onSubmit={handleSubmit} action="">
-            <div className="h-[300px] bg-[#EDE3E3] px-5 py-5 shadow-lg rounded-md">
+            <div className="h-[360px] bg-[#EDE3E3] px-5 py-5 shadow-lg rounded-md">
               <div className=" flex gap-3 items-center mt-2 mb-8">
-                <h5 className="ont-san text-3xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
+                <h5 className="ont-san text-2xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
                   ₹ {Price}
                 </h5>
                 <span className="font-normal text-lg leading-3 tracking-tighter text-[#959595]">
@@ -352,11 +356,20 @@ function SinglePropertyDetails() {
                   </div>
                 </div>
               ) : null}
+              <h5 className="ont-san text-2xl mt-12 font-normal leading-6 tracking-tight text-[#1e1e1e]">
+                Total Amount : ₹ {totalAmount}
+              </h5>
             </div>
-            <div className="w-full mt-10">
-              <Button type="submit" className="w-full leading-9" size="lg">
-                Check Availability
-              </Button>
+            <div className="w-full mt-5">
+              {booingData ? (
+                <Button onClick={() => navigate('/booking')}  className="w-full leading-9" size="lg">
+                  Book Now
+                </Button>
+              ) : (
+                <Button type="submit"  className="w-full leading-9" size="lg">
+                  Check Availability
+                </Button>
+              )}
             </div>
           </form>
         </div>

@@ -11,6 +11,7 @@ import ResetPasswordPage from "../pages/userPages/ResetPasswordPage";
 import PropertyListPage from "../pages/userPages/PropertyListPage";
 import SinglePropertyPage from "../pages/userPages/SinglePropertyPage";
 import UserProfilePage from "../pages/userPages/UserProfilePage";
+import BookingPage from "../pages/userPages/BookingPage";
 
 
 export default function UserRoute() {
@@ -26,6 +27,7 @@ export default function UserRoute() {
         <Route path='/propertyList' element={<PropertyListPage/>} />
         <Route path='/userprofile' element={<UserProfilePage/>} />
         <Route path='/singleproperty' element={<SinglePropertyPage/>} />
+        <Route path='/booking' element={<BookingPage/>} />
         <Route path="/login" element={<UserPublic><SignInPage /></UserPublic>} />
         <Route path="/signup" element={<UserPublic><SignUpPage /></UserPublic>} />
       </Route>
