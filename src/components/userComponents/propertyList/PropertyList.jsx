@@ -21,7 +21,6 @@ export default function PropertyList({ sort }) {
     const showPropertyData = async () => {
       try {
         const response = await UserPropertyList(active,sort);
-        console.log(response);
         if (response.data.status) {
           setTotalpage(response.data.totalPages)
           setPropertyList(response.data.propertyData);

@@ -93,7 +93,7 @@ function SinglePropertyDetails() {
   const [isOpen, setIsOpen] = useState(false);
   const [increment, setIncrement] = useState(1);
   const [roomCount, setRoomCount] = useState(1);
-  const [booingData, setBokkingData] = useState();
+  const [bookingData, setBookingData] = useState();
   const navigate = useNavigate()
   const totalAmount = roomCount * Price;
 
@@ -136,9 +136,8 @@ function SinglePropertyDetails() {
         _id,
       });
       if (response.data.status) {
-        setBokkingData(response.data.id);
+        setBookingData(response.data.id);
       }
-      console.log(response);
     } catch (err) {
       console.log(err);
     }
@@ -361,8 +360,8 @@ function SinglePropertyDetails() {
               </h5>
             </div>
             <div className="w-full mt-5">
-              {booingData ? (
-                <Button onClick={() => navigate('/booking')}  className="w-full leading-9" size="lg">
+              {bookingData ? (
+                <Button onClick={() => navigate(`/booking`, { state: { bookingData,PropertyName,City,State,Image} })}  className="w-full leading-9" size="lg">
                   Book Now
                 </Button>
               ) : (

@@ -105,9 +105,19 @@ export async function UserSingleProperty(id) {
 
 export async function BookingDetails(bookingData){
   try{
+    
     const data = await userApi.post('/bookings',bookingData)
     return data
   }catch(err){
     throw new err(err)
+  }
+}
+
+export async function PaymentDetails(bookingId){
+  try{
+    const data = await userApi.get(`/paymentdetails/${bookingId}`)
+    return data
+  }catch(err){
+    console.log(err)
   }
 }
