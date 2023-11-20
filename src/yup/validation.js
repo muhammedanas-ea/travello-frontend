@@ -84,3 +84,14 @@ export const userProfileSchema =Yup.object({
   state: Yup.string().required("Please Enter Your state"),
   city: Yup.string().required("Please Enter Your city")
 })
+
+export const CheckInDetailSchema = Yup.object({
+  name: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!").trim()
+    .required("Please Enter Your Name"),
+  number: Yup.number().min(10).required("please enter your number"),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("please enter your email"),
+});

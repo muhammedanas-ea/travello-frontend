@@ -12,9 +12,12 @@ import {
 import { MdOutlinePets } from "react-icons/md";
 import { FaBath, FaSwimmingPool, FaWifi } from "react-icons/fa";
 import SingleProperty from "../singleProperty/SingleProperty";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { BookingDetails, UserSingleProperty } from "../../../api/UserApi";
 import DatePicker from "react-datepicker";
+import { GenerateError } from "../../../toast/Toast";
+import CheckingDetails from "../checkingDetails/CheckingDetails";
+
 
 function SinglePropertyDetails() {
   const { state } = useLocation();
@@ -94,7 +97,8 @@ function SinglePropertyDetails() {
   const [increment, setIncrement] = useState(1);
   const [roomCount, setRoomCount] = useState(1);
   const [bookingData, setBookingData] = useState();
-  const navigate = useNavigate()
+  const [openCheckingDetails, setOpenCheckingDetails] = useState(false);
+  // const navigate = useNavigate()
   const totalAmount = roomCount * Price;
 
   const handleSatrtDate = (e) => {
@@ -126,6 +130,11 @@ function SinglePropertyDetails() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(startDate === null){
+      return GenerateError('select a start check in date')
+    }else if(endDate === null){
+      return GenerateError('select a start check out date')
+    }
     try {
       const response = await BookingDetails({
         totalAmount,
@@ -137,6 +146,7 @@ function SinglePropertyDetails() {
       });
       if (response.data.status) {
         setBookingData(response.data.id);
+        setOpenCheckingDetails(true);
       }
     } catch (err) {
       console.log(err);
@@ -361,9 +371,15 @@ function SinglePropertyDetails() {
             </div>
             <div className="w-full mt-5">
               {bookingData ? (
-                <Button onClick={() => navigate(`/booking`, { state: { bookingData,PropertyName,City,State,Image} })}  className="w-full leading-9" size="lg">
-                  Book Now
-                </Button>
+                 <CheckingDetails
+                  open={openCheckingDetails}
+                  setOpen={setOpenCheckingDetails} 
+                  bookingData={bookingData}
+                  PropertyName = {PropertyName}
+                  City={City}
+                  State={State}
+                  Image={Image}
+                  />
               ) : (
                 <Button type="submit"  className="w-full leading-9" size="lg">
                   Check Availability

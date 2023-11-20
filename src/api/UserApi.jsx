@@ -118,6 +118,16 @@ export async function PaymentDetails(bookingId){
     const data = await userApi.get(`/paymentdetails/${bookingId}`)
     return data
   }catch(err){
-    console.log(err)
+    throw new err(err)
+  }
+}
+
+export async function CheckingUserDetails(checkingData){
+  try{
+    console.log(checkingData,'api section');
+    const data = await userApi.post('/checkuserdetails',checkingData)
+     return data
+  }catch(err){
+    throw new err(err)
   }
 }

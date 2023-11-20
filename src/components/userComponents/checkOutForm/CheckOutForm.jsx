@@ -18,16 +18,17 @@ import {
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import axiosInterceptorInstance from "../../../utils/UserMiddleware";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-export function CheckOutForm({ Secret, bookingId, chekInDate, checkOut, fee }) {
+export function CheckOutForm({ bookingId,fee }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
-  const [clientSecret, setClientSecret] = useState(Secret);
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     
@@ -45,22 +46,18 @@ export function CheckOutForm({ Secret, bookingId, chekInDate, checkOut, fee }) {
     
     
     if (paymentIntent) {
-      console.log(paymentIntent,'hiiiiiiiiiiii');
       let bookData = {
         bookingId: bookingId,
         paymentstatus: "success",
-        chekInDate: chekInDate,
-        checkOut: checkOut,
       };
-      console.log(paymentIntent, "payment intent");
-      const response = await axiosInterceptorInstance.post("/paymentsuccess", {
+      const response = await axiosInterceptorInstance.put("/paymentsuccess", {
         bookData,
       });
       console.log(response, "out");
-      // if (response.data.created) {
-      //     console.log(response, "inside");
-      //     navigate("/success")
-      // }
+      if (response.data.status) {
+          console.log(response, "inside");
+          navigate("/success")
+      }
     }
 
     if (error.type === "card_error" || error.type === "validation_error") {

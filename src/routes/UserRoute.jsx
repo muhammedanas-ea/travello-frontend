@@ -12,6 +12,7 @@ import PropertyListPage from "../pages/userPages/PropertyListPage";
 import SinglePropertyPage from "../pages/userPages/SinglePropertyPage";
 import UserProfilePage from "../pages/userPages/UserProfilePage";
 import BookingPage from "../pages/userPages/BookingPage";
+import SuccessPage from "../pages/userPages/successPage";
 
 
 export default function UserRoute() {
@@ -28,6 +29,7 @@ export default function UserRoute() {
         <Route path='/userprofile' element={<UserProfilePage/>} />
         <Route path='/singleproperty' element={<SinglePropertyPage/>} />
         <Route path='/booking' element={<BookingPage/>} />
+        <Route path='/success' element={<SuccessPage/>} />
         <Route path="/login" element={<UserPublic><SignInPage /></UserPublic>} />
         <Route path="/signup" element={<UserPublic><SignUpPage /></UserPublic>} />
       </Route>

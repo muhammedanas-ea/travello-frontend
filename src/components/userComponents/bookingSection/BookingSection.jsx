@@ -1,27 +1,32 @@
-import { Checkbox, Input, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { PaymentDetails } from "../../../api/UserApi";
 import { CheckOutForm } from "../checkOutForm/CheckOutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import moment from "moment";
 const PUBLIC_KEY =
   "pk_test_51ODm4bSHaENjV1jr6QBv93m7yUjiUR2bCql3CNylL2bhvGcr3Fr8ZUEzlInPA3zAyDN8k8EUUUzGChUNHKWZXzAh00Q4Z4tzgS";
 const stripePromise = loadStripe(PUBLIC_KEY);
 
 export default function BookingSection() {
   const { state } = useLocation();
-  const { bookingData, PropertyName, City, State, Image} = state;
+  const { bookingData, PropertyName, City, State, Image } = state;
   const [paymentData, setPaymentData] = useState([]);
-  const { CheckOut, ChekIn, TotalGuest, TotalRate, TotalRooms,_id } = paymentData;
+  const { CheckOut, ChekIn, TotalGuest, TotalRate, TotalRooms, _id } =
+    paymentData;
   const [clientSecret, setClientSecret] = useState("");
+  const [adress,setAddressData] = useState([])
 
   useEffect(() => {
     const showBookingData = async () => {
       try {
         const response = await PaymentDetails(bookingData);
+        console.log(response);
         if (response.data.status) {
           setPaymentData(response.data.booking);
+          setAddressData(response.data.booking.Address);
           setClientSecret(response.data.clientSecret);
         }
       } catch (err) {
@@ -30,9 +35,6 @@ export default function BookingSection() {
     };
     showBookingData();
   }, [bookingData]);
-
- 
-  
 
   const appearance = {
     theme: "stripe",
@@ -55,7 +57,7 @@ export default function BookingSection() {
                 Check in details
               </Typography>
 
-              <div className="flex w-full mt-2 flex-col items-start bg-white   rounded-lg  md:flex-row  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+              <div className="flex w-full mt-2 flex-col items-start bg-white   rounded-lg  md:flex-row  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                 <img
                   className="object-fill w-full rounded-t-lg h-96 md:h-[13rem] md:w-48 md:rounded-none md:rounded-s-lg"
                   src={
@@ -77,13 +79,17 @@ export default function BookingSection() {
                       <p className="font-normal  leading-3 tracking-tighter text-[#959595]">
                         Check In
                       </p>
-                      <p className="mt-2">{ChekIn}</p>
+                      <p className="mt-2">
+                        {moment(ChekIn).format("MMM Do YY")}
+                      </p>
                     </div>
                     <div>
                       <p className="font-normal  leading-3 tracking-tighter text-[#959595]">
                         Check Out
                       </p>
-                      <p className="mt-2">{CheckOut}</p>
+                      <p className="mt-2">
+                        {moment(CheckOut).format("MMM Do YY")}
+                      </p>
                     </div>
                   </div>
                   <p className="font-normal mt-2 leading-3 tracking-tighter text-[#959595]">
@@ -102,63 +108,35 @@ export default function BookingSection() {
               <div className="mt-2">
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Input
-                      size="lg"
-                      label="House name"
-                      name="houseName"
-                      //   value={values.houseName}
-                      //   onChange={handleChange}
-                      //   onBlur={handleBlur}
-                    />
+                  <div className="flex gap-2 mb-3 items-center">
+                    <h6 className="font-san  text-lg font-normal leading-6 tracking-tight text-[#1e1e1e]">
+                      Name :
+                    </h6>
+                    <p className="text-gray-700">{adress.Name}</p>
                   </div>
-                  <div>
-                    <Input
-                      size="lg"
-                      label="State"
-                      name="state"
-                      //   value={values.state}
-                      //   onChange={handleChange}
-                      //   onBlur={handleBlur}
-                    />
+                  <div className="flex w-full mb-3  gap-2 items-center">
+                    <h6 className="font-san  text-lg font-normal leading-6 tracking-tight text-[#1e1e1e]">
+                      Email :
+                    </h6>
+                    <p className="text-gray-700">{adress.Email}</p>
                   </div>
-                </div>
-                <div className="w-full mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Input
-                      size="lg"
-                      label="House name"
-                      name="houseName"
-                      //   value={values.houseName}
-                      //   onChange={handleChange}
-                      //   onBlur={handleBlur}
-                    />
+                  <div className="flex gap-2  mb-3  items-center">
+                    <p className="font-san  text-lg font-normal leading-6 tracking-tight text-[#1e1e1e]">
+                      Mobile :
+                    </p>
+                    <p className="text-gray-700">{adress.Mobile}</p>
                   </div>
-                  <div>
-                    <Input
-                      size="lg"
-                      label="State"
-                      name="state"
-                      //   value={values.state}
-                      //   onChange={handleChange}
-                      //   onBlur={handleBlur}
-                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="col-span-2 col-start-4">
-            <div className="h-[200px] bg-[#f3f0f0] mt-[5rem] border border-gray-800 px-5 py-5 shadow-lg rounded-md flex flex-col justify-between">
-              <h5 className="mt-2 mb-3 ont-san text-2xl font-normal leading-6 tracking-tight text-[#1e1e1ed2]">
+            <div className="h-[145px] bg-[#f3f0f0] mt-[5rem] border border-gray-800 px-5 py-5 shadow-lg rounded-md flex flex-col justify-between">
+              <h5 className="mt-2 ont-san text-2xl font-normal leading-6 tracking-tight text-[#1e1e1ed2]">
                 Price details
               </h5>
-              <div className="flex gap-1 items-center">
-                <Checkbox color="blue" />
-                <span className="font-san mb-1 text-xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
-                  Online Payment
-                </span>
-              </div>
-              <div className="flex justify-between mt-4">
+              <div className="flex justify-between">
                 <h5 className="ont-san text-2xl font-normal leading-6 tracking-tight text-[#1e1e1edc]">
                   Total Amount :
                 </h5>
@@ -170,13 +148,7 @@ export default function BookingSection() {
             <div className="w-full mt-8 mb-5">
               {clientSecret ? (
                 <Elements options={options} stripe={stripePromise}>
-                  <CheckOutForm
-                    Secret={clientSecret}
-                    bookingId={_id}
-                    chekInDate={ChekIn}
-                    checkOut={CheckOut}
-                    fee={TotalRate}
-                  />
+                  <CheckOutForm bookingId={_id} fee={TotalRate} />
                 </Elements>
               ) : (
                 ""
