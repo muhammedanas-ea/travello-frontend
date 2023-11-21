@@ -4,6 +4,7 @@ import PropertyList from "../propertyList/PropertyList";
 // eslint-disable-next-line react/prop-types
 export default function PropertySort({search}) {
   const [sortData,setSortData] = useState()
+  console.log(search);
 
   const handleChange = (e) =>{
     setSortData(e)

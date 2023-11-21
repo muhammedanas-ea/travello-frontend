@@ -49,7 +49,7 @@ export async function ListProperty(id) {
     const data = await propertyApi.get(`/listProperty/${id}`);
     return data;
   } catch (err) {
-    console.log(err);
+    throw new err(err);
   }
 }
 
@@ -58,6 +58,17 @@ export async function SinglePropertyDetails(id){
     const data = await propertyApi.get(`/propertydetails/${id}`)
     return data 
   }catch(err){
-    console.log(err)
+    throw new err(err);
+  }
+}
+
+export async function BookingDetailsOwner(id){
+  try{
+    console.log(id , 'in api');
+    const data = await propertyApi.get(`/bookingdetails/${id}`)
+    return data
+
+  }catch(err){
+    throw new err(err);
   }
 }

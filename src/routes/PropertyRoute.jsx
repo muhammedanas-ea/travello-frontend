@@ -8,6 +8,7 @@ import PropertyProtected from "../protected/PropertyProtected";
 import PropertyPublic from "../protected/PropertyPublic";
 import OwnerProfilePage from "../pages/propertyPages/OwnerProfilePage";
 import PropertyDetailsPage from "../pages/propertyPages/PropertyDetailsPage";
+import BookingDetailsPage from "../pages/propertyPages/BookingDetailsPage";
 
 export default function PropertyRoute() {
   return (
@@ -22,6 +23,7 @@ export default function PropertyRoute() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/ownerprofile" element={<OwnerProfilePage />} />
           <Route path="/propertydetails" element={<PropertyDetailsPage />} />
+          <Route path="/bookingdetails" element={<BookingDetailsPage />} />
         </Route>
       </Route>
     </Routes>

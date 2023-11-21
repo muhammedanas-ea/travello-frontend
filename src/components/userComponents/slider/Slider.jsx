@@ -6,6 +6,7 @@ import sliderImg2 from "../../../../public/staticImages/slider-img2.jpg";
 
 //Import style
 import "./Slider.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Slider() {
   const sliderDetails = [
@@ -20,6 +21,8 @@ export default function Slider() {
       buttonText: "Best rated",
     },
   ];
+
+  const navigate = useNavigate()
 
   return (
     <Carousel>
@@ -47,6 +50,7 @@ export default function Slider() {
                     size="md"
                     color="white"
                     variant="text"
+                    onClick={() => navigate('/propertyList')}
                   >
                     {buttonText}
                   </Button>

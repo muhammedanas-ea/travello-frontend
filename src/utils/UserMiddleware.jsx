@@ -15,7 +15,9 @@ axiosInterceptorInstance.interceptors.request.use((req) => {
 axiosInterceptorInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+   
     if (error.response && error.response.status === 400) {
+      console.log(error.response.data.message);
       GenerateError(error.response.data.message);
     } else if (error.response && error.response.status === 403) {
       localStorage.removeItem("userToken");
