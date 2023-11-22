@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BookingDetailsOwner } from "../../../api/PropertyApi";
+import moment from "moment";
 
 export default function BookingDetails() {
   const { id } = useSelector((state) => state.owner);
-  const [ ,setBookingData] = useState([])
+  const [ data,setData] = useState([])
   // console.log(bookingData);
 
   useEffect(() => {
@@ -12,7 +13,7 @@ export default function BookingDetails() {
       try {
         const response = await BookingDetailsOwner(id);
         if(response){
-          setBookingData(response.data)
+          setData(response.data)
         }
         console.log(response);
       } catch (err) {
@@ -56,22 +57,27 @@ export default function BookingDetails() {
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
-                  <td className="w-4 p-4">1</td>
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    name
-                  </th>
-                  <td className="px-6 py-4">email</td>
-                  <td className="px-6 py-4">email</td>
-                  <td className="px-6 py-4">email</td>
-                  <td className="px-6 py-4">email</td>
-                  <td className="px-6 py-4">email</td>
-                </tr>
-              </tbody>
+              {data.map((item,index) =>{
+                return(
+                  <tbody key={index}>
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">
+                    <td className="w-4 p-4">1</td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      {item.PropertyName}
+                    </th>
+                    <td className="px-6 py-4">{item.details.Address.Name}</td>
+                    <td className="px-6 py-4">{item.details.TotalRooms}</td>
+                    <td className="px-6 py-4">{item.details.TotalGuest}</td>
+                    <td className="px-6 py-4">{moment(item.details.ChekIn).format("MMM Do YY")}</td>
+                    <td className="px-6 py-4">{moment(item.details.ChekOut).format("MMM Do YY")}</td>
+                  </tr>
+                </tbody>
+                )
+              })}
+             
             </table>
           </div>
         </div>

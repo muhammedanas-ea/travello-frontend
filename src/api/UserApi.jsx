@@ -131,3 +131,12 @@ export async function CheckingUserDetails(checkingData){
     throw new err(err)
   }
 }
+
+export async function BoookingSummery(id){
+  try{
+    const data = await userApi.get(`/bookingsummery/${id}`)
+    return data
+  }catch(err){
+    throw new err(err)
+  }
+}

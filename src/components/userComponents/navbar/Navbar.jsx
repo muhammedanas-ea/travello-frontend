@@ -12,6 +12,7 @@ import {
   UserCircleIcon,
   ChevronDownIcon,
   PowerIcon,
+  InboxArrowDownIcon,
 } from "@heroicons/react/24/solid";
 
 // Import Logo Components
@@ -29,6 +30,10 @@ const profileMenuItems = [
   {
     label: "My Profile",
     icon: UserCircleIcon,
+  },
+  {
+    label: "Bookings",
+    icon: InboxArrowDownIcon,
   },
   {
     label: "Sign Out",
@@ -103,11 +108,19 @@ function ProfileMenu() {
                 >
                   {label}
                 </button>
+              ) : label === "Bookings" ? (
+                <Link
+                  className="font-normal"
+                  style={{ color: isLastItem ? "red" : "inherit" }}
+                  to="/bookingsummery"
+                >
+                  {label}
+                </Link>
               ) : (
                 <Link
                   className="font-normal"
-                  color={isLastItem ? "red" : "inherit"}
-                  to='/userprofile'
+                  style={{ color: isLastItem ? "red" : "inherit" }}
+                  to="/userprofile"
                 >
                   {label}
                 </Link>
