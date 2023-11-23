@@ -33,7 +33,7 @@ export default function CheckingDetails({ open, setOpen,bookingData,PropertyName
           const response = await CheckingUserDetails(values);
           if(response.data.status){
             navigate(`/booking`, { state: { bookingData,PropertyName,City,State,Image} })
-          }  
+          }   
         } catch (err) {
           console.log(err);
         }

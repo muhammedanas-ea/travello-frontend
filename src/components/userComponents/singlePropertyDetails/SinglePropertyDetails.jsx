@@ -117,6 +117,8 @@ function SinglePropertyDetails() {
       if ((increment + 1) % 3 === 0 && increment > 3) {
         setRoomCount(roomCount + 1);
       }
+    }else if(increment === RoomCount * 3){
+      GenerateError("Room capacity is reached")
     }
   };
   const handleDecrement = () => {
@@ -311,6 +313,7 @@ function SinglePropertyDetails() {
                       placeholderText="Check In"
                       className=" bg-white mt-1 hover:bg-gray-200 outline-none"
                       minDate={new Date()}
+                      maxDate={new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)}
                     />
                   </div>
                 </div>
@@ -322,7 +325,8 @@ function SinglePropertyDetails() {
                       onChange={handleEndDate}
                       placeholderText="Check Out"
                       className=" bg-white hover:bg-gray-200 mt-1 outline-none "
-                      minDate={startDate}
+                      minDate={startDate ? new Date(startDate.getTime() + 24 * 60 * 60 * 1000) : null}
+                      maxDate={startDate ? new Date(startDate.getTime() + 30*24 * 60 * 60 * 1000) : null}
                     />
                   </div>
                 </div>

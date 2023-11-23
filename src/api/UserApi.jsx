@@ -65,10 +65,11 @@ export async function UserRestPassword(resetPasswordData) {
   }
 }
 
-export async function UserPropertyList(active,sort) {
+export async function UserPropertyList(active,sort,aminitesSort,search,priceFilter) {
   try {
+    const serializedArray = encodeURIComponent(JSON.stringify(aminitesSort));
     const data = await userApi.get(
-      `/userpropertylist/${active}/${sort}`
+      `/userpropertylist/${active}/${sort}/${serializedArray}/${search}/${priceFilter}`
     );
     return data;
   } catch (err) {
