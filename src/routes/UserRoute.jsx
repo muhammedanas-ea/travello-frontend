@@ -14,6 +14,7 @@ import UserProfilePage from "../pages/userPages/UserProfilePage";
 import BookingPage from "../pages/userPages/BookingPage";
 import SuccessPage from "../pages/userPages/successPage";
 import BookigSummeryPage from "../pages/userPages/BookigSummeryPage";
+import ErrorPage from "../pages/userPages/ErrorPage";
 
 
 export default function UserRoute() {
@@ -22,6 +23,7 @@ export default function UserRoute() {
       <Route path="/emailVerify" element={<UserPublic><EmailVerifyPage /></UserPublic>} />
       <Route path="/forgotPassword" element={<UserPublic><ForgotPasswordPage /></UserPublic>} />
       <Route path="/resetPassword/:id/:token" element={<ResetPasswordPage />} />
+      <Route path='/error' element={<ErrorPage/>} />
       <Route path="/" element={<UserLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />

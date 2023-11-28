@@ -25,6 +25,8 @@ axiosInterceptorInstance.interceptors.response.use(
         GenerateError(error.response.data.message);
       },200)
       window.location = "/home";
+    } else if(error.response && error.response.status === 404){
+      window.location = "/error";
     }
     return Promise.reject(error);
   }

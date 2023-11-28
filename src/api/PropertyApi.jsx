@@ -62,12 +62,10 @@ export async function SinglePropertyDetails(id){
   }
 }
 
-export async function BookingDetailsOwner(id){
+export async function BookingDetailsOwner(id,active){
   try{
-    console.log(id , 'in api');
-    const data = await propertyApi.get(`/bookingdetails/${id}`)
+    const data = await propertyApi.get(`/bookingdetails/${id}/${active}`)
     return data
-
   }catch(err){
     throw new err(err);
   }

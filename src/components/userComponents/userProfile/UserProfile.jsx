@@ -13,12 +13,14 @@ export default function UserProfile() {
   );
   const dispatch = useDispatch();
   const [profile, setProfile] = useState();
+  const [loading,setLoading] = useState(false)
 
   useEffect(() => {
     const showUserData = async () => {
       try {
         const response = await UserProfileData(id);
         if (response) {
+          setLoading(true)
           dispatch(
             setUserDetails({
               id: response.data._id,
@@ -67,7 +69,9 @@ export default function UserProfile() {
       },
     });
   return (
-    <div className="py-9">
+    <>
+    {loading ? (
+      <div className="py-9">
       <div className="contai-section">
         <Typography
           variant="h3"
@@ -182,5 +186,11 @@ export default function UserProfile() {
         </div>
       </div>
     </div>
+    ):(
+      <div className="w-full h-screen flex justify-center items-center">
+        Loading.......
+      </div>
+    )}
+    </>
   );
 }

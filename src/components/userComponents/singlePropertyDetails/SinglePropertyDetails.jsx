@@ -379,10 +379,6 @@ function SinglePropertyDetails() {
                   open={openCheckingDetails}
                   setOpen={setOpenCheckingDetails} 
                   bookingData={bookingData}
-                  PropertyName = {PropertyName}
-                  City={City}
-                  State={State}
-                  Image={Image}
                   />
               ) : (
                 <Button type="submit"  className="w-full leading-9" size="lg">

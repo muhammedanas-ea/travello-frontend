@@ -7,17 +7,19 @@ const axiosInterceptorInstanceOwner = axios.create({
 
 axiosInterceptorInstanceOwner.interceptors.request.use((req) => {
   if (localStorage.getItem("propertyToken")) {
-    req.headers.Authorization = "Bearer " + localStorage.getItem("propertyToken");
+    req.headers.Authorization =
+      "Bearer " + localStorage.getItem("propertyToken");
   }
   return req;
 });
-
 
 axiosInterceptorInstanceOwner.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 400) {
       GenerateError(error.response.data.message);
+    } else if (error.response && error.response.status === 404) {
+      window.location = "/property/errorpage";
     }
     return Promise.reject(error);
   }

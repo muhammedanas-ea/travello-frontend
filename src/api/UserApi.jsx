@@ -133,11 +133,30 @@ export async function CheckingUserDetails(checkingData){
   }
 }
 
-export async function BoookingSummery(id){
+export async function BoookingSummery(id,active){
   try{
-    const data = await userApi.get(`/bookingsummery/${id}`)
+    const data = await userApi.get(`/bookingsummery/${id}/${active}`)
     return data
   }catch(err){
     throw new err(err)
+  }
+}
+
+export async function BookingCancelUser(bookingId) {
+  try {
+    const data = await userApi.post('/bookingcancel', { bookingId });
+    return data;
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
+
+export async function MangeWalletPayment(bookingId){
+  try{
+    const data = await userApi.post('/walletpayment',{bookingId})
+    return data
+  }catch (err) {
+    throw new Error(err);
   }
 }

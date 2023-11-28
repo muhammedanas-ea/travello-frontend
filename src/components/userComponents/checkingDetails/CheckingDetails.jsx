@@ -13,7 +13,7 @@ import { CheckingUserDetails } from "../../../api/UserApi";
 import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-export default function CheckingDetails({ open, setOpen,bookingData,PropertyName,City,State,Image }) {
+export default function CheckingDetails({ open, setOpen,bookingData}) {
   const handleClose = () => setOpen(open);
   const navigate = useNavigate()
   const initialValues = {
@@ -32,7 +32,7 @@ export default function CheckingDetails({ open, setOpen,bookingData,PropertyName
         try {
           const response = await CheckingUserDetails(values);
           if(response.data.status){
-            navigate(`/booking`, { state: { bookingData,PropertyName,City,State,Image} })
+            navigate(`/booking`, { state: { bookingData} })
           }   
         } catch (err) {
           console.log(err);
@@ -66,6 +66,7 @@ export default function CheckingDetails({ open, setOpen,bookingData,PropertyName
               </Typography>
               <Input
                 name="email"
+                label="email"
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -81,6 +82,7 @@ export default function CheckingDetails({ open, setOpen,bookingData,PropertyName
               </Typography>
               <Input
                 name="name"
+                label="name"
                 value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -96,6 +98,7 @@ export default function CheckingDetails({ open, setOpen,bookingData,PropertyName
               </Typography>
               <Input
                 name="number"
+                label="number"
                 value={values.number}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -108,7 +111,7 @@ export default function CheckingDetails({ open, setOpen,bookingData,PropertyName
               )}
             </CardBody>
             <CardFooter className="pt-0">
-              <Button type="submit" variant="gradient" fullWidth>
+              <Button  type="submit" variant="gradient" fullWidth>
                 Book now
               </Button>
             </CardFooter>
