@@ -27,6 +27,12 @@ axiosInterceptorInstance.interceptors.response.use(
       window.location = "/home";
     } else if(error.response && error.response.status === 404){
       window.location = "/error";
+    } else if(error.response && error.response.status === 401){
+      localStorage.removeItem("userToken");
+      setTimeout(() =>{
+        GenerateError(error.response.data.message);
+      },200)
+      window.location = "/login";
     }
     return Promise.reject(error);
   }

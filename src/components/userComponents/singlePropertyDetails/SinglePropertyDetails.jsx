@@ -12,12 +12,10 @@ import {
 import { MdOutlinePets } from "react-icons/md";
 import { FaBath, FaSwimmingPool, FaWifi } from "react-icons/fa";
 import SingleProperty from "../singleProperty/SingleProperty";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BookingDetails, UserSingleProperty } from "../../../api/UserApi";
 import DatePicker from "react-datepicker";
 import { GenerateError } from "../../../toast/Toast";
-import CheckingDetails from "../checkingDetails/CheckingDetails";
-
 
 function SinglePropertyDetails() {
   const { state } = useLocation();
@@ -96,10 +94,13 @@ function SinglePropertyDetails() {
   const [isOpen, setIsOpen] = useState(false);
   const [increment, setIncrement] = useState(1);
   const [roomCount, setRoomCount] = useState(1);
-  const [bookingData, setBookingData] = useState();
-  const [openCheckingDetails, setOpenCheckingDetails] = useState(false);
-  // const navigate = useNavigate()
-  const totalAmount = roomCount * Price;
+  const navigate = useNavigate();
+  let differenceInDays = 0;
+  if (startDate && endDate) {
+    const differenceInTime = endDate.getTime() - startDate.getTime();
+    differenceInDays = differenceInTime / (1000 * 3600 * 24);
+  }
+  const totalAmount = roomCount * Price * differenceInDays;
 
   const handleSatrtDate = (e) => {
     const selectedDate = new Date(e);
@@ -117,8 +118,8 @@ function SinglePropertyDetails() {
       if ((increment + 1) % 3 === 0 && increment > 3) {
         setRoomCount(roomCount + 1);
       }
-    }else if(increment === RoomCount * 3){
-      GenerateError("Room capacity is reached")
+    } else if (increment === RoomCount * 3) {
+      GenerateError("Room capacity is reached");
     }
   };
   const handleDecrement = () => {
@@ -132,10 +133,10 @@ function SinglePropertyDetails() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(startDate === null){
-      return GenerateError('select a start check in date')
-    }else if(endDate === null){
-      return GenerateError('select a start check out date')
+    if (startDate === null) {
+      return GenerateError("select a start check in date");
+    } else if (endDate === null) {
+      return GenerateError("select a start check out date");
     }
     try {
       const response = await BookingDetails({
@@ -147,14 +148,13 @@ function SinglePropertyDetails() {
         _id,
       });
       if (response.data.status) {
-        setBookingData(response.data.id);
-        setOpenCheckingDetails(true);
+        const updatedBookingData = response.data.id;
+        navigate(`/booking`, { state: { bookingData: updatedBookingData } });
       }
     } catch (err) {
       console.log(err);
     }
   };
-
 
   return (
     <>
@@ -325,8 +325,18 @@ function SinglePropertyDetails() {
                       onChange={handleEndDate}
                       placeholderText="Check Out"
                       className=" bg-white hover:bg-gray-200 mt-1 outline-none "
-                      minDate={startDate ? new Date(startDate.getTime() + 24 * 60 * 60 * 1000) : null}
-                      maxDate={startDate ? new Date(startDate.getTime() + 30*24 * 60 * 60 * 1000) : null}
+                      minDate={
+                        startDate
+                          ? new Date(startDate.getTime() + 24 * 60 * 60 * 1000)
+                          : null
+                      }
+                      maxDate={
+                        startDate
+                          ? new Date(
+                              startDate.getTime() + 30 * 24 * 60 * 60 * 1000
+                            )
+                          : null
+                      }
                     />
                   </div>
                 </div>
@@ -374,17 +384,9 @@ function SinglePropertyDetails() {
               </h5>
             </div>
             <div className="w-full mt-5">
-              {bookingData ? (
-                 <CheckingDetails
-                  open={openCheckingDetails}
-                  setOpen={setOpenCheckingDetails} 
-                  bookingData={bookingData}
-                  />
-              ) : (
-                <Button type="submit"  className="w-full leading-9" size="lg">
-                  Check Availability
-                </Button>
-              )}
+              <Button type="submit" className="w-full leading-9" size="lg">
+                Check Availability
+              </Button>
             </div>
           </form>
         </div>

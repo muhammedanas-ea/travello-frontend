@@ -123,15 +123,6 @@ export async function PaymentDetails(bookingId){
   }
 }
 
-export async function CheckingUserDetails(checkingData){
-  try{
-    console.log(checkingData,'api section');
-    const data = await userApi.post('/checkuserdetails',checkingData)
-     return data
-  }catch(err){
-    throw new err(err)
-  }
-}
 
 export async function BoookingSummery(id,active){
   try{
@@ -158,5 +149,15 @@ export async function MangeWalletPayment(bookingId){
     return data
   }catch (err) {
     throw new Error(err);
+  }
+}
+
+export async function BoookigCompletedDetails(bookingId){
+  try{
+    console.log(bookingId);
+    const data = await userApi.get(`/bookingcompleted/${bookingId}`)
+    return data
+  }catch(err){
+    throw new Error(err)
   }
 }

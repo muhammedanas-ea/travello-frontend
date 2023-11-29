@@ -6,6 +6,7 @@ import HomePage from "../pages/userPages/HomePage";
 import SignUpPage from "../pages/userPages/SignUpPage";
 import EmailVerifyPage from '../pages/userPages/EmailVerifyPage';
 import UserPublic from "../protected/UserPublic";
+import UserProtect from '../protected/UserProtected'
 import ForgotPasswordPage from "../pages/userPages/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/userPages/ResetPasswordPage";
 import PropertyListPage from "../pages/userPages/PropertyListPage";
@@ -15,6 +16,7 @@ import BookingPage from "../pages/userPages/BookingPage";
 import SuccessPage from "../pages/userPages/successPage";
 import BookigSummeryPage from "../pages/userPages/BookigSummeryPage";
 import ErrorPage from "../pages/userPages/ErrorPage";
+import BookingDetailsPage from "../pages/userPages/BookingDetailsPage";
 
 
 export default function UserRoute() {
@@ -29,11 +31,12 @@ export default function UserRoute() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/home/:id/:token" element={<HomePage />} />
         <Route path='/propertyList' element={<PropertyListPage/>} />
-        <Route path='/userprofile' element={<UserProfilePage/>} />
-        <Route path='/singleproperty' element={<SinglePropertyPage/>} />
-        <Route path='/booking' element={<BookingPage/>} />
-        <Route path='/success' element={<SuccessPage/>} />
-        <Route path='/bookingsummery' element={<BookigSummeryPage/>} />
+        <Route path='/userprofile' element={<UserProtect><UserProfilePage/></UserProtect>} />
+        <Route path='/singleproperty' element={<UserProtect><SinglePropertyPage/></UserProtect>} />
+        <Route path='/booking' element={<UserProtect><BookingPage/></UserProtect>} />
+        <Route path='/success' element={<UserProtect><SuccessPage/></UserProtect>} />
+        <Route path='/bookingsummery' element={<UserProtect><BookigSummeryPage/></UserProtect>} />
+        <Route path='/bookingdetails' element={<UserProtect><BookingDetailsPage/></UserProtect>} />
         <Route path="/login" element={<UserPublic><SignInPage /></UserPublic>} />
         <Route path="/signup" element={<UserPublic><SignUpPage /></UserPublic>} />
       </Route>

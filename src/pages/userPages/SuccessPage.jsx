@@ -21,12 +21,18 @@ export default function SuccessPage() {
             Thank you for completing your secure online payment.
           </p>
           <p> Have a great day!</p>
-          <div className="py-10 text-center">
+          <div className="py-10 text-center justify-center flex gap-3">
             <Link
               to='/home'
               className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3"
             >
               GO BACK
+            </Link>
+            <Link
+              to='/bookingsummery'
+              className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3"
+            >
+              Bookings
             </Link>
           </div>
         </div>

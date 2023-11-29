@@ -17,9 +17,18 @@ axiosInterceptorInstanceOwner.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 400) {
+      localStorage.removeItem("propertyToken");
+      window.location.href  = "/property";
       GenerateError(error.response.data.message);
     } else if (error.response && error.response.status === 404) {
-      window.location = "/property/errorpage";
+      window.location.href  = "/property/errorpage";
+    }else if(error.response && error.response.status === 401){
+      localStorage.removeItem("propertyToken");
+      window.location.href  = "/property";
+      setTimeout(() =>{
+        GenerateError(error.response.data.message);
+      },200)
+      
     }
     return Promise.reject(error);
   }

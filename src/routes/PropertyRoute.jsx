@@ -19,7 +19,7 @@ export default function PropertyRoute() {
         <Route path="/login" element={<PropertyLoginpage />} />
         <Route path="/otpverification" element={<OtpVerificationPage />} />
       </Route>
-      <Route element={<PropertyProtected />}>
+      <Route  element={<PropertyProtected />}>
         <Route element={<PropertyLayout />}>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/ownerprofile" element={<OwnerProfilePage />} />
