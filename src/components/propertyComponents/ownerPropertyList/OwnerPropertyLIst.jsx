@@ -20,7 +20,6 @@ export default function OwnerPropertyLIst() {
       try {
         const response = await ListProperty(id);
         if (response.data.status) {
-          console.log(response.data);
           setPropertyList(response.data.propertyData);
           setChild(false);
         }
@@ -64,7 +63,6 @@ export default function OwnerPropertyLIst() {
                       }
                       alt=""
                     />
-                    {console.log(Image[1])}
                   </div>
                   <Chip
                     variant="ghost"

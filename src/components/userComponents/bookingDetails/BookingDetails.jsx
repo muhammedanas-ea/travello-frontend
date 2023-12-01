@@ -17,7 +17,6 @@ export default function BookingDetails() {
   useEffect(() => {
     const showBookingData = async () => {
       try {
-        console.log(bookingId);
         const response = await BoookigCompletedDetails(bookingId);
         if (response) {
           setCancel(true);

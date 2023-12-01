@@ -1,4 +1,4 @@
-import loginImg from "../../../../public/staticImages/1991562_Freepik.jpg";
+import loginImg from "../../../../public/staticImages/1991562_Freepik.webp";
 import "./SignIn.css";
 import { UserLogin } from "../../../api/UserApi";
 import { useNavigate, Link } from "react-router-dom";

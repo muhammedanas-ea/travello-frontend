@@ -1,4 +1,4 @@
-import bgImg from "../../../../public/staticImages/property-signin.jpg";
+import bgImg from "../../../../public/staticImages/property-signin.webp";
 import { PropertySignin } from "../../../api/PropertyApi";
 import { ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";

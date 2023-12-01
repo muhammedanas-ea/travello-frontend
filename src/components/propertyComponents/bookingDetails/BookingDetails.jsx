@@ -19,7 +19,6 @@ export default function BookingDetails() {
           setData(response.data.bookingData);
           setTotalpage(response.data.totalPages);
         }
-        console.log(response);
       } catch (err) {
         console.log(err);
       }

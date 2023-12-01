@@ -70,3 +70,13 @@ export async function BookingDetailsOwner(id,active){
     throw new err(err);
   }
 }
+
+
+export async function EditProperty(editData){
+  try{
+    const data = await propertyApi.post("/editProperty",editData);
+    return data;
+  }catch(err){
+    throw new err(err);
+  }
+}

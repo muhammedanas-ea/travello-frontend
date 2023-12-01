@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import bgImg from "../../../../public/staticImages/property-signin.jpg";
+import bgImg from "../../../../public/staticImages/property-signin.webp";
 import { PropertySignUp } from "../../../api/PropertyApi";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";

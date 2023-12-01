@@ -35,8 +35,8 @@ export default function PropertySort({ search }) {
 
   return (
     <>
-      <div className="flex justify-between items-center pt-4 mb-10 gap-5">
-        <div className="w-1/3">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center pt-4 mb-10 gap-5">
+        <div className="w-full md:w-1/3">
           <div className="relative mb-6">
             <div>
               <div className="mb-2">Price Range: ₹{priceFilter}</div>
@@ -61,7 +61,7 @@ export default function PropertySort({ search }) {
             </span>
           </div>
         </div>
-        <div className="flex gap-5 items-center">
+        <div className="flex flex-col md:flex-row gap-5 md:items-center">
           <div>
             <div className="mb-2">Amenities:</div>
             <Select
@@ -72,7 +72,7 @@ export default function PropertySort({ search }) {
               isMulti={true}
             />
           </div>
-          <div className="relative inline-block text-left w-52">
+          <div className="relative inline-block text-left w-full md:w-52">
             <div className="mb-2">Price Sort:</div>
             <select
               onChange={(e) => handleChange(e.target.value)}

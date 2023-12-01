@@ -50,7 +50,6 @@ export default function PropertyAddingDialog({onDataUpdate}) {
     validationSchema: AddPropertySchema,
     onSubmit: async (values,{resetForm}) => {
       try {
-        console.log(values);
         const formData = new FormData();
         formData.append("propertyName", values.propertyName);
         formData.append("price", values.price);

@@ -10,7 +10,7 @@ export default function PropertySearch() {
 
   return (
     <>
-      <div className="grid grid-cols-1  md:grid-cols-1 px-3 items-center w-full h-[65px] rounded-md bg-[#fcfbfb] box-shadow mb-[10rem] md:my-4">
+      <div className="grid grid-cols-1  md:grid-cols-1 px-3 items-center w-full h-[65px] rounded-md bg-[#fcfbfb] box-shadow mb-[2rem] md:my-4">
         <div className="w-full md:w-full">
           <Input
             label="Search"

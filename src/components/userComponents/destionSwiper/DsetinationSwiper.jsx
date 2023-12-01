@@ -1,10 +1,10 @@
 // Import tailwind Component section
-import {
-  // Card,
-  // CardHeader,
-  // CardBody,
-  Typography,
-} from "@material-tailwind/react";
+// import {
+//   // Card,
+//   // CardHeader,
+//   // CardBody,
+//   Typography,
+// } from "@material-tailwind/react";
 
 // Import Style For Property Swiper Card
 import "./DestinationSwiper.css";
@@ -31,12 +31,12 @@ export default function DestinationSwiper() {
 
   return (
     <div className="main-sparation">
-      <div className="contai-section">
+      {/* <div className="contai-section">
         <div className="pb-6">
           <Typography  className="text-[#1e1e1e] font-fmaily">
             popular Destination
           </Typography>
-        </div>
+        </div> */}
         {/* <div className="flex gap-6">
           {destination.map((items, index) => {
 
@@ -69,7 +69,7 @@ export default function DestinationSwiper() {
             );
           })}
         </div> */}
-      </div>
+      {/* </div> */}
     </div>
   );
 }

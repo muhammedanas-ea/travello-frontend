@@ -1,7 +1,7 @@
 import { UserSignUp } from "../../../api/UserApi";
 import { Link, useNavigate } from "react-router-dom";
 import { GenerateSuccess } from "../../../toast/Toast";
-import loginImg from "../../../../public/staticImages/1991562_Freepik.jpg";
+import loginImg from "../../../../public/staticImages/1991562_Freepik.webp";
 import GoogleSignUp from "../googleAuth/GoogleSignUp";
 import { useFormik } from "formik";
 import { SignupSchema } from "../../../yup/validation";

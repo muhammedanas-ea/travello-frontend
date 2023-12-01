@@ -2,10 +2,10 @@
 import { Typography, Button } from "@material-tailwind/react";
 
 // Import Slider Image Section
-import slide1 from "../../../../public/staticImages/sliderimg-1.jpg";
-import slide2 from "../../../../public/staticImages/sliderimg-2.jpg";
-import slide3 from "../../../../public/staticImages/sliderimg-3.jpg";
-import slide4 from "../../../../public/staticImages/sliderimg-4.jpg";
+import slide1 from "../../../../public/staticImages/sliderimg-1.webp";
+import slide2 from "../../../../public/staticImages/sliderimg-2.webp";
+import slide3 from "../../../../public/staticImages/sliderimg-3.webp";
+import slide4 from "../../../../public/staticImages/sliderimg-4.webp";
 
 // Import Style For Property Swiper Card
 import "./PropertySwiper.css";

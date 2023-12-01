@@ -1,8 +1,8 @@
 import { Carousel, Button, Typography } from "@material-tailwind/react";
 
 // Import Image of slider
-import sliderImg1 from "../../../../public/staticImages/slider-img1.jpg";
-import sliderImg2 from "../../../../public/staticImages/slider-img2.jpg";
+import sliderImg1 from "../../../../public/staticImages/property-signin.webp";
+import sliderImg2 from "../../../../public/staticImages/property-signin.webp";
 
 //Import style
 import "./Slider.css";

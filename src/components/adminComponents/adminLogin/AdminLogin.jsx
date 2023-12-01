@@ -1,4 +1,4 @@
-import bgImg from "../../../../public/staticImages/property-signin.jpg";
+import bgImg from "../../../../public/staticImages/property-signin.webp";
 import { AdminLoginVerify } from "../../../api/AdminApi";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
