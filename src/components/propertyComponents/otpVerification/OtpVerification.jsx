@@ -18,12 +18,15 @@ function OtpVerification() {
       const response = await OtpChecking({ otp, id });
       if (response.data.status) {
         localStorage.setItem("propertyToken", response.data.propertytoken);
-        dispatch(
-          setPropertyOwnerDetails({
-            id: response.data.propertyData._id,
+        const ownerDetails = {
+          id: response.data.propertyData._id,
             name: response.data.propertyData.name,
             email: response.data.propertyData.email,
             number: response.data.propertyData.number,
+        }
+        dispatch(
+          setPropertyOwnerDetails({
+            ownerInfo:ownerDetails
           })
         );
         navigate("/property");

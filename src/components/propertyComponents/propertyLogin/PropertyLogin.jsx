@@ -24,12 +24,15 @@ export default function PropertyLogin() {
           const response = await PropertySignin(values);
           if (response.data.status) {
             localStorage.setItem("propertyToken", response.data.propertytoken);
+            const ownerDetails = {
+              id: response.data.propertyData._id,
+              name: response.data.propertyData.name,
+              email: response.data.propertyData.email,
+              number: response.data.propertyData.number,
+            };
             dispatch(
               setPropertyOwnerDetails({
-                id: response.data.propertyData._id,
-                name: response.data.propertyData.name,
-                email: response.data.propertyData.email,
-                number: response.data.propertyData.number,
+                ownerInfo: ownerDetails,
               })
             );
             navigate("/property");

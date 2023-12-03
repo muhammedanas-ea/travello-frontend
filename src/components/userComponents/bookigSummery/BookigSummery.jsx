@@ -7,16 +7,18 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 
 export default function BookigSummery() {
-  const { id } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
   const [data, setData] = useState([]);
   const [active, setActive] = React.useState(1);
   const [totalPage, setTotalpage] = useState();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
-
+  const id = userInfo.id
+  
   useEffect(() => {
     const showBookingSummeryData = async () => {
       try {
+       
         const response = await BoookingSummery(id, active);
         if (response) {
           setLoading(true);

@@ -17,6 +17,7 @@ import SuccessPage from "../pages/userPages/successPage";
 import BookigSummeryPage from "../pages/userPages/BookigSummeryPage";
 import ErrorPage from "../pages/userPages/ErrorPage";
 import BookingDetailsPage from "../pages/userPages/BookingDetailsPage";
+import ChatList from "../components/userComponents/chat/ChatList";
 
 
 export default function UserRoute() {
@@ -39,6 +40,7 @@ export default function UserRoute() {
         <Route path='/bookingdetails' element={<UserProtect><BookingDetailsPage/></UserProtect>} />
         <Route path="/login" element={<UserPublic><SignInPage /></UserPublic>} />
         <Route path="/signup" element={<UserPublic><SignUpPage /></UserPublic>} />
+        <Route path="/chat" element={<ChatList />} />
       </Route>
     </Routes>
   );

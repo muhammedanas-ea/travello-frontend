@@ -28,25 +28,25 @@ export default function EditPropertyDialog({ data, onDataUpdate }) {
     // eslint-disable-next-line react/prop-types
     propertyId: data._id,
     // eslint-disable-next-line react/prop-types
-    propertyName: data ? data.PropertyName : "",
+    propertyName:  data.PropertyName,
     // eslint-disable-next-line react/prop-types
-    price: data ? data.Price : "",
+    price: data.Price ,
     // eslint-disable-next-line react/prop-types
-    room: data ? data.RoomCount : "",
+    room: data.RoomCount ,
     // eslint-disable-next-line react/prop-types
-    gust: data ? data.GuestCount : "",
+    gust: data.GuestCount,
     // eslint-disable-next-line react/prop-types
-    state: data ? data.State : "",
+    state: data.State,
     // eslint-disable-next-line react/prop-types
-    location: data ? data.City : "",
+    location: data.City,
     // eslint-disable-next-line react/prop-types
-    propertyType: data ? data.PropertyType : "",
+    propertyType: data.PropertyType,
     // eslint-disable-next-line react/prop-types
-    number: data ? data.MobileNumber : "",
+    number: data.MobileNumber,
     // eslint-disable-next-line react/prop-types
-    describe: data ? data.Description : "",
+    describe: data.Description,
     // eslint-disable-next-line react/prop-types
-    amenities: data ? data.Amenities : "",
+    amenities: data.Amenities,
   };
 
   const {

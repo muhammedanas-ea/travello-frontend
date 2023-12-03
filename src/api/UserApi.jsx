@@ -154,8 +154,53 @@ export async function MangeWalletPayment(bookingId){
 
 export async function BoookigCompletedDetails(bookingId){
   try{
-    console.log(bookingId);
     const data = await userApi.get(`/bookingcompleted/${bookingId}`)
+    return data
+  }catch(err){
+    throw new Error(err)
+  }
+}
+
+export async function AllChats(userId){
+  try{
+    const data = await userApi.get(`/fetchchat/${userId}`)
+    return data
+  }catch(err){
+    throw new Error(err)
+  }
+}
+
+export async function UserChatSearch(search){
+  try{
+    const data = await userApi.get(`/usersearch/${search}`)
+    return data
+  }catch(err){
+    throw new Error(err)
+  }
+}
+
+export async function Accesschat(ownerId,userId){
+  try{
+    const data = await userApi.post('/accesschat',{ownerId,userId})
+    return data
+  }catch(err){
+    throw new Error(err)
+  }
+}
+
+export async function MessageData(chatId){
+  try{
+    const data = await userApi.get(`/message/${chatId}`)
+    return data
+  }catch(err){
+    throw new Error(err)
+  }
+}
+
+export async function MessageSend(content,chatId,userId){
+  try{
+    console.log(chatId,'in api is working')
+    const data = await userApi.post('/message',{content,chatId,userId})
     return data
   }catch(err){
     throw new Error(err)

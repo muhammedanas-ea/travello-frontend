@@ -51,9 +51,7 @@ function ProfileMenu() {
     localStorage.removeItem("userToken");
     dispatch(
       setUserDetails({
-        id: "",
-        name: "",
-        email: "",
+        userInfo: {},
       })
     );
     navigate("/login");
@@ -137,7 +135,7 @@ export default function Header() {
   const params = useParams();
   const { id, token } = params;
   const dispatch = useDispatch();
-  const { name } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -147,11 +145,18 @@ export default function Header() {
           const response = await EmailVerify(params.id, params.token);
           if (response.data.status) {
             localStorage.setItem("userToken", response.data.usertoken);
+            const userDetails = {
+              id: response.data.userData._id,
+              name: response.data.userData.name,
+              email: response.data.userData.email,
+              number: response.data.number,
+              houseName: response.data.houseName,
+              state: response.data.state,
+              city: response.data.city,
+            };
             dispatch(
               setUserDetails({
-                id: response.data.userData._id,
-                name: response.data.userData.name,
-                email: response.data.userData.email,
+                userInfo: userDetails,
               })
             );
             GenerateSuccess(response.data.message);
@@ -174,7 +179,7 @@ export default function Header() {
           <div className="flex items-center gap-7">
             {localStorage.getItem("userToken") ? (
               <>
-                <span>{name}</span>
+                <span>{userInfo.name}</span>
                 <ProfileMenu />
               </>
             ) : (

@@ -40,8 +40,7 @@ export default function BookingDetails() {
       console.log(err);
     }
   };
-  console.log(cancel);
-
+ 
   return (
     <div className="py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -52,7 +51,7 @@ export default function BookingDetails() {
                 variant="h3"
                 className="text-gray-800 text-2xl font-extralight mb-6"
               >
-                Transaction ID: {bookingId}
+                Transaction ID: {bookingData.TransactionId}
               </Typography>
               <hr className="border-1 border-gray-300 mb-8" />
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -2,10 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    id:'',
-    name:'',
-    email:'',
-    number:'',
+    ownerInfo:{}
 }
 
 const propertySlice = createSlice({
@@ -13,16 +10,10 @@ const propertySlice = createSlice({
     initialState,
     reducers:{
         setPropertyOwnerDetails:(state,action) =>{
-            state.id= action.payload.id;
-            state.name= action.payload.name;
-            state.email= action.payload.email;
-            state.number= action.payload.number;
+            state.ownerInfo= action.payload.ownerInfo
         },
         setPropertyOwnerlogoutDetails:(state) =>{
-            state.id= '';
-            state.name= '';
-            state.email= '';    
-            state.number= '';
+            state.ownerInfo= {}
         }
     }
 })

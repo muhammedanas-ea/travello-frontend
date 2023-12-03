@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function OwnerPropertyLIst() {
-  const { id } = useSelector((state) => state.owner);
+  const { ownerInfo } = useSelector((state) => state.owner);
   const [PropertyList, setPropertyList] = useState([]);
   const [child, setChild] = useState();
   const navigate = useNavigate()
@@ -14,6 +14,8 @@ export default function OwnerPropertyLIst() {
   const onDataUpdate = (data) => {
     setChild(data);
   };
+
+  const id = ownerInfo.id
 
   useEffect(() => {
     const showPropertyData = async () => {

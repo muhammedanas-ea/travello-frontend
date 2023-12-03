@@ -40,10 +40,7 @@ function ProfileMenu() {
     localStorage.removeItem("propertyToken");
     dispatch(
       setPropertyOwnerlogoutDetails({
-        id: "",
-        name: "",
-        email: "",
-        number: "",
+        ownerInfo:{}
       })
     );
     navigate("/property/login");
@@ -118,7 +115,7 @@ function ProfileMenu() {
 
 export default function Header() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const { name } = useSelector((state) => state.owner);
+  const { ownerInfo } = useSelector((state) => state.owner);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -153,7 +150,7 @@ export default function Header() {
             </div>
             <div className="flex items-center">
               <div className="flex items-center gap-5 ml-3">
-                <span>{name}</span>
+                <span>{ownerInfo.name}</span>
                 <ProfileMenu />
               </div>
             </div>

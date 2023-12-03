@@ -6,15 +6,17 @@ import { Button, Chip, IconButton } from "@material-tailwind/react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 
 export default function BookingDetails() {
-  const { id } = useSelector((state) => state.owner);
+  const { ownerInfo } = useSelector((state) => state.owner);
   const [data, setData] = useState([]);
   const [active, setActive] = React.useState(1);
   const [totalPage, setTotalpage] = useState();
 
+  const id = ownerInfo.id;
+
   useEffect(() => {
     const showUserData = async () => {
       try {
-        const response = await BookingDetailsOwner(id,active);
+        const response = await BookingDetailsOwner(id, active);
         if (response) {
           setData(response.data.bookingData);
           setTotalpage(response.data.totalPages);
@@ -24,7 +26,7 @@ export default function BookingDetails() {
       }
     };
     showUserData();
-  }, [id,active]);
+  }, [id, active]);
 
   const getItemProps = (index) => ({
     variant: active === index ? "filled" : "text",
@@ -48,7 +50,7 @@ export default function BookingDetails() {
     <div className="p-4 sm:ml-64">
       <div className="p-4 rounded-lg dark:border-gray-700 mt-16">
         <div className="relative overflow-x-auto shadow-xl sm:rounded-lg">
-          <div className="h-[70px] py-6 flex justify-between items-center bg-gray-50 px-4">
+          <div className="h-[70px] w-full py-6  bg-gray-50 px-4">
             <h1 className="font-medium ">Booking Details</h1>
           </div>
           <div className="pt-2">
@@ -82,6 +84,9 @@ export default function BookingDetails() {
                   <th scope="col" className="px-6 py-3">
                     Payment methode
                   </th>
+                  <th scope="col" className="px-6 py-3">
+                    Booking Status
+                  </th>
                 </tr>
               </thead>
               {data.map((item, index) => {
@@ -113,6 +118,19 @@ export default function BookingDetails() {
                           size="sm"
                           value={item.details.paymentMethode}
                           color="green"
+                          className="text-center"
+                        />
+                      </td>
+                      <td className="px-6 py-4">
+                        <Chip
+                          variant="ghost"
+                          size="sm"
+                          value={item.details.bookingStatus}
+                          color={
+                            item.details.bookingStatus === "cancel"
+                              ? "red"
+                              : "green"
+                          }
                           className="text-center"
                         />
                       </td>

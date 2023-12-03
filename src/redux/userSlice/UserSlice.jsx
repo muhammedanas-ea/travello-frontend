@@ -2,16 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    id:'',
-    name:'',
-    email:'',
-    number:'',
-    houseName:'',
-    state:'',
-    city:'',
-    is_block:'',
-    is_verified:'',
-    is_admin:''
+    userInfo : {},
 }
 
 const userSlice = createSlice({
@@ -19,28 +10,10 @@ const userSlice = createSlice({
     initialState,
     reducers:{
         setUserDetails:(state,action) =>{
-            state.id= action.payload.id;
-            state.name= action.payload.name;
-            state.email= action.payload.email;
-            state.number = action.payload.number;
-            state.houseName= action.payload.houseName;
-            state.state= action.payload.state;
-            state.city= action.payload.city;
-            state.is_block= action.payload.is_block;
-            state.is_verified= action.payload.is_verified;
-            state.is_admin= action.payload.is_admin;
+            state.userInfo= action.payload.userInfo;
         },
         setUserlogoutDetails:(state) =>{
-            state.id= '';
-            state.name= '';
-            state.email= '';
-            state.number = '';
-            state.houseName= '';
-            state.state= '';
-            state.city= '';
-            state.is_block= '';
-            state.is_verified= '';
-            state.is_admin= '';
+            state.userInfo= {}
         }
     }
 })
