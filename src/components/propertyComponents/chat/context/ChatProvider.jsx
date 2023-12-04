@@ -6,10 +6,10 @@ const ChatContext = createContext();
 // eslint-disable-next-line react/prop-types
 const ChatProvider = ({ children }) => {
   const [user, setUser] = useState();
-  const [selectedChat, setSelectedChat] = useState('');
+  const [selectedChat, setSelectedChat] = useState();
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState([]);
-  const {userInfo} = useSelector((state) => state.user)
+  const { ownerInfo } = useSelector((state) => state.owner);
 
   const initialChatState = {
     _id: '', 
@@ -19,9 +19,8 @@ const ChatProvider = ({ children }) => {
     updatedAt: '', 
     // Add other properties as needed
   };
-
   useEffect(() =>{
-    setUser(userInfo)
+    setUser(ownerInfo)
     setSelectedChat(initialChatState);
   },[])
 

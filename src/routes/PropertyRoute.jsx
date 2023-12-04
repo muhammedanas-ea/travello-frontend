@@ -10,6 +10,7 @@ import OwnerProfilePage from "../pages/propertyPages/OwnerProfilePage";
 import PropertyDetailsPage from "../pages/propertyPages/PropertyDetailsPage";
 import BookingDetailsPage from "../pages/propertyPages/BookingDetailsPage";
 import ErrorPage from "../pages/propertyPages/ErrorPage";
+import ChatList from "../components/propertyComponents/chat/ChatList";
 
 export default function PropertyRoute() {
   return (
@@ -26,6 +27,7 @@ export default function PropertyRoute() {
           <Route path="/propertydetails" element={<PropertyDetailsPage />} />
           <Route path="/bookingdetails" element={<BookingDetailsPage />} />
           <Route path="/errorpage" element={<ErrorPage />} />
+          <Route path="/chat" element={<ChatList />} />
         </Route>
       </Route>
     </Routes>

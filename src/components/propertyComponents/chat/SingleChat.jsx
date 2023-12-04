@@ -6,8 +6,9 @@ import io from "socket.io-client";
 import { useEffect } from "react";
 import ScrollableChat from "./ScrollableChat";
 import { ChatState } from "./context/ChatProvider";
-import { MessageSend } from "../../../api/UserApi";
-import userRequest from '../../../utils/UserMiddleware';
+import { OwnerMessageSend } from "../../../api/PropertyApi";
+import userRequest from "../../../utils/UserMiddleware";
+
 var socket, selectedChatCompare;
 const ENDPOINT = import.meta.env.VITE_BACKENDURL;
 
@@ -30,6 +31,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(true);
       const chatId = selectedChat._id;
       const data = await userRequest.get(`/message/${chatId}`);
+      // const data = await MessageData(chatId);
       setMessages(data.data);
       setLoading(false);
 
@@ -45,7 +47,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       try {
         setNewMessage("");
         const userId = user.id;
-        const { data } = await MessageSend(newMessage, selectedChat, userId);
+        const { data } = await OwnerMessageSend(
+          newMessage,
+          selectedChat,
+          userId
+        );
 
         socket.emit("new message", data);
         setMessages([...messages, data]);
@@ -120,7 +126,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const isMessageSender = (currentUser, selectedChat) => {
     return (
-      selectedChat.sender && currentUser.user.id === selectedChat.sender.id
+      selectedChat.sender && currentUser.owner._id === selectedChat.sender._id
     );
   };
   return (
@@ -148,7 +154,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               className="h-10 w-10 rounded-full me-2 mt-2"
             />
 
-            {selectedChat.users?.owner && selectedChat.users.owner?.name}
+            {selectedChat.users.user && selectedChat.users.user.name}
           </Text>
           <Box
             display="flex"

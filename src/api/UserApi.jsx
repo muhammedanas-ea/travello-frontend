@@ -179,23 +179,6 @@ export async function UserChatSearch(search){
   }
 }
 
-export async function Accesschat(ownerId,userId){
-  try{
-    const data = await userApi.post('/accesschat',{ownerId,userId})
-    return data
-  }catch(err){
-    throw new Error(err)
-  }
-}
-
-export async function MessageData(chatId){
-  try{
-    const data = await userApi.get(`/message/${chatId}`)
-    return data
-  }catch(err){
-    throw new Error(err)
-  }
-}
 
 export async function MessageSend(content,chatId,userId){
   try{

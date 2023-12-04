@@ -1,8 +1,8 @@
 import { Drawer, Typography, Input, Card } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { UserChatSearch } from "../../../api/UserApi";
 import { ChatState } from "./context/ChatProvider";
+import { OwnerChatSearch } from "../../../api/PropertyApi";
 import userRequest from '../../../utils/UserMiddleware'
 
 export default function SideDrawer() {
@@ -15,6 +15,7 @@ export default function SideDrawer() {
   const [loadingChat, setLoadingChat] = useState(false);
   const { setChats, user, chats, setSelectedChat } = ChatState();
 
+
   const handleSearch = async () => {
     if (!search) {
       console.log("Please Enter something in search");
@@ -22,7 +23,7 @@ export default function SideDrawer() {
     }
     try {
       setLoading(true);
-      const { data } = await UserChatSearch(search);
+      const { data } = await OwnerChatSearch(search);
       setLoading(false);
       setSearchResult(data);
     } catch (err) {
@@ -30,20 +31,19 @@ export default function SideDrawer() {
     }
   };
 
-  const accessChat = async (ownerId) => {
+  const accessChat = async (userId) => {
     try {
       setLoadingChat(true);
-      const userId = user.id;
+      const ownerId = user.id;
       const { data } = await userRequest.post(`/accesschat`, { ownerId, userId });
+      
       // const { data } = await Accesschat(ownerId, userId);
-      console.log(data);
 
       if (!chats.find((c) => c._id === data._id)) {
         console.log("nothing");
         setChats([data, ...chats]);
       }
-      console.log(data, "data");
-      console.log(chats, "chat");
+
       setSelectedChat(data);
       setLoadingChat(false);
       setOpen(!open);

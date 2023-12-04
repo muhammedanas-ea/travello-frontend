@@ -80,3 +80,33 @@ export async function EditProperty(editData){
     throw new err(err);
   }
 }
+
+
+export async function OwnerMessageSend(content,chatId,userId){
+  try{
+    console.log(chatId,'in api is working')
+    const data = await propertyApi.post('/message',{content,chatId,userId})
+    return data
+  }catch(err){
+    throw new Error(err)
+  }
+}
+
+export async function OwnerChatSearch(search){
+  try{
+    const data = await propertyApi.get(`/ownersearch/${search}`)
+    return data
+  }catch(err){
+    throw new Error(err)
+  }
+}
+
+
+export async function AllChats(userId){
+  try{
+    const data = await propertyApi.get(`/fetchchat/${userId}`)
+    return data
+  }catch(err){
+    throw new Error(err)
+  }
+}

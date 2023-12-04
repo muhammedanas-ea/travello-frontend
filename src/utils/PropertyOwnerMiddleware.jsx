@@ -21,7 +21,8 @@ axiosInterceptorInstanceOwner.interceptors.response.use(
       window.location.href = "/property";
       GenerateError(error.response.data.message);
     } else if (error.response && error.response.status === 404) {
-      window.location.href = "/property/errorpage";
+      console.log(error.response.data.message);
+      // window.location.href = "/property/errorpage";
     } else if (error.response && error.response.status === 401) {
       localStorage.removeItem("propertyToken");
       setTimeout(() => {

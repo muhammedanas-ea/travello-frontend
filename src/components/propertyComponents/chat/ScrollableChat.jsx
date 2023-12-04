@@ -1,22 +1,24 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
+import { Avatar } from "@chakra-ui/avatar";
+import { Tooltip } from "@chakra-ui/tooltip";
 import { ChatState } from "./context/ChatProvider";
-import {
-  isLastMessage,
-  isSameSender,
-  isSameSenderMargin,
-  isSameUser,
+import {   
+    isLastMessage,
+    isSameSender,
+    isSameSenderMargin,
+    isSameUser, 
 } from "./config/ChatLogic";
-import { Avatar, Tooltip } from "@chakra-ui/react";
 
 // eslint-disable-next-line react/prop-types
-function ScrollableChat({ messages }) {
+const ScrollableChat = ({ messages }) => {
   const { user } = ChatState();
   const chatContainerRef = useRef(null);
+  
 
+  // Scroll to the bottom of the container when new messages arrive
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -24,8 +26,8 @@ function ScrollableChat({ messages }) {
     <div
       ref={chatContainerRef}
       style={{
-        maxHeight: "500px",
-        overflowY: "auto",
+        maxHeight: '500px', // Set a maximum height for the scrollable container
+        overflowY: 'auto',
       }}
     >
       {messages &&
@@ -34,21 +36,15 @@ function ScrollableChat({ messages }) {
           <div style={{ display: "flex" }} key={i}>
             {(isSameSender(messages, m, i, user.id) ||
               isLastMessage(messages, i, user.id)) && (
-              <Tooltip
-                label={m.sender.owner.name}
-                placement="bottom-start"
-                hasArrow
-              >
-                {m.sender.owner.displaypicture ? (
+              <Tooltip label={m.sender.name} placement="bottom-start" hasArrow>
+                {m.sender.pic ? (
                   <Avatar
                     mt="7px"
                     mr={1}
                     size="sm"
-                    width={"8"}
-                    height={"8"}
                     cursor="pointer"
                     name={m.sender.name}
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQanlasPgQjfGGU6anray6qKVVH-ZlTqmuTHw&usqp=CAU"
+                    src={m.sender.pic}
                   />
                 ) : (
                   <Avatar
@@ -59,7 +55,7 @@ function ScrollableChat({ messages }) {
                     size="2px"
                     cursor="pointer"
                     name={m.sender.name}
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQanlasPgQjfGGU6anray6qKVVH-ZlTqmuTHw&usqp=CAU"
+                    src='https://www.clipartmax.com/png/small/54-546487_a-little-over-a-month-ago-i-had-lasik-surgery-user-profile.png'
                   />
                 )}
               </Tooltip>
@@ -67,11 +63,11 @@ function ScrollableChat({ messages }) {
             <span
               style={{
                 backgroundColor: `${
-                  m.sender.user
-                    ? m.sender.user.id === user.id
+                  m.sender.owner
+                    ? m.sender.owner._id === user.id
                       ? "#BEE3F8"
                       : "#B9F5D0"
-                    : m.sender.owner?._id === user?.id
+                    : m.sender.user?._id === user.id
                     ? "#BEE3F8"
                     : "#B9F5D0"
                 }`,
@@ -88,6 +84,6 @@ function ScrollableChat({ messages }) {
         ))}
     </div>
   );
-}
+};
 
 export default ScrollableChat;

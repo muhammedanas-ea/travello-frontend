@@ -1,17 +1,18 @@
 import { useEffect } from "react";
-import { AllChats } from "../../../api/UserApi";
+// import { AllChats } from "../../../api/UserApi";
 import { ChatState } from "./context/ChatProvider";
 import { Box, Stack, Text } from "@chakra-ui/react";
 import SideDrawer from "./SideDrawer";
 import "./Style.css";
+import { AllChats } from "../../../api/PropertyApi";
 
 // eslint-disable-next-line react/prop-types
 export default function Mychats({ fetchAgain }) {
   const { setChats, user, selectedChat, chats, setSelectedChat } = ChatState();
-  const userId = user.id;
 
   const fetchChats = async () => {
     try {
+      const userId = user.id;
       const response = await AllChats(userId);
       setChats(response.data);
     } catch (err) {
@@ -84,14 +85,13 @@ export default function Mychats({ fetchAgain }) {
                       className="h-10 w-10 rounded-full me-2 mt-2"
                     />
                     <div>
-                      {console.log(chat.users.owner.name)}
-                      <Text>{chat.users?.owner?.name}</Text>
+                      <Text>{chat.users.user?.name}</Text>
                       {chat.latestMessage && (
                         <Text fontSize="xs">
                           <b>
                             {chat.latestMessage.sender?.owner
-                              ? chat.latestMessage.sender?.owner?.name
-                              : chat.latestMessage.sender?.user?.name}
+                              ? chat.latestMessage.sender.owner?.name
+                              : chat.latestMessage.sender.user?.name}
                           </b>
                           {chat.latestMessage.content.length > 50
                             ? chat.latestMessage.content.substring(0, 51) +
