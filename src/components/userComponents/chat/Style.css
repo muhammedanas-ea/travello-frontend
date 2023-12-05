@@ -5,9 +5,9 @@
     scrollbar-width: none;
   }
   .messages::-webkit-scrollbar {
-    display: none;
+    display: none !important;
   }
 
   .newClass::-webkit-scrollbar {
-    display: none;
+    display: none !important;
   }

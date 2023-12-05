@@ -40,6 +40,16 @@ export const AdminLoginSchema = Yup.object({
   password: Yup.string().min(4).required("Please enter password"),
 });
 
+export const RatingDescriptionSchema = Yup.object({
+  rating: Yup.number()
+    .min(1, "Rating must be at least 1")
+    .max(5, "Rating must be at most 5")
+    .required("Please enter a rating"),
+    description: Yup.string()
+    .max(1000, "Description must be at most 1000 characters")
+    .required("Please enter a description"),
+});
+
 export const PropertySignupSchema = Yup.object({
   name: Yup.string()
     .min(2, "Too Short!")

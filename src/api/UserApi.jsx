@@ -189,3 +189,11 @@ export async function MessageSend(content,chatId,userId){
     throw new Error(err)
   }
 }
+export async function AddReview(value,propertyId){
+  try{
+    const data = await userApi.post('/addreview',value,propertyId)
+    return data
+  }catch(err){
+    throw new Error(err)
+  }
+}

@@ -11,17 +11,17 @@ const ChatProvider = ({ children }) => {
   const [chats, setChats] = useState([]);
   const { ownerInfo } = useSelector((state) => state.owner);
 
-  const initialChatState = {
-    _id: '', 
-    chatName: '', 
-    users: [], 
-    createdAt: '',
-    updatedAt: '', 
-    // Add other properties as needed
-  };
+  // const initialChatState = {
+  //   _id: '', 
+  //   chatName: '', 
+  //   users: [], 
+  //   createdAt: '',
+  //   updatedAt: '', 
+  //   // Add other properties as needed
+  // };
   useEffect(() =>{
     setUser(ownerInfo)
-    setSelectedChat(initialChatState);
+    // setSelectedChat(initialChatState);
   },[])
 
   return (

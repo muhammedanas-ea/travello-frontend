@@ -11,18 +11,18 @@ const ChatProvider = ({ children }) => {
   const [chats, setChats] = useState([]);
   const {userInfo} = useSelector((state) => state.user)
 
-  const initialChatState = {
-    _id: '', 
-    chatName: '', 
-    users: [], 
-    createdAt: '',
-    updatedAt: '', 
-    // Add other properties as needed
-  };
+  // const initialChatState = {
+  //   _id: '', 
+  //   chatName: '', 
+  //   users: [], 
+  //   createdAt: '',
+  //   updatedAt: '', 
+  //   // Add other properties as needed
+  // };
 
   useEffect(() =>{
     setUser(userInfo)
-    setSelectedChat(initialChatState);
+    // setSelectedChat(initialChatState);
   },[])
 
   return (

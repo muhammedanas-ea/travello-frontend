@@ -11,7 +11,7 @@ function ChatList() {
  
   return (
     <div className="p-4 sm:ml-64">
-      <div className="p-4 rounded-lg dark:border-gray-700 mt-16">
+      <div className="rounded-lg dark:border-gray-700 mt-16">
         <div className="w-full grid grid-cols-1  sm:rounded-lg">
         <div style={{ width: "100%" }}>
           <Box

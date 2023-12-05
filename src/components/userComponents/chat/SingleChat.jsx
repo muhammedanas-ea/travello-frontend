@@ -10,6 +10,7 @@ import { MessageSend } from "../../../api/UserApi";
 import userRequest from '../../../utils/UserMiddleware';
 var socket, selectedChatCompare;
 const ENDPOINT = import.meta.env.VITE_BACKENDURL;
+import './Style.css'
 
 // eslint-disable-next-line react/prop-types
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {

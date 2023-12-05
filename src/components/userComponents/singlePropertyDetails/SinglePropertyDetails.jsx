@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
+  Rating,
   Tab,
   TabPanel,
   Tabs,
@@ -13,14 +14,25 @@ import { MdOutlinePets } from "react-icons/md";
 import { FaBath, FaSwimmingPool, FaWifi } from "react-icons/fa";
 import SingleProperty from "../singleProperty/SingleProperty";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BookingDetails, UserSingleProperty } from "../../../api/UserApi";
+import {
+  AddReview,
+  BookingDetails,
+  UserSingleProperty,
+} from "../../../api/UserApi";
 import DatePicker from "react-datepicker";
-import { GenerateError } from "../../../toast/Toast";
+import { GenerateError, GenerateSuccess } from "../../../toast/Toast";
+import { Textarea } from "@chakra-ui/react";
+import { useFormik } from "formik";
+import { RatingDescriptionSchema } from "../../../yup/validation";
+import './SinglePropertyDetails.css'
 
 function SinglePropertyDetails() {
   const { state } = useLocation();
   const { _id } = state;
   const [siglePropertyData, setSinglePropertyData] = useState([]);
+  const [fetchAgain,setFetchAgain] = useState()
+  console.log(siglePropertyData, "is djjj");
+
   const {
     PropertyName,
     RoomCount,
@@ -39,13 +51,14 @@ function SinglePropertyDetails() {
         const response = await UserSingleProperty(_id);
         if (response.data.status) {
           setSinglePropertyData(response.data.propertyData);
+          setFetchAgain(false)
         }
       } catch (err) {
         console.log(err);
       }
     };
     showSinglePropertyData();
-  }, [_id]);
+  }, [_id,fetchAgain]);
 
   const predefinedAmenities = [
     {
@@ -86,6 +99,10 @@ function SinglePropertyDetails() {
       label: "Reviews",
       value: 3,
     },
+    {
+      label: "Add Reviews",
+      value: 4,
+    },
   ];
 
   const [activeTab, setActiveTab] = React.useState(1);
@@ -94,6 +111,7 @@ function SinglePropertyDetails() {
   const [isOpen, setIsOpen] = useState(false);
   const [increment, setIncrement] = useState(1);
   const [roomCount, setRoomCount] = useState(1);
+  
   const navigate = useNavigate();
   let differenceInDays = 0;
   if (startDate && endDate) {
@@ -131,7 +149,7 @@ function SinglePropertyDetails() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleDetailsSubmit = async (e) => {
     e.preventDefault();
     if (startDate === null) {
       return GenerateError("select a start check in date");
@@ -154,6 +172,37 @@ function SinglePropertyDetails() {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const initialValues = {
+    rating: null,
+    description: "",
+  };
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: RatingDescriptionSchema,
+      onSubmit: async (values, { resetForm }) => {
+        try {
+          const response = await AddReview({ values, _id });
+          if (response) {
+            GenerateSuccess(response.data.message);
+            setFetchAgain(true)
+            resetForm();
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    });
+
+  const handleRatingChange = (newValue) => {
+    handleChange({
+      target: {
+        name: "rating",
+        value: newValue,
+      },
+    });
   };
 
   return (
@@ -246,13 +295,45 @@ function SinglePropertyDetails() {
                             })}
                           </div>
                         </div>
-                        <div className="mb-3">
+                        <div className="newClass h-[300px] overflow-y-scroll mb-3">
                           <Typography
                             variant="h3"
                             className="py-5 cursor-pointer  text-gray-800 sm:text-xl sm:font-extralight"
                           >
                             Reviews
                           </Typography>
+                          <div>
+                          {siglePropertyData?.Ratings?.map((item, index) => {
+                            return (
+                              <article className="pb-3" key={index}>
+                                <div className="flex items-center mb-4">
+                                  <img
+                                    className="w-10 h-10 me-4 rounded-full"
+                                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                                    alt=""
+                                  />
+                                  <div className="font-medium dark:text-white">
+                                    <p>
+                                      {item.Users?.name}
+                                      <time
+                                        dateTime="2014-08-16 19:00"
+                                        className="block text-sm text-gray-500 dark:text-gray-400"
+                                      >
+                                         {item.Users?.email}
+                                      </time>
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
+                                  <Rating value={item?.ReviewRating} readonly />
+                                </div>
+                                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                                 {item?.ReviewDescription}
+                                </p>
+                              </article>
+                            );
+                          })}
+                        </div>
                         </div>
                       </div>
                     ) : activeTab === 2 ? (
@@ -282,7 +363,105 @@ function SinglePropertyDetails() {
                         </div>
                       </div>
                     ) : activeTab === 3 ? (
-                      <div>wwwwwwwwwwww</div>
+                      <div className="newClass h-[400px] overflow-y-scroll">
+                        <Typography
+                          variant="h3"
+                          className="py-5 cursor-pointer  text-gray-800 sm:text-xl sm:font-extralight"
+                        >
+                          Reviews
+                        </Typography>
+                        <div>
+                          {siglePropertyData?.Ratings?.map((item, index) => {
+                            return (
+                              <article className="pb-3" key={index}>
+                                <div className="flex items-center mb-4">
+                                  <img
+                                    className="w-10 h-10 me-4 rounded-full"
+                                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                                    alt=""
+                                  />
+                                  <div className="font-medium dark:text-white">
+                                    <p>
+                                      {item.Users?.name}
+                                      <time
+                                        dateTime="2014-08-16 19:00"
+                                        className="block text-sm text-gray-500 dark:text-gray-400"
+                                      >
+                                         {item.Users?.email}
+                                      </time>
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
+                                  <Rating value={item.ReviewRating} readonly />
+                                </div>
+                                <p className="mb-2 text-gray-500 dark:text-gray-400">
+                                 {item?.ReviewDescription}
+                                </p>
+                              </article>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ) : activeTab === 4 ? (
+                      <div className="mb-3">
+                        <Typography
+                          variant="h3"
+                          className="py-5 cursor-pointer  text-gray-800 sm:text-xl sm:font-extralight"
+                        >
+                          Add Reviews
+                        </Typography>
+                        <div>
+                          <form onSubmit={handleSubmit} action="">
+                            <div className="mb-3">
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="mb-2 font-medium"
+                              >
+                                Review Rating
+                              </Typography>
+                              <Rating
+                                value={values.rating}
+                                onChange={(newValue) =>
+                                  handleRatingChange(newValue)
+                                }
+                                onBlur={handleBlur}
+                              />
+                              {touched.rating && errors.rating && (
+                                <p className="pt-2 text-xs italic text-red-500">
+                                  {errors.rating}
+                                </p>
+                              )}
+                            </div>
+                            <div>
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="mb-2 font-medium"
+                              >
+                                Review Description
+                              </Typography>
+
+                              <Textarea
+                                name="description"
+                                value={values.description}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className="w-full rounded-md h-[80px] border  border-gray-700"
+                              />
+                              {touched.description && errors.description && (
+                                <p className="pt-2 text-xs italic text-red-500">
+                                  {errors.description}
+                                </p>
+                              )}
+                            </div>
+                            <div className="flex justify-end mt-3">
+                              <Button type="submit">Add Review</Button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     ) : (
                       <div>{Description}</div>
                     )}
@@ -293,7 +472,7 @@ function SinglePropertyDetails() {
           </div>
         </div>
         <div className="col-span-2 row-span-5 col-start-4">
-          <form onSubmit={handleSubmit} action="">
+          <form onSubmit={handleDetailsSubmit} action="">
             <div className="h-[360px] bg-[#EDE3E3] px-5 py-5 shadow-lg rounded-md">
               <div className=" flex gap-3 items-center mt-2 mb-8">
                 <h5 className="ont-san text-2xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
