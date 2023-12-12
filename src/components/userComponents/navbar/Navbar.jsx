@@ -25,6 +25,7 @@ import { GenerateSuccess } from "../../../toast/Toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
 
+
 // profile menu component
 const profileMenuItems = [
   {
@@ -176,9 +177,17 @@ export default function Header() {
           <Link to="/home">
             <Logo />
           </Link>
-          <div className="flex items-center gap-7">
+          <div className="flex items-center gap-5">
             {localStorage.getItem("userToken") ? (
               <>
+               <Button
+                  className="border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20"
+                  size="sm"
+                  variant="text"
+                  onClick={() => navigate("/chat")}
+                >
+                  chats
+                </Button>
                 <span>{userInfo.name}</span>
                 <ProfileMenu />
               </>

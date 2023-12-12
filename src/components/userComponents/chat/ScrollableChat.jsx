@@ -28,6 +28,7 @@ function ScrollableChat({ messages }) {
         overflowY: "auto",
       }}
     >
+      {console.log(user.id,'isssss')}
       {messages &&
         // eslint-disable-next-line react/prop-types
         messages.map((m, i) => (
@@ -39,41 +40,28 @@ function ScrollableChat({ messages }) {
                 placement="bottom-start"
                 hasArrow
               >
-                {m.sender.owner.displaypicture ? (
-                  <Avatar
-                    mt="7px"
-                    mr={1}
-                    size="sm"
-                    width={"8"}
-                    height={"8"}
-                    cursor="pointer"
-                    name={m.sender.name}
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQanlasPgQjfGGU6anray6qKVVH-ZlTqmuTHw&usqp=CAU"
-                  />
-                ) : (
-                  <Avatar
-                    mt="7px"
-                    mr={1}
-                    width={"8"}
-                    height={"8"}
-                    size="2px"
-                    cursor="pointer"
-                    name={m.sender.name}
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQanlasPgQjfGGU6anray6qKVVH-ZlTqmuTHw&usqp=CAU"
-                  />
-                )}
+                <Avatar
+                  mt="7px"
+                  mr={1}
+                  size="sm"
+                  width={"8"}
+                  height={"8"}
+                  cursor="pointer"
+                  name={m.sender.name}
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQanlasPgQjfGGU6anray6qKVVH-ZlTqmuTHw&usqp=CAU"
+                />
               </Tooltip>
             )}
             <span
               style={{
                 backgroundColor: `${
                   m.sender.user
-                    ? m.sender.user.id === user.id
+                    ? m.sender.user?._id === user.id
                       ? "#BEE3F8"
-                      : "#B9F5D0"
-                    : m.sender.owner?._id === user?.id
+                      : "#8eebb3"
+                    : m.sender.owner?._id === user.id
                     ? "#BEE3F8"
-                    : "#B9F5D0"
+                    : "#8eebb3"
                 }`,
                 marginLeft: isSameSenderMargin(messages, m, i, user.id),
                 marginTop: isSameUser(messages, m, i, user.id) ? 3 : 10,

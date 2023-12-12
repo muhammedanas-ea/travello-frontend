@@ -31,7 +31,7 @@ function SinglePropertyDetails() {
   const { _id } = state;
   const [siglePropertyData, setSinglePropertyData] = useState([]);
   const [fetchAgain,setFetchAgain] = useState()
-  console.log(siglePropertyData, "is djjj");
+  const [reviewCheck,setReviwCheck] = useState()
 
   const {
     PropertyName,
@@ -49,7 +49,9 @@ function SinglePropertyDetails() {
     const showSinglePropertyData = async () => {
       try {
         const response = await UserSingleProperty(_id);
+        console.log(response,'in the admin');
         if (response.data.status) {
+          setReviwCheck(response.data.bookingCheck)
           setSinglePropertyData(response.data.propertyData);
           setFetchAgain(false)
         }
@@ -82,7 +84,7 @@ function SinglePropertyDetails() {
   const matchingAmenities =
     Amenities && Array.isArray(Amenities)
       ? predefinedAmenities.filter((predefinedAmenity) =>
-          Amenities.includes(predefinedAmenity.content.toLowerCase())
+          Amenities.includes(predefinedAmenity.content)
         )
       : [];
 
@@ -250,7 +252,7 @@ function SinglePropertyDetails() {
                     onClick={() => setActiveTab(value)}
                     className={activeTab === value ? "text-gray-900" : ""}
                   >
-                    {label}
+                    {label === 'Add Reviews' ? reviewCheck?.length > 0 ? label :null  : label }
                   </Tab>
                 ))}
               </TabsHeader>
@@ -295,7 +297,7 @@ function SinglePropertyDetails() {
                             })}
                           </div>
                         </div>
-                        <div className="newClass h-[300px] overflow-y-scroll mb-3">
+                        <div className={ `${siglePropertyData?.Ratings?.length > 0 ? "newClass h-[300px] overflow-y-scroll": "" } mb-3`}>
                           <Typography
                             variant="h3"
                             className="py-5 cursor-pointer  text-gray-800 sm:text-xl sm:font-extralight"
@@ -363,7 +365,7 @@ function SinglePropertyDetails() {
                         </div>
                       </div>
                     ) : activeTab === 3 ? (
-                      <div className="newClass h-[400px] overflow-y-scroll">
+                      <div className={siglePropertyData?.Ratings?.length > 0 ? `newClass h-[300px] overflow-y-scroll` : ''}>
                         <Typography
                           variant="h3"
                           className="py-5 cursor-pointer  text-gray-800 sm:text-xl sm:font-extralight"
@@ -403,7 +405,7 @@ function SinglePropertyDetails() {
                           })}
                         </div>
                       </div>
-                    ) : activeTab === 4 ? (
+                    ) : activeTab === 4 && reviewCheck?.length > 0 ? (
                       <div className="mb-3">
                         <Typography
                           variant="h3"

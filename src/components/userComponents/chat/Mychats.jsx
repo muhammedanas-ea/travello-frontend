@@ -57,7 +57,6 @@ export default function Mychats({ fetchAgain }) {
       <Box
         display="flex"
         flexDir="column"
-        // p={3}
         bg="#ededed"
         w="100%"
         h="100%"
@@ -76,7 +75,6 @@ export default function Mychats({ fetchAgain }) {
                   color={selectedChat === chat ? "white" : "black"}
                   px={2}
                   py={2}
-                  // borderRadius="md"
                 >
                   <Box display="flex" alignItems="center" gap="2">
                     <img
@@ -84,15 +82,9 @@ export default function Mychats({ fetchAgain }) {
                       className="h-10 w-10 rounded-full me-2 mt-2"
                     />
                     <div>
-                      {console.log(chat.users.owner.name)}
                       <Text>{chat.users?.owner?.name}</Text>
                       {chat.latestMessage && (
                         <Text fontSize="xs">
-                          <b>
-                            {chat.latestMessage.sender?.owner
-                              ? chat.latestMessage.sender?.owner?.name
-                              : chat.latestMessage.sender?.user?.name}
-                          </b>
                           {chat.latestMessage.content.length > 50
                             ? chat.latestMessage.content.substring(0, 51) +
                               "..."

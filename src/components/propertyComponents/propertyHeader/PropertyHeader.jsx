@@ -116,7 +116,7 @@ function ProfileMenu() {
 export default function Header() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const { ownerInfo } = useSelector((state) => state.owner);
-
+  const navigate = useNavigate()
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
@@ -150,6 +150,14 @@ export default function Header() {
             </div>
             <div className="flex items-center">
               <div className="flex items-center gap-5 ml-3">
+              <Button
+                  className="border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20"
+                  size="sm"
+                  variant="text"
+                  onClick={() => navigate("/property/chat")}
+                >
+                  chats
+                </Button>
                 <span>{ownerInfo.name}</span>
                 <ProfileMenu />
               </div>

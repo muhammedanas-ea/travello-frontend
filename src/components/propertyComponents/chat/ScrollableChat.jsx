@@ -37,16 +37,6 @@ const ScrollableChat = ({ messages }) => {
             {(isSameSender(messages, m, i, user.id) ||
               isLastMessage(messages, i, user.id)) && (
               <Tooltip label={m.sender.name} placement="bottom-start" hasArrow>
-                {m.sender.pic ? (
-                  <Avatar
-                    mt="7px"
-                    mr={1}
-                    size="sm"
-                    cursor="pointer"
-                    name={m.sender.name}
-                    src={m.sender.pic}
-                  />
-                ) : (
                   <Avatar
                     mt="7px"
                     mr={1}
@@ -57,7 +47,6 @@ const ScrollableChat = ({ messages }) => {
                     name={m.sender.name}
                     src='https://www.clipartmax.com/png/small/54-546487_a-little-over-a-month-ago-i-had-lasik-surgery-user-profile.png'
                   />
-                )}
               </Tooltip>
             )}
             <span
@@ -66,10 +55,10 @@ const ScrollableChat = ({ messages }) => {
                   m.sender.owner
                     ? m.sender.owner._id === user.id
                       ? "#BEE3F8"
-                      : "#B9F5D0"
-                    : m.sender.user?._id === user.id
+                      : "#8eebb3"
+                    : m.sender.user._id === user.id
                     ? "#BEE3F8"
-                    : "#B9F5D0"
+                    : "#8eebb3"
                 }`,
                 marginLeft: isSameSenderMargin(messages, m, i, user.id),
                 marginTop: isSameUser(messages, m, i, user.id) ? 3 : 10,

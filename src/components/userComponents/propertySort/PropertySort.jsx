@@ -1,20 +1,19 @@
 import { useState } from "react";
 import PropertyList from "../propertyList/PropertyList";
 import Select from "react-select";
+import Slider from "react-slider";
+import "./PropertySort.css";
 
 // eslint-disable-next-line react/prop-types
 export default function PropertySort({ search }) {
+  const min = 1000,
+    max = 100000;
   const [sortData, setSortData] = useState();
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [priceFilter, setPiceFilter] = useState(1000);
+  const [priceFilter, setPiceFilter] = useState([min, max]);
 
   const handleChange = (e) => {
     setSortData(e);
-  };
-
-  const priceHandleChange = (e) => {
-    console.log(e, "in price range");
-    setPiceFilter(e);
   };
 
   const options = [
@@ -39,22 +38,20 @@ export default function PropertySort({ search }) {
         <div className="w-full md:w-1/3">
           <div className="relative mb-6">
             <div>
-              <div className="mb-2">Price Range: ₹{priceFilter}</div>
-              <input
-                id="labels-range-input"
-                type="range"
-                onChange={(e) => priceHandleChange(e.target.value)}
-                defaultValue={priceFilter}
-                min={1000}
-                max={100000}
-                className="w-full h-2 bg-gray-600 rounded-sm  appearance-none cursor-pointer"
+              <div className="mb-2">
+                {" "}
+                Price Range: ₹{priceFilter[0]} - ₹{priceFilter[1]}
+              </div>
+              <Slider
+                className="slider"
+                onChange={setPiceFilter}
+                value={priceFilter}
+                min={min}
+                max={max}
               />
             </div>
             <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">
               Min : ₹1000
-            </span>
-            <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-1/2 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">
-              ₹50000
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">
               Max : ₹100000

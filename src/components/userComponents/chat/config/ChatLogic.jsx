@@ -1,5 +1,4 @@
 export const isLastMessage = (messages, i, userId) => {
-  console.log(messages, "is isLastMessage function in user");
   const lastSenderId =
     messages[messages.length - 1].sender.owner &&
     messages[messages.length - 1].sender.owner._id
@@ -65,14 +64,14 @@ export const isSameUser = (messages, m, i) => {
         : m.sender.owner?._id;
     const previousSenderId =
       messages[i - 1].sender.user && messages[i - 1].sender.user._id
-        ? messages[i - 1].sender.user?._id
+        ? messages[i - 1].sender.user._id
         : messages[i - 1].sender.owner?._id;
     return i > 0 && currentSenderId === previousSenderId;
   }
 };
 
 export const getSender = (loggedUser, users) => {
-  return users[0]?._id === loggedUser?._id ? users[1].name : users[0].name;
+  return users[0]?._id === loggedUser._id ? users[1].name : users[0].name;
 };
 
 export const getSenderFull = (loggedUser, users) => {

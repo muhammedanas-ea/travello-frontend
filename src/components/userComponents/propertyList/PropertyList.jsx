@@ -15,6 +15,7 @@ export default function PropertyList({ sort, aminitesSort, search,priceFilter })
   const [active, setActive] = React.useState(1);
   const [totalPage, setTotalpage] = useState();
 
+
   useEffect(() => {
     const showPropertyData = async () => {
       try {

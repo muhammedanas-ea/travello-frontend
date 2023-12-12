@@ -15,7 +15,6 @@ import './Style.css'
 // eslint-disable-next-line react/prop-types
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
-
   const [loading, setLoading] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const [newMessage, setNewMessage] = useState("");
@@ -47,7 +46,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         setNewMessage("");
         const userId = user.id;
         const { data } = await MessageSend(newMessage, selectedChat, userId);
-
         socket.emit("new message", data);
         setMessages([...messages, data]);
       } catch (error) {
@@ -66,7 +64,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     fetchMessages();
-    selectedChatCompare = selectedChat;
+    selectedChatCompare = selectedChat; 
   }, [selectedChat]);
 
   useEffect(() => {
@@ -77,10 +75,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       if (
         !selectedChatCompare || // If chat is not selected or doesn't match the current chat
         selectedChatCompare._id !== newMessageReceived.chat._id
-      ) {
-        if (!notification.includes(newMessageReceived)) {
-          setNotification([newMessageReceived, ...notification]);
-          setFetchAgain(!fetchAgain);
+        ) {
+          if (!notification.includes(newMessageReceived)) {
+            setFetchAgain(!fetchAgain);
+            setNotification([newMessageReceived, ...notification]);
         }
       } else {
         // Update the messages state to include the new message while preserving previous messages
@@ -90,6 +88,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
     // Register the event listener
     socket.on("message received", handleNewMessageReceived);
+    console.log("message received", handleNewMessageReceived);
 
     // Cleanup: Remove the event listener when the component unmounts
     return () => {
@@ -149,7 +148,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               className="h-10 w-10 rounded-full me-2 mt-2"
             />
 
-            {selectedChat.users?.owner && selectedChat.users.owner?.name}
+            {selectedChat.users.owner && selectedChat.users.owner.name}
           </Text>
           <Box
             display="flex"

@@ -15,7 +15,6 @@ const ENDPOINT = import.meta.env.VITE_BACKENDURL;
 // eslint-disable-next-line react/prop-types
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
-
   const [loading, setLoading] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const [newMessage, setNewMessage] = useState("");
@@ -30,8 +29,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     try {
       setLoading(true);
       const chatId = selectedChat._id;
+
       const data = await userRequest.get(`/message/${chatId}`);
-      // const data = await MessageData(chatId);
       setMessages(data.data);
       setLoading(false);
 
@@ -126,7 +125,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const isMessageSender = (currentUser, selectedChat) => {
     return (
-      selectedChat.sender && currentUser.owner._id === selectedChat.sender._id
+      selectedChat.sender && currentUser.owner.id === selectedChat.sender.id
     );
   };
   return (

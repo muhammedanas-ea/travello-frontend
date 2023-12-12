@@ -84,7 +84,6 @@ export async function EditProperty(editData){
 
 export async function OwnerMessageSend(content,chatId,userId){
   try{
-    console.log(chatId,'in api is working')
     const data = await propertyApi.post('/message',{content,chatId,userId})
     return data
   }catch(err){

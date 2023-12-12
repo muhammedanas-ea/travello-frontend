@@ -50,7 +50,6 @@ export const isSameSender = (messages, m, i, userId) => {
 };
   
   export const isLastMessage = (messages, i, userId) => {
-    console.log(messages,'is isLastMessage function');
     const lastSenderId =
       messages[messages.length - 1].sender.owner &&
       messages[messages.length - 1].sender.owner._id
@@ -69,7 +68,7 @@ export const isSameSender = (messages, m, i, userId) => {
         : m.sender.user?._id;
     const previousSenderId =
       messages[i-1].sender.owner && messages[i-1].sender.owner._id
-        ? messages[i-1].sender.owner?._id
+        ? messages[i-1].sender.owner._id
         : messages[i-1].sender.user?._id;
   
     return i > 0 && currentSenderId === previousSenderId;
