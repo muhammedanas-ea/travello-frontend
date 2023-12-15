@@ -48,8 +48,7 @@ function SinglePropertyDetails() {
   useEffect(() => {
     const showSinglePropertyData = async () => {
       try {
-        const response = await UserSingleProperty(_id);
-        console.log(response,'in the admin');
+        const response = await UserSingleProperty(_id)
         if (response.data.status) {
           setReviwCheck(response.data.bookingCheck)
           setSinglePropertyData(response.data.propertyData);

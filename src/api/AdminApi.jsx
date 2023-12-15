@@ -99,3 +99,12 @@ export async function AdminApprove(verify, id) {
     console.log(err);
   }
 }
+
+ export async function DashboardData(){
+  try{
+    const data = await adminApi.get('/dashboard')
+    return data
+  }catch(err){
+    console.log(err)
+  }
+}
