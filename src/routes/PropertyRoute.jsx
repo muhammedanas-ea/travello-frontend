@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import PropertySignupPage from "../pages/propertyPages/PropertySignupPage";
 import OtpVerificationPage from "../pages/propertyPages/OtpVerificationPage";
 import DashboardPage from "../pages/propertyPages/DashboardPage";
-import PropertyLoginpage from "../pages/propertyPages/PropertyLoginpage";
+import PropertyLoginpage from "../pages/propertyPages/PropertyLoginPage";
 import PropertyLayout from "../layout/propertyLayout/PropertyLayout";
 import PropertyProtected from "../protected/PropertyProtected";
 import PropertyPublic from "../protected/PropertyPublic";
