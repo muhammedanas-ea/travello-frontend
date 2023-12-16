@@ -1,36 +1,40 @@
 import { AgChartsReact } from "ag-charts-react";
-import { useEffect, useState } from "react";
-import { DashboardData } from "../../../api/AdminApi";
-import moment from "moment";
+import {  useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { DashboardData } from "../../../api/PropertyApi";
+
+// import moment from "moment";
 
 export default function Dashboard() {
   const [dashboardData, setDashboardData] = useState();
+  const { ownerInfo } = useSelector((state) => state.owner);
+  const proprtyId = ownerInfo.id
 
   const fetchDashboardData = async () => {
     try {
-      const response = await DashboardData();
+      const response = await DashboardData(proprtyId);
       if (response) {
         setDashboardData(response.data);
-        setOptions((prevOptions) => ({
-          ...prevOptions,
-          data: [
-            {
-              year: moment(response.data.firstDate).format("MMM"),
-              avgTemp: 2.3,
-              propertyBookings: response.data.newYearTotalSales,
-            },
-            {
-              year: moment(response.data.startDate).format("MMM"),
-              avgTemp: 6.3,
-              propertyBookings: response.data.secondYearTotalSales,
-            },
-            {
-              year: moment(response.data.thirdDate).format("MMM"),
-              avgTemp: 16.2,
-              propertyBookings: response.data.thirdYearTotalSales,
-            },
-          ],
-        }));
+        // setOptions((prevOptions) => ({
+        //   ...prevOptions,
+        //   data: [
+        //     {
+        //       year: moment(response.data.firstDate).format("MMM"),
+        //       avgTemp: 2.3,
+        //       propertyBookings: response.data.newYearTotalSales,
+        //     },
+        //     {
+        //       year: moment(response.data.startDate).format("MMM"),
+        //       avgTemp: 6.3,
+        //       propertyBookings: response.data.secondYearTotalSales,
+        //     },
+        //     {
+        //       year: moment(response.data.thirdDate).format("MMM"),
+        //       avgTemp: 16.2,
+        //       propertyBookings: response.data.thirdYearTotalSales,
+        //     },
+        //   ],
+        // }));
       }
       console.log(response);
     } catch (err) {
@@ -40,7 +44,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchDashboardData();
-  }, []);
+  }, [proprtyId]);
 
   const [options, setOptions] = useState({
     data: [],
@@ -82,10 +86,10 @@ export default function Dashboard() {
             </div>
             <div>
               <h1 className="font-bold text-lg text-gray-600">
-                {dashboardData && dashboardData.totalUser}
+                {/* {dashboardData && dashboardData.totalUser} */}
               </h1>
               <h1 className="uppercase font-bold mt-2 text-gray-800">
-                total user
+                total booking user
               </h1>
             </div>
           </div>
@@ -108,10 +112,10 @@ export default function Dashboard() {
             </div>
             <div>
               <h1 className="font-bold text-lg text-gray-600">
-                {dashboardData && dashboardData.totalProperty}
+                {dashboardData && dashboardData.bookings}
               </h1>
               <h1 className="uppercase font-bold mt-2 text-gray-800">
-                total property
+                total bookings
               </h1>
             </div>
           </div>
@@ -134,7 +138,7 @@ export default function Dashboard() {
             </div>
             <div>
               <h1 className="font-bold text-lg text-gray-600">
-                {dashboardData && dashboardData.totalPrice}
+                {dashboardData && dashboardData.totalSales}
               </h1>
               <h1 className="uppercase font-bold mt-2 text-gray-800">
                 total sales
@@ -149,3 +153,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

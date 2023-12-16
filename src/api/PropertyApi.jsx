@@ -109,3 +109,13 @@ export async function AllChats(userId){
     throw new Error(err)
   }
 }
+
+export async function DashboardData(proprtyId){
+  try{
+    console.log(proprtyId);
+    const data = await propertyApi.get(`/dashboard/${proprtyId}`)
+    return data
+  }catch(err){
+    console.log(err)
+  }
+}

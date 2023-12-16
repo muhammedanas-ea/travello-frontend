@@ -1,10 +1,9 @@
-// import Header from "../../components/propertyComponents/header/Header";
+import Dashboard from "../../components/propertyComponents/dashboard/Dashboard";
 
 export default function DashboardPage() {
   return (
     <>
-   
+      <Dashboard />
     </>
   );
 }
-
