@@ -1,7 +1,7 @@
 import { Button, Chip, IconButton, Input } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { UserDetails } from "../../../api/AdminApi";
-import DialogBox from "../dialogBox/dialogBox";
+import DialogBox from "../dialogBox/DialogBox";
 import { UserUnblock } from "../../../api/AdminApi";
 import {
   ArrowLeftIcon,
