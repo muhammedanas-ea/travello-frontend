@@ -1,4 +1,4 @@
-import ViewDetails from "../../components/adminComponents/viewDetails/viewDetails";
+import ViewDetails from "../../components/adminComponents/viewDetails/ViewDetails";
 
 export default function ViewDetailPage() {
   return (
