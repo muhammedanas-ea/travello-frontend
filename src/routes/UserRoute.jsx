@@ -13,7 +13,7 @@ import PropertyListPage from "../pages/userPages/PropertyListPage";
 import SinglePropertyPage from "../pages/userPages/SinglePropertyPage";
 import UserProfilePage from "../pages/userPages/UserProfilePage";
 import BookingPage from "../pages/userPages/BookingPage";
-import SuccessPage from "../pages/userPages/successPage";
+import SuccessPage from "../pages/userPages/SuccessPage";
 import BookigSummeryPage from "../pages/userPages/BookigSummeryPage";
 import ErrorPage from "../pages/userPages/ErrorPage";
 import BookingDetailsPage from "../pages/userPages/BookingDetailsPage";
