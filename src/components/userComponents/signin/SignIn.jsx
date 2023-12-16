@@ -4,7 +4,7 @@ import { UserLogin } from "../../../api/UserApi";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../redux/userSlice/UserSlice";
-import GoogleSignin from "../googleAuth/googleSigin";
+import GoogleSignin from "../googleAuth/GoogleSigin";
 import { useFormik } from "formik";
 import { LoginSchema } from "../../../yup/validation";
 
