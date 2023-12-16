@@ -1,6 +1,6 @@
 import { Button, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MangeWalletPayment, PaymentDetails } from "../../../api/UserApi";
 import { CheckOutForm } from "../checkOutForm/CheckOutForm";
 import { Elements } from "@stripe/react-stripe-js";
@@ -17,7 +17,7 @@ export default function BookingSection() {
   const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(false);
   const [paymentMethode, setPaymentMethode] = useState("");
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const showBookingData = async () => {
@@ -50,10 +50,9 @@ export default function BookingSection() {
   const handleWalletPayment = async (bookingId) => {
     try {
       const response = await MangeWalletPayment(bookingId);
-      console.log(response);
-      // if(response.data.status){
-      //   navigate('/success')
-      // }
+      if(response.data.status){
+        navigate('/success')
+      }
     } catch (err) {
       console.log(err);
     }

@@ -13,7 +13,7 @@ import PropertyListPage from "../pages/userPages/PropertyListPage";
 import SinglePropertyPage from "../pages/userPages/SinglePropertyPage";
 import UserProfilePage from "../pages/userPages/UserProfilePage";
 import BookingPage from "../pages/userPages/BookingPage";
-// import SuccessPage from "../pages/userPages/successPage";
+import SuccessPage from "../pages/userPages/successPage";
 import BookigSummeryPage from "../pages/userPages/BookigSummeryPage";
 import ErrorPage from "../pages/userPages/ErrorPage";
 import BookingDetailsPage from "../pages/userPages/BookingDetailsPage";
@@ -35,7 +35,7 @@ export default function UserRoute() {
         <Route path='/userprofile' element={<UserProtect><UserProfilePage/></UserProtect>} />
         <Route path='/singleproperty' element={<UserProtect><SinglePropertyPage/></UserProtect>} />
         <Route path='/booking' element={<UserProtect><BookingPage/></UserProtect>} />
-        {/* <Route path='/success' element={<UserProtect><SuccessPage/></UserProtect>} /> */}
+        <Route path='/success' element={<UserProtect><SuccessPage/></UserProtect>} />
         <Route path='/bookingsummery' element={<UserProtect><BookigSummeryPage/></UserProtect>} />
         <Route path='/bookingdetails' element={<UserProtect><BookingDetailsPage/></UserProtect>} />
         <Route path="/login" element={<UserPublic><SignInPage /></UserPublic>} />
