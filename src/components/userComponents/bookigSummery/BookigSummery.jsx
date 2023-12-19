@@ -77,7 +77,7 @@ export default function BookigSummery() {
                           <img
                             className="object-fill w-full rounded-t-lg h-[8rem] md:w-36 md:rounded-none md:rounded-l-lg"
                             src={
-                              Image
+                              item.PropertyId.Image
                                 ? `${import.meta.env.VITE_USER_URL}/files/${item.PropertyId.Image[0]}`
                                 : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                             }
