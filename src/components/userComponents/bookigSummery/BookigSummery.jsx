@@ -66,7 +66,7 @@ export default function BookigSummery() {
               </Typography>
               <hr className="border-1 border-gray-400" />
               <div className="contai-section">
-                {data.map((item, index) => {
+                {data && data.map((item, index) => {
                   return (
                     <div
                       key={index}
@@ -78,7 +78,7 @@ export default function BookigSummery() {
                             className="object-fill w-full rounded-t-lg h-[8rem] md:w-36 md:rounded-none md:rounded-l-lg"
                             src={
                               Image
-                                ? `${import.meta.env.VITE_USER_URL}/files/${item?.PropertyId.Image[0]}`
+                                ? `${import.meta.env.VITE_USER_URL}/files/${item.PropertyId.Image[0]}`
                                 : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                             }
                             alt=""
