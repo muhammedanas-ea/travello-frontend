@@ -107,9 +107,10 @@ export default function BookingDetails() {
                 <div className="md:col-span-1">
                   <img
                     className="object-fill w-full h-[13rem] rounded-lg"
+                   
                     src={
                       Image
-                        ? `/images/${bookingData.PropertyId.Image[0]}`
+                        ? `${import.meta.env.VITE_USER_URL}/files/${bookingData.PropertyId.Image[0]}`
                         : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                     }
                     alt=""

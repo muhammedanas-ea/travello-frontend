@@ -102,7 +102,7 @@ export default function PropertyList({ sort, aminitesSort, search,priceFilter })
                     className="object-fill h-[210px] w-full rounded-t-md"
                     src={
                       Image
-                        ? `/images/${Image[0]}`
+                        ? `${import.meta.env.VITE_USER_URL}/files/${Image[0]}`
                         : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                     }
                     alt=""

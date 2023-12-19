@@ -137,7 +137,7 @@ export default function PropertyList() {
                               className="w-24 h-24 rounded-md object-cover"
                               src={
                                 Image
-                                  ? `/images/${Image[0]}`
+                                  ? `${import.meta.env.VITE_USER_URL}/files/${Image[0]}`
                                   : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                               }
                             />
