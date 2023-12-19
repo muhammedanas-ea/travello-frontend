@@ -77,12 +77,13 @@ export default function BookigSummery() {
                           <img
                             className="object-fill w-full rounded-t-lg h-[8rem] md:w-36 md:rounded-none md:rounded-l-lg"
                             src={
-                              item.PropertyId.Image
-                                ? `${import.meta.env.VITE_USER_URL}/files/${item.PropertyId?.Image[0]}`
+                              item.PropertyId?.Image
+                                ? `${import.meta.env.VITE_USER_URL}/files/${item.PropertyId.Image[0]}`
                                 : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                             }
                             alt=""
                           />
+                         { console.log(item.PropertyId.Image)}
                           <div className="p-3 leading-normal">
                             <h6 className="font-san mb-5 text-xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
                               Booking on {moment(item.Date).format("MMM Do YY")}
