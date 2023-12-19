@@ -110,7 +110,7 @@ export default function BookingDetails() {
                    
                     src={
                       bookingData.PropertyId.Image
-                        ? `${import.meta.env.VITE_USER_URL}/files/${bookingData.PropertyId?.Image[0]}`
+                        ? `${import.meta.env.VITE_USER_URL}/files/${bookingData.PropertyId.Image[0]}`
                         : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                     }
                     alt=""
