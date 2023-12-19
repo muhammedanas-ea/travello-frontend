@@ -2,7 +2,7 @@ import axios from "axios";
 import { GenerateError } from "../toast/Toast";
 
 const adminApi = axios.create({
-  baseURL: `http://localhost:3001/admin`,
+  baseURL: import.meta.env.VITE_ADMIN_URL,
 });
 
 const handleApiCallError = (error) => {
