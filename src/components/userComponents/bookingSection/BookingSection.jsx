@@ -78,7 +78,7 @@ export default function BookingSection() {
                       className="object-fill w-full rounded-t-lg h-96 md:h-[13rem] md:w-48 md:rounded-none md:rounded-s-lg"
                       src={
                         paymentData.PropertyId.Image
-                          ? `/images/${paymentData.PropertyId.Image[0]}`
+                          ? `${import.meta.env.VITE_USER_URL}/files/${paymentData.PropertyId.Image[0]}`
                           : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                       }
                       alt=""

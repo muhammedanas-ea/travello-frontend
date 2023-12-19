@@ -182,7 +182,6 @@ export default function UserProfile() {
                     <Button type="submit" className="w-1/2">
                       Update Profile
                     </Button>
-                    ;
                   </div>
                 </form>
               </div>

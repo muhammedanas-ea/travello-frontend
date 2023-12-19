@@ -109,7 +109,7 @@ export default function BookingDetails() {
                     className="object-fill w-full h-[13rem] rounded-lg"
                    
                     src={
-                      bookingData.PropertyId.Image
+                      bookingData && bookingData.PropertyId.Image
                         ? `${import.meta.env.VITE_USER_URL}/files/${bookingData.PropertyId.Image[0]}`
                         : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                     }

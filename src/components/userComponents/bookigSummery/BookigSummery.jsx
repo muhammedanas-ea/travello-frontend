@@ -66,7 +66,7 @@ export default function BookigSummery() {
               </Typography>
               <hr className="border-1 border-gray-400" />
               <div className="contai-section">
-                {data && data.map((item, index) => {
+                {data && data?.map((item, index) => {
                   return (
                     <div
                       key={index}
@@ -74,12 +74,11 @@ export default function BookigSummery() {
                     >
                       <div className="">
                         <div className="flex items-center gap-4">
-                          { console.log(item.PropertyId.Image)}
                           <img
                             className="object-fill w-full rounded-t-lg h-[8rem] md:w-36 md:rounded-none md:rounded-l-lg"
                             src={
                               item.PropertyId && item.PropertyId.Image
-                                ? `${import.meta.env.VITE_USER_URL}/files/${item.PropertyId.Image[0]}`
+                                ? `${import.meta.env.VITE_USER_URL}/files/${item.PropertyId?.Image[0]}`
                                 : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                             }
                             alt=""
@@ -89,10 +88,10 @@ export default function BookigSummery() {
                               Booking on {moment(item.Date).format("MMM Do YY")}
                             </h6>
                             <h6 className="font-san mb-1 text-xl font-normal leading-6 tracking-tight text-gray-700">
-                              {item.PropertyId.PropertyName}
+                              {item.PropertyId?.PropertyName}
                             </h6>
                             <p className="mb-4 font-normal text-gray-700 dark:text-gray-400">
-                              {item.PropertyId.City}, {item.PropertyId.State}
+                              {item.PropertyId?.City}, {item.PropertyId?.State}
                             </p>
                           </div>
                         </div>
