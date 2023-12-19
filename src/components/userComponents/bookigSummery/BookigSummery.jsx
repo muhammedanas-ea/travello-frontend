@@ -74,6 +74,7 @@ export default function BookigSummery() {
                     >
                       <div className="">
                         <div className="flex items-center gap-4">
+                          { console.log(item.PropertyId.Image)}
                           <img
                             className="object-fill w-full rounded-t-lg h-[8rem] md:w-36 md:rounded-none md:rounded-l-lg"
                             src={
@@ -83,7 +84,6 @@ export default function BookigSummery() {
                             }
                             alt=""
                           />
-                         { console.log(item.PropertyId.Image)}
                           <div className="p-3 leading-normal">
                             <h6 className="font-san mb-5 text-xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
                               Booking on {moment(item.Date).format("MMM Do YY")}
