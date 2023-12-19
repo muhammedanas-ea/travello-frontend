@@ -15,6 +15,8 @@ export default function OwnerPropertyLIst() {
     setChild(data);
   };
 
+  const imageApi = import.meta.env.VITE_USER_URL
+
   const id = ownerInfo.id
 
   useEffect(() => {
@@ -60,7 +62,7 @@ export default function OwnerPropertyLIst() {
                       className="object-fill h-[210px] w-full rounded-t-md"
                       src={
                         Image
-                          ? `/images/${Image[0]}`
+                          ? `${imageApi}/files/${Image[0]}`
                           : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
                       }
                       alt=""
