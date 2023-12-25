@@ -9,7 +9,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ChakraBaseProvider } from "@chakra-ui/react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
+  <GoogleOAuthProvider clientId={"824306338354-scfku3mcmisn8jmtu5ko0k6acs4ejjmq.apps.googleusercontent.com"}>
     <React.StrictMode>
       <ChakraBaseProvider>
         <Provider store={Store}>
