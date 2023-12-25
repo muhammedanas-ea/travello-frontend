@@ -33,14 +33,21 @@ export default function GoogleSignin() {
             .then((res) => {
               if (res.data.status) {
                 localStorage.setItem("userToken", res.data.usertoken);
+                const userDetails = {
+                  id: res.data.userData._id,
+                  name: res.data.userData.name,
+                  email: res.data.userData.email,
+                  number: res.data.number,
+                  houseName: res.data.houseName,
+                  state: res.data.state,
+                  city: res.data.city,
+                  is_block: res.data.userData.is_block,
+                  is_verified: res.data.userData.is_verified,
+                  is_admin: res.data.userData.is_admin,
+                };
                 dispatch(
                   setUserDetails({
-                    id: res.data.userData._id,
-                    name: res.data.userData.name,
-                    email: res.data.userData.email,
-                    is_block: res.data.userData.is_block,
-                    is_verified: res.data.userData.is_verified,
-                    is_admin: res.data.userData.is_admin,
+                    userInfo: userDetails,
                   })
                 );
                 navigate("/home");

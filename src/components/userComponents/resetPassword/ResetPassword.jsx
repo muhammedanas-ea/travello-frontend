@@ -26,14 +26,21 @@ export default function ResetPassword() {
           const response = await UserRestPassword(values);
           if (response.data.status) {
             localStorage.setItem("userToken", response.data.usertoken);
+            const userDetails = {
+              id: response.data.userData._id,
+              name: response.data.userData.name,
+              email: response.data.userData.email,
+              number: response.data.number,
+              houseName: response.data.houseName,
+              state: response.data.state,
+              city: response.data.city,
+              is_block: response.data.userData.is_block,
+              is_verified: response.data.userData.is_verified,
+              is_admin: response.data.userData.is_admin,
+            };
             dispatch(
               setUserDetails({
-                id: response.data.userData._id,
-                name: response.data.userData.name,
-                email: response.data.userData.email,
-                is_block: response.data.userData.is_block,
-                is_verified: response.data.userData.is_verified,
-                is_admin: response.data.userData.is_admin,
+                userInfo: userDetails,
               })
             );
             setTimeout(() => {
