@@ -20,13 +20,13 @@ export default function PropertyRoute() {
         <Route path="/login" element={<PropertyLoginpage />} />
         <Route path="/otpverification" element={<OtpVerificationPage />} />
       </Route>
-      <Route  element={<PropertyProtected />}>
+      <Route path="/errorpage" element={<ErrorPage />} />
+      <Route element={<PropertyProtected />}>
         <Route element={<PropertyLayout />}>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/ownerprofile" element={<OwnerProfilePage />} />
           <Route path="/propertydetails" element={<PropertyDetailsPage />} />
           <Route path="/bookingdetails" element={<BookingDetailsPage />} />
-          <Route path="/errorpage" element={<ErrorPage />} />
           <Route path="/chat" element={<ChatList />} />
         </Route>
       </Route>

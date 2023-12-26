@@ -2,8 +2,7 @@ import { AgChartsReact } from "ag-charts-react";
 import {  useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { DashboardData } from "../../../api/PropertyApi";
-
-// import moment from "moment";
+import moment from "moment";
 
 export default function Dashboard() {
   const [dashboardData, setDashboardData] = useState();
@@ -15,26 +14,26 @@ export default function Dashboard() {
       const response = await DashboardData(proprtyId);
       if (response) {
         setDashboardData(response.data);
-        // setOptions((prevOptions) => ({
-        //   ...prevOptions,
-        //   data: [
-        //     {
-        //       year: moment(response.data.firstDate).format("MMM"),
-        //       avgTemp: 2.3,
-        //       propertyBookings: response.data.newYearTotalSales,
-        //     },
-        //     {
-        //       year: moment(response.data.startDate).format("MMM"),
-        //       avgTemp: 6.3,
-        //       propertyBookings: response.data.secondYearTotalSales,
-        //     },
-        //     {
-        //       year: moment(response.data.thirdDate).format("MMM"),
-        //       avgTemp: 16.2,
-        //       propertyBookings: response.data.thirdYearTotalSales,
-        //     },
-        //   ],
-        // }));
+        setOptions((prevOptions) => ({
+          ...prevOptions,
+          data: [
+            {
+              year: moment(response.data.firstDate).format("MMM"),
+              avgTemp: 2.3,
+              propertyBookings: response.data.newYearTotalSales,
+            },
+            {
+              year: moment(response.data.startDate).format("MMM"),
+              avgTemp: 6.3,
+              propertyBookings: response.data.secondYearTotalSales,
+            },
+            {
+              year: moment(response.data.thirdDate).format("MMM"),
+              avgTemp: 16.2,
+              propertyBookings: response.data.thirdYearTotalSales,
+            },
+          ],
+        }));
       }
       console.log(response);
     } catch (err) {
@@ -86,7 +85,7 @@ export default function Dashboard() {
             </div>
             <div>
               <h1 className="font-bold text-lg text-gray-600">
-                {/* {dashboardData && dashboardData.totalUser} */}
+                {dashboardData && dashboardData.uniqueUser}
               </h1>
               <h1 className="uppercase font-bold mt-2 text-gray-800">
                 total booking user

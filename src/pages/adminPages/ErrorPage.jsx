@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function ErrorPage() {
+function ErrorPage() {
   return (
     <div className="grid h-screen place-content-center bg-white px-4">
       <div className="text-center">
@@ -10,7 +10,7 @@ export default function ErrorPage() {
         </p>
         <p className="mt-4 text-gray-500">We can not find that page.</p>
         <Link
-          to='/'
+          to="/admin"
           className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring"
         >
           Go Back Home
@@ -19,3 +19,5 @@ export default function ErrorPage() {
     </div>
   );
 }
+
+export default ErrorPage;

@@ -25,8 +25,7 @@ axiosInterceptorInstance.interceptors.response.use(
       },200)
       window.location = "/home";
     } else if(error.response && error.response.status === 404){
-      console.log(error.response.data.message,'issssssss')
-      // window.location = "/error";
+      window.location = "/error";
     } else if(error.response && error.response.status === 401){
       localStorage.removeItem("userToken");
       setTimeout(() =>{

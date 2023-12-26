@@ -1,21 +1,13 @@
-import axios from "axios";
-import { GenerateError } from "../toast/Toast";
+import axiosInterceptorInstanceAdmin from '../utils/AdminMiddleware'
+const adminApi = axiosInterceptorInstanceAdmin
 
-const adminApi = axios.create({
-  baseURL: import.meta.env.VITE_ADMIN_URL,
-});
-
-const handleApiCallError = (error) => {
-  GenerateError(error.response.data.message);
-  return;
-};
 
 export async function UserDetails(active, search) {
   try {
     const data = await adminApi.get(`/userlist/${active}/${search}`);
     return data;
   } catch (err) {
-    handleApiCallError(err);
+    throw new err(err);
   }
 }
 
@@ -24,7 +16,7 @@ export async function AdminLoginVerify(loginData) {
     const data = await adminApi.post("/adminLogin", loginData);
     return data;
   } catch (err) {
-    handleApiCallError(err);
+    throw new err(err);
   }
 }
 
@@ -33,7 +25,7 @@ export async function UserBlock(id) {
     const data = await adminApi.put("/blockuser", id);
     return data;
   } catch (err) {
-    console.log(err);
+    throw new err(err);
   }
 }
 
@@ -42,7 +34,7 @@ export async function UserUnblock(id) {
     const data = await adminApi.put("/ublockUser", id);
     return data;
   } catch (err) {
-    console.log(err);
+    throw new err(err);
   }
 }
 
@@ -51,7 +43,7 @@ export async function VerifyNotification() {
     const data = await adminApi.get("/verify");
     return data;
   } catch (err) {
-    console.log(err);
+    throw new err(err);
   }
 }
 
@@ -60,7 +52,7 @@ export async function PropertyDetails(active, search) {
     const data = await adminApi.get(`/propertylistadmin/${active}/${search}`);
     return data;
   } catch (err) {
-    console.log(err);
+    throw new err(err);
   }
 }
 
@@ -69,7 +61,7 @@ export async function PropertyBlock(id) {
     const data = await adminApi.put("/propertyBlock", id);
     return data;
   } catch (err) {
-    console.log(err);
+    throw new err(err);
   }
 }
 
@@ -78,7 +70,7 @@ export async function PropertyUnblock(id) {
     const data = await adminApi.put("/propertyUnblock", id);
     return data;
   } catch (err) {
-    console.log(err);
+    throw new err(err);
   }
 }
 
@@ -87,7 +79,7 @@ export async function ViewPropertyDetails(id) {
     const data = await adminApi.get(`/viewDetails/${id}`);
     return data;
   } catch (err) {
-    console.log(err);
+    throw new err(err);
   }
 }
 
@@ -96,7 +88,7 @@ export async function AdminApprove(verify, id) {
     const data = await adminApi.put("/adminapprove", { verify, id });
     return data;
   } catch (err) {
-    console.log(err);
+    throw new err(err);
   }
 }
 
@@ -105,7 +97,7 @@ export async function AdminApprove(verify, id) {
     const data = await adminApi.get('/dashboard')
     return data
   }catch(err){
-    console.log(err)
+    throw new err(err);
   }
 }
 
