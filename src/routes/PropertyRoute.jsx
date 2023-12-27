@@ -30,6 +30,7 @@ export default function PropertyRoute() {
           <Route path="/chat" element={<ChatList />} />
         </Route>
       </Route>
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }

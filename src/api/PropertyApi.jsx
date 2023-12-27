@@ -112,10 +112,18 @@ export async function AllChats(userId){
 
 export async function DashboardData(proprtyId){
   try{
-    console.log(proprtyId);
     const data = await propertyApi.get(`/dashboard/${proprtyId}`)
     return data
   }catch(err){
-    console.log(err)
+    throw new Error(err)
+  }
+}
+
+export async function PropertyHide(propertyId,hide){
+  try{
+    const data = await propertyApi.put('/hideproperty',{propertyId,hide})
+    return data
+  }catch(err){
+    throw new Error(err)
   }
 }

@@ -42,6 +42,7 @@ export default function UserRoute() {
         <Route path="/signup" element={<UserPublic><SignUpPage /></UserPublic>} />
         <Route path="/chat" element={<ChatList />} />
       </Route>
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }

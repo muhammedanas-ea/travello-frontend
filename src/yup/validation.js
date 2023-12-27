@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+const imageFormats = ["image/jpeg","image/jpg", "image/png"];
 
 export const SignupSchema = Yup.object({
   name: Yup.string()
@@ -95,7 +96,14 @@ export const AddPropertySchema = Yup.object({
     .of(Yup.string())
     .required("Select at least one amenity"),
   describe: Yup.string().required("Required"),
-  images: Yup.array().required("Required"),
+  image: Yup.mixed()
+    .test("is-image", "Only image files are allowed", (value) => {
+      console.log(value);
+      if (value) {
+        return imageFormats.includes(value.type);
+      }
+      return true;
+    })
 });
 
 export const userProfileSchema =Yup.object({

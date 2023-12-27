@@ -1,8 +1,9 @@
-import { Typography } from "@material-tailwind/react";
+import { Button, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { SinglePropertyDetails } from "../../../api/PropertyApi";
+import {  PropertyHide, SinglePropertyDetails } from "../../../api/PropertyApi";
 import EditPropertyDialog from "../editPropertyDialoge/EditPropertyDialoge";
+import { GenerateSuccess } from "../../../toast/Toast";
 
 export default function PropertyDetails() {
   const { state } = useLocation();
@@ -21,26 +22,41 @@ export default function PropertyDetails() {
     State,
     PropertyType,
     Image,
+    Is_list,
   } = singleData;
 
   const onDataUpdate = (data) => {
     setChild(data);
   };
 
-  useEffect(() => {
-    const showViewPropertyData = async () => {
-      try {
-        const response = await SinglePropertyDetails(_id);
-        if (response) {
-          setLoading(true);
-          setSingleData(response.data.propertyData);
-        }
-      } catch (err) {
-        console.log(err);
+  const showViewPropertyData = async () => {
+    try {
+      const response = await SinglePropertyDetails(_id);
+      if (response) {
+        setLoading(true);
+        setSingleData(response.data.propertyData);
       }
-    };
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
     showViewPropertyData();
   }, [_id, child]);
+
+  const handleList = async (hide) => {
+    try {
+      const propertyId = _id;
+      const response = await PropertyHide(propertyId, hide);
+      if (response) {
+        showViewPropertyData();
+        GenerateSuccess(response.data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -147,11 +163,26 @@ export default function PropertyDetails() {
                       </div>
                     </div>
                   </div>
-                  <div className="pl-6 pb-5">
+                  <div className="pl-6 pb-5 flex gap-4">
                     <EditPropertyDialog
                       data={singleData}
                       onDataUpdate={onDataUpdate}
                     />
+                    {!Is_list ? (
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleList("showproperty")}
+                      >
+                        Show property
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleList("hideproperty")}
+                      >
+                        Hide property
+                      </Button>
+                    )}
                   </div>
                 </div>
                 <div className="col-span-2 row-span-4 col-start-4">

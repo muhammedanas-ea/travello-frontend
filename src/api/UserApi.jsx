@@ -67,7 +67,7 @@ export async function UserRestPassword(resetPasswordData) {
 
 export async function UserPropertyList(active,sort,aminitesSort,search,priceFilter) {
   try {
-    console.log(typeof(priceFilter));
+    console.log(active);
     const serializedArray = encodeURIComponent(JSON.stringify(aminitesSort));
     const data = await userApi.get(
       `/userpropertylist/${active}/${sort}/${serializedArray}/${search}/${priceFilter}`
@@ -198,3 +198,4 @@ export async function AddReview(value,propertyId){
     throw new Error(err)
   }
 }
+

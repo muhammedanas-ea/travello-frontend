@@ -28,6 +28,7 @@ export default function PropertyList({ sort, aminitesSort, search,priceFilter })
         );
         if (response.data.status) {
           setTotalpage(response.data.totalPages);
+          console.log(response.data.propertyData,'oo');
           setPropertyList(response.data.propertyData);
         }
       } catch (err) {

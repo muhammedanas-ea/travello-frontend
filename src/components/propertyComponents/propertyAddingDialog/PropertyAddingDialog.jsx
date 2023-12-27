@@ -341,6 +341,11 @@ export default function PropertyAddingDialog({onDataUpdate}) {
                 multiple
                 onChange={handleImageChange}
               />
+               {touched.images && errors.images && (
+                    <p className="pt-2 text-xs italic text-red-500">
+                      {errors.images}
+                    </p>
+                  )}
             </div>
             <div>
               <Typography

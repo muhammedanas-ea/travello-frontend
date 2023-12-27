@@ -26,6 +26,7 @@ export default function AdminRoutes() {
       <Route element={<AdminPublic />}>
         <Route path="/login" element={<LoginPage />} />
       </Route>
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }
