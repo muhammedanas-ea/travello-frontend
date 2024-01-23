@@ -31,6 +31,7 @@ export async function PropertySignin(loginData) {
 
 export async function AddProperty(addData) {
   try {
+    console.log(addData,'aaaaaaaaa');
     const config = {
       header: {
         "content-type": "multipart/form-data",

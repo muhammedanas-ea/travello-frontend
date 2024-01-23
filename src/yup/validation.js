@@ -78,7 +78,7 @@ export const EditPropertySchema = Yup.object({
   amenities: Yup.array()
     .of(Yup.string())
     .required("Select at least one amenity"),
-  describe: Yup.string().required("Required"),
+  describe: Yup.string().required("write your discrption"),
 });
 export const AddPropertySchema = Yup.object({
   propertyName: Yup.string()
@@ -95,7 +95,7 @@ export const AddPropertySchema = Yup.object({
   amenities: Yup.array()
     .of(Yup.string())
     .required("Select at least one amenity"),
-  describe: Yup.string().required("Required"),
+  describe: Yup.string().required("write your discrption"),
   image: Yup.mixed()
     .test("is-image", "Only image files are allowed", (value) => {
       console.log(value);
@@ -112,7 +112,7 @@ export const userProfileSchema =Yup.object({
   .max(50, "Too Long!")
   .required("Please Enter Your Name"),
   email:Yup.string()
-  .email("Invalid email")
+  .email("please enter valied email")
   .required("please enter your email"),
   number: Yup.number().min(10).required("please enter your number"),
   houseName: Yup.string().required("Please Enter Your house name"),
@@ -127,6 +127,6 @@ export const CheckInDetailSchema = Yup.object({
     .required("Please Enter Your Name"),
   number: Yup.number().min(10).required("please enter your number"),
   email: Yup.string()
-    .email("Invalid email")
+    .email("please enter valied email")
     .required("please enter your email"),
 });
