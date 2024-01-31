@@ -78,6 +78,10 @@ export async function UserPropertyList(active,sort,aminitesSort,search,priceFilt
   }
 }
 
+export async function PropertySwiperData(){
+  return await userApi.get('/propertyswiper')
+}
+
 export async function UpdateProfile(profileData, id) {
   try {
     const data = await userApi.put("/userprofile", { profileData, id });

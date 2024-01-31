@@ -1,51 +1,28 @@
-// Import tailwind Component section
 import { Typography, Button } from "@material-tailwind/react";
-
-// Import Slider Image Section
-import slide1 from "../../../../public/staticImages/sliderimg-1.webp";
-import slide2 from "../../../../public/staticImages/sliderimg-2.webp";
-import slide3 from "../../../../public/staticImages/sliderimg-3.webp";
-import slide4 from "../../../../public/staticImages/sliderimg-4.webp";
-
-// Import Style For Property Swiper Card
 import "./PropertySwiper.css";
 import { useNavigate } from "react-router-dom";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import { useEffect, useState } from "react";
+import { PropertySwiperData } from "../../../api/UserApi";
+import { GenerateError } from "../../../toast/Toast";
 
 export default function PropertySwiper() {
   const navigate = useNavigate();
-  const bestRated = [
-    {
-      image: slide1,
-      propertyName: "Enchanting Pastures - Khopoli",
-      location: "Lonavala, Maharashtra",
-      price: "18,800",
-    },
-    {
-      image: slide3,
-      propertyName: "Enchanting Pastures - Khopoli",
-      location: "Lonavala, Maharashtra",
-      price: "18,800",
-    },
-    {
-      image: slide2,
-      propertyName: "Enchanting Pastures - Khopoli",
-      location: "Lonavala, Maharashtra",
-      price: "18,800",
-    },
-    {
-      image: slide4,
-      propertyName: "Enchanting Pastures - Khopoli",
-      location: "Lonavala, Maharashtra",
-      price: "18,800",
-    },
-  ];
+  const [bestRated,setBestRated] = useState([])
 
+  const fecthData = async () =>{
+    const response = await PropertySwiperData()
+    if(response){
+      setBestRated(response.data)
+    }
+  }
+
+  useEffect(() =>{
+    fecthData()
+  },[])
+ 
   return (
     <div className="main-sparation">
       <div className="contai-section">
@@ -78,8 +55,8 @@ export default function PropertySwiper() {
           }}
           className="mySwiper"
         >
-          {bestRated.map((item, index) => {
-            const { image, propertyName, location, price } = item;
+          {bestRated && bestRated.map((item, index) => {
+            const { Image, PropertyName, State, Price, City , _id} = item;
 
             return (
               <SwiperSlide key={index}>
@@ -87,23 +64,27 @@ export default function PropertySwiper() {
                   <a href="#">
                     <img
                       className="rounded-t-lg object-fill w-full h-44"
-                      src={image}
+                      src={
+                        Image
+                          ? `${import.meta.env.VITE_USER_URL}/files/${Image[0]}`
+                          : "https://th.bing.com/th/id/OIP.puMo9ITfruXP8iQx9cYcqwHaGJ?pid=ImgDet&rs=1"
+                      }
                       alt=""
                     />
                   </a>
                   <div className="p-5 mt-[2.5]">
                     <a href="#">
                       <h6 className="font-san mb-1 text-lg font-normal leading-6 tracking-tight text-[#1e1e1e]">
-                        {propertyName}
+                        {PropertyName}
                       </h6>
                     </a>
                     <p className="font-normal text-xs text-[#959595]">
-                      {location}
+                      {State},{City}
                     </p>
                     <div className="mt-7 flex justify-between items-center">
                       <div>
                         <h5 className="ont-san text-lg font-normal leading-6 tracking-tight text-[#1e1e1e]">
-                          ₹ {price}
+                          ₹ {Price}
                         </h5>
                         <span className="font-normal text-xs leading-3 tracking-tighter text-[#959595]">
                           Per night + Tax
@@ -114,7 +95,13 @@ export default function PropertySwiper() {
                           className="h-10 border-solid rounded-md border border-[#000] transition ease-in-out delay-10  hover:bg-[#000] hover:text-white duration-20"
                           size="sm"
                           variant="text"
-                          onClick={() => navigate("/propertylist")}
+                          onClick={() => {
+                            if (localStorage.getItem("userToken")) {
+                              navigate(`/singleproperty`, { state: { _id } });
+                            } else {
+                              GenerateError("you must be need to  login");
+                            }
+                          }}
                         >
                           View property
                         </Button>
