@@ -31,6 +31,19 @@ export default function DestinationSwiper() {
       image: image4,
       destionName: "Agra",
     },
+    {
+      image: image4,
+      destionName: "Agra",
+    },
+    {
+      image: image4,
+      destionName: "Agra",
+    },
+    {
+      image: image4,
+      destionName: "Agra",
+    },
+   
   ];
 
   return (
@@ -41,7 +54,7 @@ export default function DestinationSwiper() {
             popular Destination
           </Typography>
         </div>
-        <div className="flex gap-6">
+        <div className="flex gap-6 overflow-x-auto w">
           {destination.map((items, index) => {
 
             const { image, destionName } = items
@@ -50,14 +63,14 @@ export default function DestinationSwiper() {
               <Card
                 shadow={false}
                 key={index}
-                className="relative mt-5 grid h-[20rem] rounded-lg w-full max-w-[300px] items-end justify-center overflow-hidden text-center"
+                className="relative mt-5 grid flex-shrink-0 h-[20rem]  w-full max-w-[270px] items-end justify-center  text-center"
               >
                 <CardHeader
                   floated={false}
                   shadow={false}
                   color="transparent"
-                  className={`absolute inset-0 m-0 h-full w-full rounded-none bg-cover bg-center`}
-                  style={{ backgroundImage: `url(${image})` }} // Corrected line
+                  className={`absolute inset-0 m-0 h-full w-full rounded-md bg-cover bg-center`}
+                  style={{ backgroundImage: `url(${image})`,objectFit: 'cover'}} // Corrected line
                 >
                   <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/50" />
                 </CardHeader>

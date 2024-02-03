@@ -24,14 +24,14 @@ import { GenerateError, GenerateSuccess } from "../../../toast/Toast";
 import { Textarea } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { RatingDescriptionSchema } from "../../../yup/validation";
-import './SinglePropertyDetails.css'
+import "./SinglePropertyDetails.css";
 
 function SinglePropertyDetails() {
   const { state } = useLocation();
   const { _id } = state;
   const [siglePropertyData, setSinglePropertyData] = useState([]);
-  const [fetchAgain,setFetchAgain] = useState()
-  const [reviewCheck,setReviwCheck] = useState()
+  const [fetchAgain, setFetchAgain] = useState();
+  const [reviewCheck, setReviwCheck] = useState();
 
   const {
     PropertyName,
@@ -48,18 +48,18 @@ function SinglePropertyDetails() {
   useEffect(() => {
     const showSinglePropertyData = async () => {
       try {
-        const response = await UserSingleProperty(_id)
+        const response = await UserSingleProperty(_id);
         if (response.data.status) {
-          setReviwCheck(response.data.bookingCheck)
+          setReviwCheck(response.data.bookingCheck);
           setSinglePropertyData(response.data.propertyData);
-          setFetchAgain(false)
+          setFetchAgain(false);
         }
       } catch (err) {
         console.log(err);
       }
     };
     showSinglePropertyData();
-  }, [_id,fetchAgain]);
+  }, [_id, fetchAgain]);
 
   const predefinedAmenities = [
     {
@@ -112,7 +112,7 @@ function SinglePropertyDetails() {
   const [isOpen, setIsOpen] = useState(false);
   const [increment, setIncrement] = useState(1);
   const [roomCount, setRoomCount] = useState(1);
-  
+
   const navigate = useNavigate();
   let differenceInDays = 0;
   if (startDate && endDate) {
@@ -134,8 +134,8 @@ function SinglePropertyDetails() {
   const handleIncrement = () => {
     if (increment < RoomCount * 3) {
       setIncrement(increment + 1);
-      if ((increment + 1) % 3 === 0 && increment > 3) {
-        setRoomCount(roomCount + 1);
+      if ((increment + 1) % 3 !== 0) {
+        setRoomCount((Math.floor((increment + 1) / 3)) + 1);
       }
     } else if (increment === RoomCount * 3) {
       GenerateError("Room capacity is reached");
@@ -188,7 +188,7 @@ function SinglePropertyDetails() {
           const response = await AddReview({ values, _id });
           if (response) {
             GenerateSuccess(response.data.message);
-            setFetchAgain(true)
+            setFetchAgain(true);
             resetForm();
           }
         } catch (err) {
@@ -251,7 +251,11 @@ function SinglePropertyDetails() {
                     onClick={() => setActiveTab(value)}
                     className={activeTab === value ? "text-gray-900" : ""}
                   >
-                    {label === 'Add Reviews' ? reviewCheck?.length > 0 ? label :null  : label }
+                    {label === "Add Reviews"
+                      ? reviewCheck?.length > 0
+                        ? label
+                        : null
+                      : label}
                   </Tab>
                 ))}
               </TabsHeader>
@@ -296,7 +300,13 @@ function SinglePropertyDetails() {
                             })}
                           </div>
                         </div>
-                        <div className={ `${siglePropertyData?.Ratings?.length > 0 ? "newClass h-[300px] overflow-y-scroll": "" } mb-3`}>
+                        <div
+                          className={`${
+                            siglePropertyData?.Ratings?.length > 0
+                              ? "newClass h-[300px] overflow-y-scroll"
+                              : ""
+                          } mb-3`}
+                        >
                           <Typography
                             variant="h3"
                             className="py-5 cursor-pointer  text-gray-800 sm:text-xl sm:font-extralight"
@@ -304,37 +314,40 @@ function SinglePropertyDetails() {
                             Reviews
                           </Typography>
                           <div>
-                          {siglePropertyData?.Ratings?.map((item, index) => {
-                            return (
-                              <article className="pb-3" key={index}>
-                                <div className="flex items-center mb-4">
-                                  <img
-                                    className="w-10 h-10 me-4 rounded-full"
-                                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-                                    alt=""
-                                  />
-                                  <div className="font-medium dark:text-white">
-                                    <p>
-                                      {item.Users?.name}
-                                      <time
-                                        dateTime="2014-08-16 19:00"
-                                        className="block text-sm text-gray-500 dark:text-gray-400"
-                                      >
-                                         {item.Users?.email}
-                                      </time>
-                                    </p>
+                            {siglePropertyData?.Ratings?.map((item, index) => {
+                              return (
+                                <article className="pb-3" key={index}>
+                                  <div className="flex items-center mb-4">
+                                    <img
+                                      className="w-10 h-10 me-4 rounded-full"
+                                      src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                                      alt=""
+                                    />
+                                    <div className="font-medium dark:text-white">
+                                      <p>
+                                        {item.Users?.name}
+                                        <time
+                                          dateTime="2014-08-16 19:00"
+                                          className="block text-sm text-gray-500 dark:text-gray-400"
+                                        >
+                                          {item.Users?.email}
+                                        </time>
+                                      </p>
+                                    </div>
                                   </div>
-                                </div>
-                                <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
-                                  <Rating value={item?.ReviewRating} readonly />
-                                </div>
-                                <p className="mb-2 text-gray-500 dark:text-gray-400">
-                                 {item?.ReviewDescription}
-                                </p>
-                              </article>
-                            );
-                          })}
-                        </div>
+                                  <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
+                                    <Rating
+                                      value={item?.ReviewRating}
+                                      readonly
+                                    />
+                                  </div>
+                                  <p className="mb-2 text-gray-500 dark:text-gray-400">
+                                    {item?.ReviewDescription}
+                                  </p>
+                                </article>
+                              );
+                            })}
+                          </div>
                         </div>
                       </div>
                     ) : activeTab === 2 ? (
@@ -364,7 +377,13 @@ function SinglePropertyDetails() {
                         </div>
                       </div>
                     ) : activeTab === 3 ? (
-                      <div className={siglePropertyData?.Ratings?.length > 0 ? `newClass h-[300px] overflow-y-scroll` : ''}>
+                      <div
+                        className={
+                          siglePropertyData?.Ratings?.length > 0
+                            ? `newClass h-[300px] overflow-y-scroll`
+                            : ""
+                        }
+                      >
                         <Typography
                           variant="h3"
                           className="py-5 cursor-pointer  text-gray-800 sm:text-xl sm:font-extralight"
@@ -388,7 +407,7 @@ function SinglePropertyDetails() {
                                         dateTime="2014-08-16 19:00"
                                         className="block text-sm text-gray-500 dark:text-gray-400"
                                       >
-                                         {item.Users?.email}
+                                        {item.Users?.email}
                                       </time>
                                     </p>
                                   </div>
@@ -397,7 +416,7 @@ function SinglePropertyDetails() {
                                   <Rating value={item.ReviewRating} readonly />
                                 </div>
                                 <p className="mb-2 text-gray-500 dark:text-gray-400">
-                                 {item?.ReviewDescription}
+                                  {item?.ReviewDescription}
                                 </p>
                               </article>
                             );
