@@ -583,7 +583,7 @@ function SinglePropertyDetails() {
               </h5>
             </div>
             <div className="w-full mt-5">
-              <Button type="submit" className="w-full leading-9" size="lg">
+              <Button type="submit" className="w-full bg-black hover:bg-[#0c0c0cf8] leading-9" size="lg">
                 Check Availability
               </Button>
             </div>
