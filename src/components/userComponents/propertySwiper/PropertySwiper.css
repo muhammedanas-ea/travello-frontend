@@ -17,3 +17,9 @@
     width: 100%;
     text-transform: uppercase;
 }
+.propertyScroll::-webkit-scrollbar{
+    display: none;
+}
+.propertyScroll{
+    scroll-behavior: smooth;
+}

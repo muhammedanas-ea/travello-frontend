@@ -1,9 +1,6 @@
 import { Typography, Button } from "@material-tailwind/react";
 import "./PropertySwiper.css";
 import { useNavigate } from "react-router-dom";
-// import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
 import { useEffect, useState } from "react";
 import { PropertySwiperData } from "../../../api/UserApi";
 import { GenerateError } from "../../../toast/Toast";
@@ -23,15 +20,15 @@ export default function PropertySwiper() {
   useEffect(() =>{
     fecthData()
   },[])
-  
+
   const [scroll,setScroll] = useState(0)
-  const scrollLeft = () =>{
-    const container = document.getElementById("scrollHandler")
+  const propertyScrollLeft = () =>{
+    const container = document.getElementById("propertyScrollHandler")
     setScroll(scroll - container.offsetWidth * 0.4)
     container.scrollLeft -= container.offsetWidth * 0.4
   }
-  const scrollRight = () =>{
-    const container = document.getElementById("scrollHandler")
+  const propertyScrollRight = () =>{
+    const container = document.getElementById("propertyScrollHandler")
     setScroll(scroll + container.offsetWidth * 0.4)
     container.scrollLeft += container.offsetWidth * 0.4
   }
@@ -44,7 +41,7 @@ export default function PropertySwiper() {
             Best rated
           </Typography>
         </div>
-        <div className="flex gap-6 overflow-x-auto scroll" id="scrollHandler">
+        <div className="flex gap-6 overflow-x-auto propertyScroll" id="propertyScrollHandler">
           {bestRated && bestRated.map((item, index) => {
             const { Image, PropertyName, State, Price, City , _id} = item;
 
@@ -104,8 +101,8 @@ export default function PropertySwiper() {
           })}
         </div>
         <div className="flex justify-between">
-          <ChevronLeftIcon className=" invisible md:visible h-10 w-10 rounded-lg bg-[#0000008a] text-blue-gray-200 hover:bg-black -ms-5 -mt-44 z-30 border-2 border-blue-gray-200 cursor-pointer" onClick={scrollLeft}/>
-          <ChevronRightIcon className="invisible md:visible h-10 w-10 -mt-44 z-30 -me-5 rounded-lg bg-[#0000008a] text-blue-gray-200 hover:bg-black border-2 border-blue-gray-200 cursor-pointer" onClick={scrollRight}/>
+          <ChevronLeftIcon className=" invisible md:visible h-10 w-10 rounded-lg bg-[#0000008a] text-blue-gray-200 hover:bg-black -ms-5 -mt-44 z-30 border-2 border-blue-gray-200 cursor-pointer" onClick={propertyScrollLeft}/>
+          <ChevronRightIcon className="invisible md:visible h-10 w-10 -mt-44 z-30 -me-5 rounded-lg bg-[#0000008a] text-blue-gray-200 hover:bg-black border-2 border-blue-gray-200 cursor-pointer" onClick={propertyScrollRight}/>
         </div>
       </div>
     </div>
