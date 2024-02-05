@@ -3,8 +3,22 @@ import { Card, Typography } from "@material-tailwind/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import "./DestinationSwiper.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function DestinationSwiper() {
+  const [scroll, setScroll] = useState(0);
+  const navigate = useNavigate()
+  const scrollLeft = () => {
+    const container = document.getElementById("scrollHandler");
+    setScroll(scroll - container.offsetWidth * 0.4);
+    container.scrollLeft -= container.offsetWidth * 0.4;
+  };
+  const scrollRight = () => {
+    const container = document.getElementById("scrollHandler");
+    setScroll(scroll + container.offsetWidth * 0.4);
+    container.scrollLeft += container.offsetWidth * 0.4;
+  };
+
   const destination = [
     {
       image:
@@ -37,17 +51,6 @@ export default function DestinationSwiper() {
       destionName: "Delhi",
     },
   ];
-  const [scroll, setScroll] = useState(0);
-  const scrollLeft = () => {
-    const container = document.getElementById("scrollHandler");
-    setScroll(scroll - container.offsetWidth * 0.4);
-    container.scrollLeft -= container.offsetWidth * 0.4;
-  };
-  const scrollRight = () => {
-    const container = document.getElementById("scrollHandler");
-    setScroll(scroll + container.offsetWidth * 0.4);
-    container.scrollLeft += container.offsetWidth * 0.4;
-  };
 
   return (
     <div className="main-sparation pb-8">
@@ -65,6 +68,7 @@ export default function DestinationSwiper() {
                 key={index}
                 className=" w-[17rem] h-80 card mt-2 rounded-lg bg-cover bg-center  object-cover"
                 style={{ backgroundImage: `url(${image}) ` }}
+                onClick={() => navigate('/propertyList')}
               >
                 <div className="w-[17rem] h-80 cardText flex flex-col justify-center items-center rounded-lg animate-showcontent">
                   <Typography
