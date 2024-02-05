@@ -41,13 +41,13 @@ export default function PropertySwiper() {
             Best rated
           </Typography>
         </div>
-        <div className="flex gap-6 overflow-x-auto propertyScroll" id="propertyScrollHandler">
+        <div className="flex gap-5 overflow-x-auto propertyScroll" id="propertyScrollHandler">
           {bestRated && bestRated.map((item, index) => {
             const { Image, PropertyName, State, Price, City , _id} = item;
 
             return (
-              <div key={index}>
-                <div className="sahdow mt-5 max-w-[300px] shadow-lg transition-transform  hover:scale-105 duration-300 bg-white border border-[#00000027] rounded-lg  dark:bg-gray-800 dark:border-gray-700">
+             
+                <div key={index} className=" sahdow flex-shrink-0 mt-5 max-w-[300px] shadow-lg transition-transform  hover:scale-105 duration-300 bg-white border border-[#00000027] rounded-lg  dark:bg-gray-800 dark:border-gray-700">
                   <a href="#">
                     <img
                       className="rounded-t-lg object-fill w-full h-44"
@@ -96,7 +96,7 @@ export default function PropertySwiper() {
                     </div>
                   </div>
                 </div>
-              </div>
+              
             );
           })}
         </div>
