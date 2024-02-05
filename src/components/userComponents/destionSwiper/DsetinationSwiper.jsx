@@ -9,7 +9,7 @@ import{ChevronLeftIcon,ChevronRightIcon} from "@heroicons/react/24/outline"
 // Import Style For Property Swiper Card
 import "./DestinationSwiper.css";
 import image from '../../../../public/staticImages/abhishek-donda-7h7NCXp9eZ0-unsplash.jpg'
-import image2 from '../../../../public/staticImages/ashim-d-silva-YH1sPWaQAhg-unsplash.jpg'
+// import image2 from '../../../../public/staticImages/ashim-d-silva-YH1sPWaQAhg-unsplash.jpg'
 import image3 from '../../../../public/staticImages/giuliano-gabella-D93E_uNgaL8-unsplash.jpg'
 import image4 from '../../../../public/staticImages/sylwia-bartyzel-eU4pipU_8HA-unsplash.jpg'
 import { useState } from "react";
@@ -107,8 +107,8 @@ export default function DestinationSwiper() {
           })}
         </div>
         <div className="flex justify-between">
-          <ChevronLeftIcon className="h-10 w-10 rounded-lg bg-black text-blue-gray-200 hover:bg-[#0000008a] -ms-5 -mt-44 z-50 border-2 border-blue-gray-200 cursor-pointer" onClick={scrollLeft}/>
-          <ChevronRightIcon className="h-10 w-10 -mt-44 z-50 -me-5 rounded-lg bg-black text-blue-gray-200 hover:bg-[#0000008a] border-2 border-blue-gray-200 cursor-pointer" onClick={scrollRight}/>
+          <ChevronLeftIcon className=" invisible md:visible h-10 w-10 rounded-lg bg-[#0000008a] text-blue-gray-200 hover:bg-black -ms-5 -mt-44 z-30 border-2 border-blue-gray-200 cursor-pointer" onClick={scrollLeft}/>
+          <ChevronRightIcon className="invisible md:visible h-10 w-10 -mt-44 z-30 -me-5 rounded-lg bg-[#0000008a] text-blue-gray-200 hover:bg-black border-2 border-blue-gray-200 cursor-pointer" onClick={scrollRight}/>
         </div>
       </div>
     </div>

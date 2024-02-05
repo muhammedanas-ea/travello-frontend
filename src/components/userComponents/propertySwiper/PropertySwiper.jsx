@@ -1,12 +1,13 @@
 import { Typography, Button } from "@material-tailwind/react";
 import "./PropertySwiper.css";
 import { useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useEffect, useState } from "react";
 import { PropertySwiperData } from "../../../api/UserApi";
 import { GenerateError } from "../../../toast/Toast";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 export default function PropertySwiper() {
   const navigate = useNavigate();
@@ -22,6 +23,18 @@ export default function PropertySwiper() {
   useEffect(() =>{
     fecthData()
   },[])
+  
+  const [scroll,setScroll] = useState(0)
+  const scrollLeft = () =>{
+    const container = document.getElementById("scrollHandler")
+    setScroll(scroll - container.offsetWidth * 0.4)
+    container.scrollLeft -= container.offsetWidth * 0.4
+  }
+  const scrollRight = () =>{
+    const container = document.getElementById("scrollHandler")
+    setScroll(scroll + container.offsetWidth * 0.4)
+    container.scrollLeft += container.offsetWidth * 0.4
+  }
  
   return (
     <div className="main-sparation">
@@ -31,35 +44,12 @@ export default function PropertySwiper() {
             Best rated
           </Typography>
         </div>
-        <Swiper
-          spaceBetween={2}
-          slidesPerView={1}
-          breakpoints={{
-            480: {
-              slidesPerView: 1,
-            },
-            645: {
-              spaceBetween: 20,
-              slidesPerView: 2,
-            },
-            943: {
-              slidesPerView: 3,
-            },
-            1200: {
-              spaceBetween: 20,
-              slidesPerView: 4,
-            },
-          }}
-          pagination={{
-            clickable: true,
-          }}
-          className="mySwiper"
-        >
+        <div className="flex gap-6 overflow-x-auto scroll" id="scrollHandler">
           {bestRated && bestRated.map((item, index) => {
             const { Image, PropertyName, State, Price, City , _id} = item;
 
             return (
-              <SwiperSlide key={index}>
+              <div key={index}>
                 <div className="sahdow mt-5 max-w-[300px] shadow-lg transition-transform  hover:scale-105 duration-300 bg-white border border-[#00000027] rounded-lg  dark:bg-gray-800 dark:border-gray-700">
                   <a href="#">
                     <img
@@ -109,10 +99,14 @@ export default function PropertySwiper() {
                     </div>
                   </div>
                 </div>
-              </SwiperSlide>
+              </div>
             );
           })}
-        </Swiper>
+        </div>
+        <div className="flex justify-between">
+          <ChevronLeftIcon className=" invisible md:visible h-10 w-10 rounded-lg bg-[#0000008a] text-blue-gray-200 hover:bg-black -ms-5 -mt-44 z-30 border-2 border-blue-gray-200 cursor-pointer" onClick={scrollLeft}/>
+          <ChevronRightIcon className="invisible md:visible h-10 w-10 -mt-44 z-30 -me-5 rounded-lg bg-[#0000008a] text-blue-gray-200 hover:bg-black border-2 border-blue-gray-200 cursor-pointer" onClick={scrollRight}/>
+        </div>
       </div>
     </div>
   );
