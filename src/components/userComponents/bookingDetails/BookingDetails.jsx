@@ -158,8 +158,8 @@ export default function BookingDetails() {
             </div>
           </div>
         ) : (
-          <div className="w-full h-screen flex justify-center items-center">
-            Loading.......
+          <div className="w-full h-[80vh] flex justify-center items-center">
+            No booking is available
           </div>
         )}
       </div>

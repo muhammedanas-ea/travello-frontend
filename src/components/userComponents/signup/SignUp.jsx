@@ -1,13 +1,25 @@
-import { UserSignUp } from "../../../api/UserApi";
+import { RemoveSignUpData, UserSignUp } from "../../../api/UserApi";
 import { Link, useNavigate } from "react-router-dom";
 import { GenerateSuccess } from "../../../toast/Toast";
 import loginImg from "../../../../public/staticImages/1991562_Freepik.webp";
 import GoogleSignUp from "../googleAuth/GoogleSignUp";
 import { useFormik } from "formik";
 import { SignupSchema } from "../../../yup/validation";
+import { useEffect } from "react";
 
 export default function SignUp() {
   const navigate = useNavigate();
+
+  const RemoveUser = async () =>{
+    const response = await RemoveSignUpData()
+    if(response){
+      console.log(response)
+    }
+  }
+
+  useEffect(() =>{
+    RemoveUser(values)
+  },[])
 
   const initialValues = {
     name: "",

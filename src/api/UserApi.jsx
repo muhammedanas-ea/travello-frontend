@@ -11,6 +11,16 @@ export async function UserSignUp(signupData) {
   }
 }
 
+export async function RemoveSignUpData(){
+  try{
+    const data = await userApi.post('/remove')
+    return data
+
+  }catch(err){
+    throw new err(err)
+  }
+}
+
 export async function EmailVerify(id, token) {
   try {
     const data = await userApi.get(`verify/${id}/${token}`);
@@ -77,6 +87,7 @@ export async function UserPropertyList(active,sort,aminitesSort,search,priceFilt
     throw new err(err);
   }
 }
+
 
 export async function PropertySwiperData(){
   return await userApi.get('/propertyswiper')
