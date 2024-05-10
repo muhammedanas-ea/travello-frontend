@@ -14,7 +14,7 @@ function EmailVerify() {
           </p>
           <Link
             className="px-5 py-2 text-white bg-[#000] border border-[#000]  rounded-md hover:bg-[#000000d3] focus:outline-none focus:ring"
-            to="https://mail.google.com/mail/u/0/#inbox/FMfcgzGwHVJhPpzQLJkkjhfttZSSdsWQ"
+            to="https://mail.google.com/mail/u/0/#inbox"
           >
             <span className="text-sm font-medium">verify your email</span>
           </Link>
