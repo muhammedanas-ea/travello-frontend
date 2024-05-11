@@ -68,7 +68,7 @@ export default function GoogleSignUp() {
         type=""
         onClick={login}
       >
-        Login with Google
+        Sign up with Google
       </button>
     </>
   );
