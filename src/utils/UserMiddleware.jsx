@@ -3,6 +3,8 @@ import { GenerateError } from "../toast/Toast";
 
 const axiosInterceptorInstance = axios.create({
   baseURL: import.meta.env.VITE_USER_URL,
+  headers: {'Content-Type': 'application/json'},
+  withCredentials: true,
 });
 
 axiosInterceptorInstance.interceptors.request.use((req) => {
