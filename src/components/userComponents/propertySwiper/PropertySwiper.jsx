@@ -35,7 +35,7 @@ export default function PropertySwiper() {
  
   return (
     <div className="main-sparation">
-      {bestRated.lenght >=0 ? (
+      {bestRated.length >=0 ? (
          <div className="contai-section">
          <div className="pb-6">
            <Typography className="text-[#1e1e1e] font-fmaily">
