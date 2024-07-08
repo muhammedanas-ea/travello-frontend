@@ -75,24 +75,55 @@ const Navbar = () =>{
             )}
           </div>
         </div>
-        <div className="flex flex-col justify-between h-[85vh] p-4">
+        <div className="flex flex-col justify-between h-[82vh] p-4">
           <ul className="text-black uppercase">
-            <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
-              Home
-            </li>
-            <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
-              Property List
-            </li>
-            <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
-              List your Property
-            </li>
+            <Link onClick={() => setOpen(!open)}  to={"/home"}>
+              <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
+                Home
+              </li>
+            </Link>
+            <Link onClick={() => setOpen(!open)}  to={"/propertyList"}>
+              <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
+                Property List
+              </li>
+            </Link>
+            {localStorage.getItem("userToken") ? (
+              <>
+                <Link onClick={() => setOpen(!open)}  to={"/userprofile"}><li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
+                  Profile
+                </li>
+                </Link>
+                <Link onClick={() => setOpen(!open)}  to={"/bookingsummery"}>
+                <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
+                  Bookings
+                </li>
+                </Link>
+              </>
+            ) : (
+              <Link onClick={() => setOpen(!open)}  to={"/property/login"}>
+                <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
+                  List your Property
+                </li>
+              </Link>
+            )}
           </ul>
-          <Button
-            className="p-4 border text-black uppercase border-gray-800 bg-transparent hover:bg-[#050505] hover:text-white rounded-md"
-            size="md"
-          >
-            Log in
-          </Button>
+          {localStorage.getItem("userToken") ? (
+            <Button
+              className="p-4 border text-black uppercase border-gray-800 bg-transparent hover:bg-[#f14242]  hover:text-white rounded-md"
+              size="md"
+            >
+              Log out
+            </Button>
+          ) : (
+            <Link onClick={() => setOpen(!open)}  to={"/login"}>
+              <Button
+                className="p-4 border text-black uppercase border-gray-800 bg-transparent hover:bg-[#050505]  hover:text-white rounded-md"
+                size="md"
+              >
+                Log in
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

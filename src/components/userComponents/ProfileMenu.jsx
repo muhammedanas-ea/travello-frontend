@@ -99,7 +99,7 @@ function ProfileMenu() {
                   {label}
                 </Typography>
               ) : label === "Bookings" ? (
-                <Link to={"/booking"}>
+                <Link to={"/bookingsummery"}>
                   <Typography
                     as="span"
                     variant="small"
