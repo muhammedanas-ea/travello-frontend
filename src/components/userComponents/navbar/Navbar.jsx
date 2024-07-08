@@ -1,13 +1,26 @@
-import { Bars3CenterLeftIcon, XMarkIcon } from "@heroicons/react/24/solid"
-import { Button } from "@material-tailwind/react"
-import { Link } from "react-router-dom"
-import ProfileMenu from "../ProfileMenu"
-import { useState } from "react"
+import { Bars3CenterLeftIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Button } from "@material-tailwind/react";
+import { Link, useNavigate } from "react-router-dom";
+import ProfileMenu from "../ProfileMenu";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "../../../redux/userSlice/UserSlice";
 
-const Navbar = () =>{
-    const [open, setOpen] = useState(false);
-    return(
-        <div
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const userLogout = () =>{
+    localStorage.removeItem("userToken");
+    dispatch(
+      setUserDetails({
+        userInfo: {},
+      })
+    );
+    navigate("/login");
+  }
+  return (
+    <div
       className={`z-50 top-0 sticky left-0 right-0 bg-white shadow-lg  text-black
       }`}
     >
@@ -49,9 +62,7 @@ const Navbar = () =>{
           {open ? (
             <XMarkIcon className="h-8 w-8 text-black" />
           ) : (
-            <Bars3CenterLeftIcon
-              className={`h-8 w-8 text-black}`}
-            />
+            <Bars3CenterLeftIcon className={`h-8 w-8 text-black}`} />
           )}
         </div>
       </header>
@@ -77,30 +88,31 @@ const Navbar = () =>{
         </div>
         <div className="flex flex-col justify-between h-[82vh] p-4">
           <ul className="text-black uppercase">
-            <Link onClick={() => setOpen(!open)}  to={"/home"}>
+            <Link onClick={() => setOpen(!open)} to={"/home"}>
               <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
                 Home
               </li>
             </Link>
-            <Link onClick={() => setOpen(!open)}  to={"/propertyList"}>
+            <Link onClick={() => setOpen(!open)} to={"/propertyList"}>
               <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
                 Property List
               </li>
             </Link>
             {localStorage.getItem("userToken") ? (
               <>
-                <Link onClick={() => setOpen(!open)}  to={"/userprofile"}><li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
-                  Profile
-                </li>
+                <Link onClick={() => setOpen(!open)} to={"/userprofile"}>
+                  <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
+                    Profile
+                  </li>
                 </Link>
-                <Link onClick={() => setOpen(!open)}  to={"/bookingsummery"}>
-                <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
-                  Bookings
-                </li>
+                <Link onClick={() => setOpen(!open)} to={"/bookingsummery"}>
+                  <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
+                    Bookings
+                  </li>
                 </Link>
               </>
             ) : (
-              <Link onClick={() => setOpen(!open)}  to={"/property/login"}>
+              <Link onClick={() => setOpen(!open)} to={"/property/login"}>
                 <li className="p-4 border-b border-gray-600 cursor-pointer hover:text-[#0033E7]">
                   List your Property
                 </li>
@@ -109,24 +121,24 @@ const Navbar = () =>{
           </ul>
           {localStorage.getItem("userToken") ? (
             <Button
+            onClick={userLogout}
               className="p-4 border text-black uppercase border-gray-800 bg-transparent hover:bg-[#f14242]  hover:text-white rounded-md"
               size="md"
             >
               Log out
             </Button>
           ) : (
-            <Link onClick={() => setOpen(!open)}  to={"/login"}>
-              <Button
-                className="p-4 border text-black uppercase border-gray-800 bg-transparent hover:bg-[#050505]  hover:text-white rounded-md"
-                size="md"
-              >
-                Log in
-              </Button>
-            </Link>
+            <Button
+              onClick={() => navigate('/login')}
+              className="p-4 border text-black uppercase border-gray-800 bg-transparent hover:bg-[#050505]  hover:text-white rounded-md"
+              size="md"
+            >
+              Log in
+            </Button>
           )}
         </div>
       </div>
     </div>
-    )
-}
-export default Navbar
+  );
+};
+export default Navbar;

@@ -14,17 +14,17 @@ import {
   InboxArrowDownIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
-import { setUserDetails } from "../../redux/userSlice/UserSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { setUserDetails } from "../../redux/userSlice/UserSlice";
 
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-  const userLogout = () => {
+  const userLogout = () =>{
     localStorage.removeItem("userToken");
     dispatch(
       setUserDetails({
@@ -32,7 +32,7 @@ function ProfileMenu() {
       })
     );
     navigate("/login");
-  };
+  }
   const profileMenuItems = [
     {
       label: "My Profile",
