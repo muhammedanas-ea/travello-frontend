@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import bgImg from "../../../../public/staticImages/property-signin.webp";
+import { HERO_URL } from "../../../utils/constants";
 import { PropertySignUp } from "../../../api/PropertyApi";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -33,7 +33,7 @@ export default function PropertySignup() {
   return (
     <section
       className="bg-gray-50 dark:bg-gray-900 w-full h-screen"
-      style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover" }}
+      style={{ backgroundImage: `url(${HERO_URL})`, backgroundSize: "cover" }}
     >
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-md shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

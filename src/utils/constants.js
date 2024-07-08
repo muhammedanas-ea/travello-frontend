@@ -1,0 +1,1 @@
+export const HERO_URL = "../assets/image/property-signin.webp"

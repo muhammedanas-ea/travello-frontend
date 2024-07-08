@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+// import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import UserLayout from "../layout/userLayout/UserLayout";
 import UserPublic from "../protected/UserPublic";
@@ -7,32 +7,43 @@ import SignUpPage from '../pages/userPages/SignUpPage'
 import SignInPage from '../pages/userPages/SignInPage'
 import ForgotPasswordPage from "../pages/userPages/ForgotPasswordPage"
 import EmailVerifyPage from '../pages/userPages/EmailVerifyPage'
-import SuspensePage from "../pages/userPages/SuspensePage";
-const HomePage = lazy(() => import("../pages/userPages/HomePage"))
-const PropertyListPage = lazy(() => import("../pages/userPages/PropertyListPage"))
-const SinglePropertyPage = lazy(() => import("../pages/userPages/SinglePropertyPage"))
-const UserProfilePage = lazy(() => import("../pages/userPages/UserProfilePage"))
-const BookingPage = lazy(() => import( "../pages/userPages/BookingPage"))
-const BookigSummeryPage = lazy(() => import("../pages/userPages/BookigSummeryPage"))
-const BookingDetailsPage = lazy(() => import("../pages/userPages/BookingDetailsPage"))
-const SuccessPage = lazy(() => import("../pages/userPages/SuccessPage"))
-const ChatList = lazy(() => import("../components/userComponents/chat/ChatList"))
-const ErrorPage = lazy(() => import("../pages/userPages/ErrorPage"))
-const ResetPasswordPage = lazy(() => import("../pages/userPages/ResetPasswordPage"))
+// import SuspensePage from "../pages/userPages/SuspensePage";
+// const HomePage = lazy(() => import("../pages/userPages/HomePage"))
+// const PropertyListPage = lazy(() => import("../pages/userPages/PropertyListPage"))
+// const SinglePropertyPage = lazy(() => import("../pages/userPages/SinglePropertyPage"))
+// const UserProfilePage = lazy(() => import("../pages/userPages/UserProfilePage"))
+// const BookingPage = lazy(() => import( "../pages/userPages/BookingPage"))
+// const BookigSummeryPage = lazy(() => import("../pages/userPages/BookigSummeryPage"))
+// const BookingDetailsPage = lazy(() => import("../pages/userPages/BookingDetailsPage"))
+// const SuccessPage = lazy(() => import("../pages/userPages/SuccessPage"))
+// const ChatList = lazy(() => import("../components/userComponents/chat/ChatList"))
+// const ErrorPage = lazy(() => import("../pages/userPages/ErrorPage"))
+// const ResetPasswordPage = lazy(() => import("../pages/userPages/ResetPasswordPage"))
+import HomePage from "../pages/userPages/HomePage";
+import PropertyListPage from "../pages/userPages/PropertyListPage";
+import SinglePropertyPage from "../pages/userPages/SinglePropertyPage";
+import UserProfilePage from "../pages/userPages/UserProfilePage";
+import BookingPage from "../pages/userPages/BookingPage";
+import BookigSummeryPage from "../pages/userPages/BookigSummeryPage";
+import BookingDetailsPage from "../pages/userPages/BookingDetailsPage";
+import SuccessPage from "../pages/userPages/SuccessPage";
+import ChatList from "../components/userComponents/chat/ChatList";
+import ErrorPage from "../pages/userPages/ErrorPage";
+import ResetPasswordPage from "../pages/userPages/ResetPasswordPage";
 
 
 export default function UserRoute() {
   return (
-    <Suspense fallback={<SuspensePage />}>
+    // <Suspense fallback={<SuspensePage />}>
       <Routes>
         <Route path="/emailVerify" element={<UserPublic><EmailVerifyPage /></UserPublic>} />
         <Route path="/forgotPassword" element={<UserPublic><ForgotPasswordPage /></UserPublic>} />
         <Route path="/resetPassword/:id/:token" element={<ResetPasswordPage />} />
         <Route path='/error' element={<ErrorPage/>} />
-        <Route path="/" element={<UserLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
           <Route path="/home/:id/:token" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<UserLayout />}>
           <Route path='/propertyList' element={<PropertyListPage/>} />
           <Route path='/userprofile' element={<UserProtect><UserProfilePage/></UserProtect>} />
           <Route path='/singleproperty' element={<UserProtect><SinglePropertyPage/></UserProtect>} />
@@ -46,6 +57,6 @@ export default function UserRoute() {
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </Suspense>
+    // </Suspense>
   );
 }

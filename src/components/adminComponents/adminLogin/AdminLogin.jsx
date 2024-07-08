@@ -1,5 +1,6 @@
-import bgImg from "../../../../public/staticImages/property-signin.webp";
 import { AdminLoginVerify } from "../../../api/AdminApi";
+import { HERO_URL } from "../../../utils/constants";
+
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -34,7 +35,7 @@ export default function AdminLogin() {
     <section
       className="bg-gray-50 dark:bg-gray-900 w-full h-screen"
       style={{
-        backgroundImage: `url(${bgImg})`,
+        backgroundImage: `url(${HERO_URL})`,
         backgroundSize: "cover",
         width: "100%",
         height: "100%",
